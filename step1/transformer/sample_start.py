@@ -1,7 +1,12 @@
 import math
 
 import torch
-import torch.functional as F
+import torch.nn.functional as F
+
+
+"""
+第一份可执行代码：手写单头注意力
+"""
 
 torch.set_printoptions(precision=3, sci_mode=False)
 
