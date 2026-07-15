@@ -4,6 +4,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+"""
+完整可训练的小型 Transformer
+"""
 
 # 避免某些电脑上小模型多线程反而运行缓慢。
 torch.set_num_threads(1)

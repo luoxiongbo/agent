@@ -1,6 +1,9 @@
 import torch
 import torch.nn as nn
 
+"""
+位置编码
+"""
 
 vocab_size = 10000
 max_sequence_length = 128

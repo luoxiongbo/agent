@@ -4,6 +4,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+"""
+带因果掩码的多头注意力
+"""
+
 
 class CausalSelfAttention(nn.Module):
 

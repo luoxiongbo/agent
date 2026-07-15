@@ -4,6 +4,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+"""
+Transformer 中最重要的代码。
+"""
 
 class MultiHeadSelfAttention(nn.Module):
 

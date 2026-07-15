@@ -6,6 +6,7 @@ import torch.nn.functional as F
 
 """
 第一份可执行代码：手写单头注意力
+为了理解注意力公式
 """
 
 torch.set_printoptions(precision=3, sci_mode=False)
@@ -46,10 +47,16 @@ scores = scores / math.sqrt(d_k)
 # 对每一行做 softmax。
 #
 # dim=-1 表示对每个 token 关注所有 token 的分数 进行归一化。
+# 结果的每一行表示一个 token 对所有 token 的关注程度。
 attention_weights = F.softmax(scores, dim=-1)
 
 
 # 使用注意力权重，对 V 进行加权求和。
+"""
+shape 变化：[3, 3] * [3, 4] = [3, 4]
+注意力点乘向量，也就是把注意力信息组合到向量里
+output 每行是第 i 个 token 汇总上下文信息后得到的新的四维向量
+"""
 output = attention_weights @ V
 
 
