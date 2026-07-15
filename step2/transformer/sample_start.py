@@ -45,7 +45,7 @@ scores = scores / math.sqrt(d_k)
 
 # 对每一行做 softmax。
 #
-# dim=-1 表示对每个 token 关注所有 token 的分数进行归一化。
+# dim=-1 表示对每个 token 关注所有 token 的分数 进行归一化。
 attention_weights = F.softmax(scores, dim=-1)
 
 
