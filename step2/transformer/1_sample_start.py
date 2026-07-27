@@ -37,6 +37,9 @@ V = X
 # Q.shape   = [3, 4]
 # K.T.shape = [4, 3]
 # scores.shape = [3, 3]
+"""
+logits
+"""
 scores = Q @ K.T
 
 # 缩放，避免点积数值随着维度增大而过大。
@@ -48,6 +51,10 @@ scores = scores / math.sqrt(d_k)
 #
 # dim=-1 表示对每个 token 关注所有 token 的分数 进行归一化。
 # 结果的每一行表示一个 token 对所有 token 的关注程度。
+"""
+softmax 函数：
+多分类问题中，在输出层做概率归一化，将线性计算结果转换为各类别的概率分布
+"""
 attention_weights = F.softmax(scores, dim=-1)
 
 
