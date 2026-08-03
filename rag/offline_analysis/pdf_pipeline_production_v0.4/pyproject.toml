@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rag-pdf-pipeline"
+version = "0.4.0"
+description = "Production-oriented PDF parsing and smart parent-child chunking pipeline for RAG"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "PyMuPDF>=1.26,<1.29",
+  "numpy>=2.0,<3",
+]
+
+[project.optional-dependencies]
+semantic = [
+  "sentence-transformers>=5.0,<6",
+]
+dev = [
+  "pytest>=8,<10",
+  "ruff>=0.12,<1",
+]
+
+[project.scripts]
+rag-pdf = "rag_pdf_pipeline.cli:main"
+rag-pdf-audit = "rag_pdf_pipeline.audit:main"
+rag-pdf-diagnose = "rag_pdf_pipeline.runtime:main"
+rag-pdf-compare = "rag_pdf_pipeline.compare:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

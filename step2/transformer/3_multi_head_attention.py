@@ -5,6 +5,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 """
+手写多头注意力
 Transformer 中最重要的代码。
 """
 
@@ -171,3 +172,9 @@ if __name__ == "__main__":
 
     print("\n每行权重之和：")
     print(weights[0, 0].sum(dim=-1))
+
+    """
+    为什么输出维度没有变？
+    只是在 token 原本的信息上 + 其他 token 的信息
+    给 token 自身加上它在上下文中的语义
+    """

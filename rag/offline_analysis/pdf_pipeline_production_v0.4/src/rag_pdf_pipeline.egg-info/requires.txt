@@ -1,0 +1,9 @@
+PyMuPDF<1.29,>=1.26
+numpy<3,>=2.0
+
+[dev]
+pytest<10,>=8
+ruff<1,>=0.12
+
+[semantic]
+sentence-transformers<6,>=5.0

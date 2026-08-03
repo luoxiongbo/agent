@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "page_count": 42,
+  "parent_count": 41,
+  "child_count": 78,
+  "atomic_unit_count": 762,
+  "ocr_page_count": 0,
+  "duplicate_child_ratio": 0.0,
+  "child_token_min": 26,
+  "child_token_median": 391.0,
+  "child_token_max": 689,
+  "issues": []
+}

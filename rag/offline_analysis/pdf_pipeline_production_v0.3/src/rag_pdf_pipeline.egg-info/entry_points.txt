@@ -1,0 +1,3 @@
+[console_scripts]
+rag-pdf = rag_pdf_pipeline.cli:main
+rag-pdf-audit = rag_pdf_pipeline.audit:main

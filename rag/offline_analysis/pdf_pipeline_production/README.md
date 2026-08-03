@@ -1,0 +1,304 @@
+# RAG PDF Pipeline：生产导向完整代码
+
+这套项目实现的是 RAG 的离线解析部分：
+
+```text
+PDF
+→ 文本 / OCR / 表格解析
+→ 页眉页脚清洗
+→ 标题层级识别
+→ 原子信息单元
+→ 规则 + 语义融合切分
+→ Parent / Child Chunk
+→ 质量检查
+→ JSONL 输出
+```
+
+它不是“每 500 token 机械切一刀”。核心策略是：
+
+1. `target_tokens` 是期望大小；
+2. `max_tokens` 才是硬上限；
+3. FAQ、列表、表格、代码块优先保持完整；
+4. 单个完整单元超过硬上限时，采用类型专用策略；
+5. 在多个安全切点中，选择相邻语义更弱、长度更接近目标的位置；
+6. 检索使用小 Child，生成时可根据 `parent_id` 展开完整 Parent。
+
+## 项目结构
+
+```text
+rag_pdf_pipeline_production/
+├── pyproject.toml
+├── requirements.txt
+├── requirements-semantic.txt
+├── config.example.json
+├── src/rag_pdf_pipeline/
+│   ├── config.py
+│   ├── models.py
+│   ├── text_utils.py
+│   ├── pdf_parser.py
+│   ├── atomic.py
+│   ├── semantic.py
+│   ├── chunker.py
+│   ├── quality.py
+│   ├── io.py
+│   ├── pipeline.py
+│   └── cli.py
+├── examples/
+│   └── expand_parent_context.py
+└── tests/
+    ├── test_pipeline.py
+    └── test_smart_chunker.py
+```
+
+## 1. 安装
+
+建议使用 Python 3.11 或 3.12。
+
+### 基础版：无模型下载
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+
+python -m pip install -U pip
+python -m pip install -e .
+```
+
+基础版使用确定性的字符/词 n-gram hashing 判断局部主题连续性。它不会访问 Hugging Face。
+
+### 神经语义模型版
+
+```bash
+python -m pip install -e '.[semantic]'
+```
+
+生产环境建议先把 Embedding 模型下载到本地，然后在配置中使用绝对路径：
+
+```json
+{
+  "semantic": {
+    "backend": "sentence_transformers",
+    "model_name_or_path": "/models/embedding-model",
+    "local_files_only": true
+  }
+}
+```
+
+这样解析任务不会因为网络、限流或 Hub 不可用而卡住。
+
+## 2. OCR
+
+扫描 PDF 需要额外安装 Tesseract。
+
+macOS：
+
+```bash
+brew install tesseract
+brew install tesseract-lang
+tesseract --list-langs | grep -E 'chi_sim|eng'
+```
+
+Ubuntu / Debian：
+
+```bash
+sudo apt-get update
+sudo apt-get install -y \
+  tesseract-ocr \
+  tesseract-ocr-chi-sim \
+  tesseract-ocr-eng
+```
+
+普通文字型 PDF 可直接使用：
+
+```bash
+rag-pdf input.pdf -o output --ocr never -v
+```
+
+## 3. 直接运行
+
+不联网、使用 hashing 语义后端：
+
+```bash
+rag-pdf input.pdf \
+  -o output \
+  --semantic-backend hashing \
+  --min-tokens 180 \
+  --target-tokens 500 \
+  --max-tokens 800 \
+  --overlap-tokens 80 \
+  -v
+```
+
+使用 JSON 配置：
+
+```bash
+rag-pdf input.pdf \
+  -o output \
+  --config config.example.json \
+  -v
+```
+
+显式允许下载语义模型：
+
+```bash
+rag-pdf input.pdf \
+  -o output \
+  --semantic-backend sentence_transformers \
+  --semantic-model BAAI/bge-small-zh-v1.5 \
+  --allow-model-download \
+  -v
+```
+
+不建议让生产 Worker 在首次任务中临时下载模型。更稳妥的做法是镜像构建阶段下载，运行时设置 `local_files_only=true`。
+
+## 4. 双阈值的意义
+
+```text
+min_tokens    = 180
+target_tokens = 500
+max_tokens    = 800
+```
+
+行为：
+
+- 小于 180：除非遇到明显语义断点，否则继续合并；
+- 接近 500：优先寻找语义低谷作为切点；
+- 500～800：允许完整信息保持整体；
+- 超过 800：必须使用安全边界拆分；
+- 最终质量检查再次保证 Child 不超过 800。
+
+## 5. 类型专用切分
+
+### 列表
+
+按照列表项切，不从一个步骤中间切；后续片段带“章节名（续）”。
+
+### 表格
+
+按照行切，每个片段重复表头。
+
+### FAQ
+
+问题在每个片段中重复，只切超长答案。
+
+### 代码
+
+优先在函数、类、SQL 语句或行组边界切。
+
+### 普通段落
+
+先分句，再计算相邻句向量；切分算法联合优化语义边界和目标长度。只有单句自身超过硬上限时才按字符兜底。
+
+## 6. Parent / Child 数据
+
+`parents.jsonl`：
+
+```json
+{
+  "parent_id": "parent_xxx",
+  "heading_path": ["用户管理", "修改密码"],
+  "content": "完整章节……",
+  "child_ids": ["child_a", "child_b"]
+}
+```
+
+`children.jsonl`：
+
+```json
+{
+  "child_id": "child_a",
+  "parent_id": "parent_xxx",
+  "content": "用于 Embedding 和检索的精确文本……",
+  "unit_ids": ["unit_1", "unit_2"],
+  "overlap_unit_ids": [],
+  "previous_child_id": null,
+  "next_child_id": "child_b"
+}
+```
+
+推荐检索流程：
+
+```text
+问题
+→ 检索 children.jsonl / 向量库中的 Child
+→ 可选 rerank
+→ 根据 parent_id 读取 Parent
+→ 或补充 previous_child_id / next_child_id
+→ 交给 LLM
+```
+
+演示：
+
+```bash
+python examples/expand_parent_context.py output CHILD_ID
+```
+
+## 7. 输出文件
+
+```text
+output/
+├── manifest.json
+├── document.json
+├── document.md
+├── atomic_units.jsonl
+├── parents.jsonl
+├── children.jsonl
+└── quality_report.json
+```
+
+- `document.md`：人工抽样检查解析顺序；
+- `atomic_units.jsonl`：检查列表、FAQ、表格等识别结果；
+- `children.jsonl`：写入向量数据库；
+- `parents.jsonl`：按 `parent_id` 存入 KV / 文档库；
+- `quality_report.json`：超限、空块、孤儿关系和重复率检查。
+
+## 8. 测试
+
+```bash
+python -m pip install -e '.[dev]'
+pytest
+```
+
+测试覆盖：
+
+- 跨页重复页眉页脚清洗；
+- 完整长列表按列表项切分；
+- 长表格按行切分并重复表头；
+- Parent / Child 关系；
+- Child 硬上限；
+- 端到端文件输出。
+
+## 9. 写入向量库时的建议
+
+只对 `children.jsonl` 的 `content` 或 `text` 计算检索向量。不要默认对巨大 Parent 建向量索引。
+
+建议在向量记录元数据中保留：
+
+```json
+{
+  "child_id": "...",
+  "parent_id": "...",
+  "document_id": "...",
+  "page_start": 10,
+  "page_end": 12,
+  "heading_path": ["用户管理", "修改密码"]
+}
+```
+
+Parent 可放 PostgreSQL、对象存储、Redis 或文档数据库中，通过 `parent_id` 读取。
+
+## 10. 生产部署边界
+
+代码已经包含生产模块应有的关键确定性能力：配置校验、稳定 ID、原子写盘、明确错误、无隐式模型下载、父子关系、硬上限和质量报告。
+
+真正上线时仍应把它接入你现有的：
+
+- 消息队列和任务状态表；
+- 对象存储；
+- 超时、重试和死信队列；
+- 指标监控与日志平台；
+- 文档版本、权限和租户隔离；
+- 向量数据库批量 upsert；
+- 解析结果抽样评测集。
+
+这些属于部署基础设施，不适合硬编码进一个通用 PDF 解析包。

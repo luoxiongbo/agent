@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "retrieval_readiness": "review",
+  "page_count": 42,
+  "parent_count": 27,
+  "child_count": 64,
+  "atomic_unit_count": 262,
+  "ocr_page_count": 0,
+  "complex_layout_page_count": 2,
+  "rejected_table_count": 103,
+  "removed_noise_block_count": 159,
+  "duplicate_child_ratio": 0.0,
+  "short_child_ratio_lt_100": 0.015625,
+  "under_min_tokens_ratio": 0.09375,
+  "over_target_tokens_ratio": 0.21875,
+  "single_child_parent_ratio": 0.555556,
+  "flat_heading_path_ratio": 0.234375,
+  "suspicious_heading_ratio": 0.0,
+  "mid_sentence_start_ratio": 0.125,
+  "broken_line_candidate_ratio": 0.09375,
+  "child_token_min": 91,
+  "child_token_p10": 181.6,
+  "child_token_p25": 285.75,
+  "child_token_median": 427.5,
+  "child_token_p75": 483.0,
+  "child_token_p90": 603.5,
+  "child_token_max": 771,
+  "children_per_parent_median": 1.0,
+  "atomic_units_per_child_median": 3.0,
+  "issues": [
+    {
+      "severity": "warning",
+      "code": "MID_SENTENCE_CHUNK_STARTS",
+      "message": "部分 Child 疑似从半句话开始",
+      "context": {
+        "value": 0.125,
+        "threshold": 0.03,
+        "examples": [
+          "案例:用户查询*“保险销售技巧”*。传统检索可能只针对“销售”或“技巧”检索,结果不一定全面。\n\n应用 HyDE 时,我们先让 LLM 根据这一查询生成一段假设",
+          "案例1:报销制度类查询:例如用户询问“差旅报销的上限是多少?”。公司内部的报销制度可能是PDF扫描件,包含分级标题和表格(各费用类别的报销上限)。通过优化解析,",
+          "if title:\n# 幻灯片标题作为单独块blocks.append({ \"text\": title, \"type\": \"heading\", \"level\":",
+          "return blocks def split_and_tag_blocks(blocks):\n\"\"\"根据内容将文本块切分、合并,并标注层级和类别标签。\"\"\"c",
+          "continue # 不把标题行本身当做内容# 非标题块:\n# 检测表格行:根据是否包含制表符或对齐空格判断if re.search(r'\\t', text) "
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "COMPLEX_LAYOUT_PAGES",
+      "message": "检测到复杂图解/幻灯片式页面，建议检查 document.md",
+      "context": {
+        "page_count": 2
+      }
+    }
+  ]
+}

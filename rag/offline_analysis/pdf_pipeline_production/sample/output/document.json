@@ -1,0 +1,156 @@
+{
+  "document_id": "pdf_5eeee6e3706d977a30e4",
+  "source_path": "/mnt/data/rag_pdf_pipeline_production/sample/demo.pdf",
+  "file_name": "demo.pdf",
+  "sha256": "5eeee6e3706d977a30e48092992a95aea1054bc0ecb397cabf04f2435949166a",
+  "page_count": 3,
+  "metadata": {
+    "format": "PDF 1.7"
+  },
+  "toc": [],
+  "body_font_size": 12.0,
+  "removed_header_footer_patterns": [
+    "enterpriseragmanual",
+    "page#"
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "width": 595.0,
+      "height": 842.0,
+      "rotation": 0,
+      "used_ocr": false,
+      "native_text_char_count": 123,
+      "blocks": [
+        {
+          "page_number": 1,
+          "bbox": [
+            72.0,
+            68.5,
+            258.74,
+            95.98
+          ],
+          "text": "1. User Management",
+          "block_no": 1,
+          "source": "native",
+          "max_font_size": 20.0,
+          "avg_font_size": 20.0,
+          "bold": false,
+          "monospace": false,
+          "heading_level": 1
+        },
+        {
+          "page_number": 1,
+          "bbox": [
+            72.0,
+            127.1,
+            597.54,
+            143.588
+          ],
+          "text": "Administrators can create users, reset passwords, and assign roles. All changes must be recorded",
+          "block_no": 2,
+          "source": "native",
+          "max_font_size": 12.0,
+          "avg_font_size": 12.0,
+          "bold": false,
+          "monospace": false,
+          "heading_level": null
+        }
+      ],
+      "tables": [],
+      "text": "# 1. User Management\n\nAdministrators can create users, reset passwords, and assign roles. All changes must be recorded"
+    },
+    {
+      "page_number": 2,
+      "width": 595.0,
+      "height": 842.0,
+      "rotation": 0,
+      "used_ocr": false,
+      "native_text_char_count": 123,
+      "blocks": [
+        {
+          "page_number": 2,
+          "bbox": [
+            72.0,
+            68.5,
+            258.74,
+            95.98
+          ],
+          "text": "2. User Management",
+          "block_no": 1,
+          "source": "native",
+          "max_font_size": 20.0,
+          "avg_font_size": 20.0,
+          "bold": false,
+          "monospace": false,
+          "heading_level": 1
+        },
+        {
+          "page_number": 2,
+          "bbox": [
+            72.0,
+            127.1,
+            597.54,
+            143.588
+          ],
+          "text": "Administrators can create users, reset passwords, and assign roles. All changes must be recorded",
+          "block_no": 2,
+          "source": "native",
+          "max_font_size": 12.0,
+          "avg_font_size": 12.0,
+          "bold": false,
+          "monospace": false,
+          "heading_level": null
+        }
+      ],
+      "tables": [],
+      "text": "# 2. User Management\n\nAdministrators can create users, reset passwords, and assign roles. All changes must be recorded"
+    },
+    {
+      "page_number": 3,
+      "width": 595.0,
+      "height": 842.0,
+      "rotation": 0,
+      "used_ocr": false,
+      "native_text_char_count": 123,
+      "blocks": [
+        {
+          "page_number": 3,
+          "bbox": [
+            72.0,
+            68.5,
+            258.74,
+            95.98
+          ],
+          "text": "3. User Management",
+          "block_no": 1,
+          "source": "native",
+          "max_font_size": 20.0,
+          "avg_font_size": 20.0,
+          "bold": false,
+          "monospace": false,
+          "heading_level": 1
+        },
+        {
+          "page_number": 3,
+          "bbox": [
+            72.0,
+            127.1,
+            597.54,
+            143.588
+          ],
+          "text": "Administrators can create users, reset passwords, and assign roles. All changes must be recorded",
+          "block_no": 2,
+          "source": "native",
+          "max_font_size": 12.0,
+          "avg_font_size": 12.0,
+          "bold": false,
+          "monospace": false,
+          "heading_level": null
+        }
+      ],
+      "tables": [],
+      "text": "# 3. User Management\n\nAdministrators can create users, reset passwords, and assign roles. All changes must be recorded"
+    }
+  ]
+}

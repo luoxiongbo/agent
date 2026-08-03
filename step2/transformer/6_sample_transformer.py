@@ -139,6 +139,7 @@ class TransformerBlock(nn.Module):
     ):
         super().__init__()
 
+        # 层归一化，标准化，避免在反向传播的时候出现梯度爆炸或者梯度消失
         self.layer_norm_1 = nn.LayerNorm(d_model)
         self.attention = CausalSelfAttention(
             d_model=d_model,

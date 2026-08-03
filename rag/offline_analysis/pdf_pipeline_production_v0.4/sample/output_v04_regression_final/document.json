@@ -1,0 +1,179 @@
+{
+  "document_id": "pdf_2adf81e837d3f3492a4d",
+  "source_path": "/mnt/data/work_v04/rag_pdf_pipeline_production_v0.4/sample/v04_regression.pdf",
+  "file_name": "v04_regression.pdf",
+  "sha256": "2adf81e837d3f3492a4d1945fc9349617d9ad7f6b37dd437b9537893209d504b",
+  "page_count": 2,
+  "metadata": {
+    "format": "PDF 1.7",
+    "_pipeline": {
+      "pipeline_version": "0.4.0",
+      "code_fingerprint": "4b6031b6156501692490",
+      "package_root": "/mnt/data/work_v04/rag_pdf_pipeline_production_v0.4/src/rag_pdf_pipeline",
+      "module_file": "/mnt/data/work_v04/rag_pdf_pipeline_production_v0.4/src/rag_pdf_pipeline/runtime.py",
+      "python_executable": "/opt/pyvenv/bin/python",
+      "python_version": "3.13.5"
+    }
+  },
+  "toc": [],
+  "body_font_size": 12.0,
+  "removed_header_footer_patterns": [],
+  "pages": [
+    {
+      "page_number": 1,
+      "width": 595.0,
+      "height": 842.0,
+      "rotation": 0,
+      "used_ocr": false,
+      "native_text_char_count": 43,
+      "blocks": [
+        {
+          "page_number": 1,
+          "bbox": [
+            220.0,
+            24.2,
+            329.344,
+            57.176
+          ],
+          "text": "RAG Flow",
+          "block_no": 0,
+          "source": "native",
+          "max_font_size": 24.0,
+          "avg_font_size": 24.0,
+          "bold": false,
+          "monospace": false,
+          "heading_level": 1,
+          "heading_source": "complex_layout_dominant_title"
+        },
+        {
+          "page_number": 1,
+          "bbox": [
+            40.0,
+            184.95,
+            455.23,
+            204.186
+          ],
+          "text": "Query Offline Parse Retrieval",
+          "block_no": 1,
+          "source": "native",
+          "max_font_size": 14.0,
+          "avg_font_size": 14.0,
+          "bold": false,
+          "monospace": false,
+          "heading_level": null,
+          "heading_source": null
+        },
+        {
+          "page_number": 1,
+          "bbox": [
+            220.0,
+            384.95,
+            289.258,
+            404.186
+          ],
+          "text": "Generation",
+          "block_no": 2,
+          "source": "native",
+          "max_font_size": 14.0,
+          "avg_font_size": 14.0,
+          "bold": false,
+          "monospace": false,
+          "heading_level": null,
+          "heading_source": null
+        }
+      ],
+      "tables": [],
+      "text": "# RAG Flow\n\nQuery Offline Parse Retrieval\n\nGeneration",
+      "layout_kind": "sparse",
+      "rejected_table_count": 0,
+      "removed_noise_block_count": 0
+    },
+    {
+      "page_number": 2,
+      "width": 595.0,
+      "height": 842.0,
+      "rotation": 0,
+      "used_ocr": false,
+      "native_text_char_count": 224,
+      "blocks": [
+        {
+          "page_number": 2,
+          "bbox": [
+            72.0,
+            60.65,
+            215.064,
+            85.382
+          ],
+          "text": "2.1 Query Module",
+          "block_no": 0,
+          "source": "native",
+          "max_font_size": 18.0,
+          "avg_font_size": 18.0,
+          "bold": false,
+          "monospace": false,
+          "heading_level": 2,
+          "heading_source": "numeric_hierarchy"
+        },
+        {
+          "page_number": 2,
+          "bbox": [
+            72.0,
+            112.8,
+            251.648,
+            134.784
+          ],
+          "text": "2.1.1 Rule-based Method",
+          "block_no": 1,
+          "source": "native",
+          "max_font_size": 16.0,
+          "avg_font_size": 16.0,
+          "bold": false,
+          "monospace": false,
+          "heading_level": 3,
+          "heading_source": "numeric_hierarchy"
+        },
+        {
+          "page_number": 2,
+          "bbox": [
+            72.0,
+            167.1,
+            534.192,
+            201.588
+          ],
+          "text": "1. Multi-turn context may be broken when a user asks a follow-up, for example the user asks: how do I apply? The system should resolve the reference correctly.",
+          "block_no": 2,
+          "source": "native",
+          "max_font_size": 12.0,
+          "avg_font_size": 12.0,
+          "bold": false,
+          "monospace": false,
+          "heading_level": null,
+          "heading_source": null
+        },
+        {
+          "page_number": 2,
+          "bbox": [
+            72.0,
+            287.1,
+            334.116,
+            303.588
+          ],
+          "text": "This paragraph describes the rule-based method.",
+          "block_no": 5,
+          "source": "native",
+          "max_font_size": 12.0,
+          "avg_font_size": 12.0,
+          "bold": false,
+          "monospace": false,
+          "heading_level": null,
+          "heading_source": null
+        }
+      ],
+      "tables": [],
+      "text": "## 2.1 Query Module\n\n### 2.1.1 Rule-based Method\n\n1. Multi-turn context may be broken when a user asks a follow-up, for example the user asks: how do I apply? The system should resolve the reference correctly.\n\nThis paragraph describes the rule-based method.",
+      "layout_kind": "normal",
+      "rejected_table_count": 0,
+      "removed_noise_block_count": 2
+    }
+  ]
+}

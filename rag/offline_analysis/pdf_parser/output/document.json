@@ -1,0 +1,122 @@
+{
+  "document_id": "pdf_0b6668bf924f4698b7a0",
+  "source_path": "/Users/haibo/Documents/temp/agent/rag/offline_analysis/pdf_parser/sample.pdf",
+  "file_name": "sample.pdf",
+  "sha256": "0b6668bf924f4698b7a0291262d975b22bd35e13e54285eed28b8c0aea8afc20",
+  "page_count": 2,
+  "metadata": {
+    "format": "PDF 1.7"
+  },
+  "toc": [],
+  "body_font_size": 12.0,
+  "removed_header_footer_patterns": [
+    "page#",
+    "ragpdfparserdemo"
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "width": 595.0,
+      "height": 842.0,
+      "rotation": 0,
+      "used_ocr": false,
+      "native_text_char_count": 137,
+      "blocks": [
+        {
+          "page_number": 1,
+          "bbox": [
+            72.0,
+            78.5,
+            258.74,
+            105.98
+          ],
+          "text": "1. User Management",
+          "block_no": 2,
+          "source": "native",
+          "max_font_size": 20.0,
+          "avg_font_size": 20.0,
+          "bold": false,
+          "heading_level": 1
+        },
+        {
+          "page_number": 1,
+          "bbox": [
+            72.0,
+            132.1,
+            358.104,
+            148.588
+          ],
+          "text": "Administrators can create users and reset passwords.",
+          "block_no": 3,
+          "source": "native",
+          "max_font_size": 12.0,
+          "avg_font_size": 12.0,
+          "bold": false,
+          "heading_level": null
+        },
+        {
+          "page_number": 1,
+          "bbox": [
+            72.0,
+            162.1,
+            415.5,
+            178.588
+          ],
+          "text": "Open Settings, select Security, enter a new password, and save.",
+          "block_no": 4,
+          "source": "native",
+          "max_font_size": 12.0,
+          "avg_font_size": 12.0,
+          "bold": false,
+          "heading_level": null
+        }
+      ],
+      "tables": [],
+      "text": "# 1. User Management\n\nAdministrators can create users and reset passwords.\n\nOpen Settings, select Security, enter a new password, and save."
+    },
+    {
+      "page_number": 2,
+      "width": 595.0,
+      "height": 842.0,
+      "rotation": 0,
+      "used_ocr": false,
+      "native_text_char_count": 100,
+      "blocks": [
+        {
+          "page_number": 2,
+          "bbox": [
+            72.0,
+            78.5,
+            315.42,
+            105.98
+          ],
+          "text": "2. Permission Management",
+          "block_no": 2,
+          "source": "native",
+          "max_font_size": 20.0,
+          "avg_font_size": 20.0,
+          "bold": false,
+          "heading_level": 1
+        },
+        {
+          "page_number": 2,
+          "bbox": [
+            72.0,
+            132.1,
+            422.112,
+            148.588
+          ],
+          "text": "Roles group permissions. Users obtain permissions through roles.",
+          "block_no": 3,
+          "source": "native",
+          "max_font_size": 12.0,
+          "avg_font_size": 12.0,
+          "bold": false,
+          "heading_level": null
+        }
+      ],
+      "tables": [],
+      "text": "# 2. Permission Management\n\nRoles group permissions. Users obtain permissions through roles."
+    }
+  ]
+}

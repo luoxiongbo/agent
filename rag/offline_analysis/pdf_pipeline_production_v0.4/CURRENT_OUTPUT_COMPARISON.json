@@ -1,0 +1,25 @@
+{
+  "parents": {
+    "old_count": 41,
+    "new_count": 41,
+    "same_id_set": true,
+    "common_count": 41,
+    "normalized_identical_count": 41,
+    "normalized_identical_ratio": 1.0,
+    "added_ids": [],
+    "removed_ids": [],
+    "changed_ids": []
+  },
+  "children": {
+    "old_count": 78,
+    "new_count": 78,
+    "same_id_set": true,
+    "common_count": 78,
+    "normalized_identical_count": 78,
+    "normalized_identical_ratio": 1.0,
+    "added_ids": [],
+    "removed_ids": [],
+    "changed_ids": []
+  },
+  "behaviorally_identical": true
+}

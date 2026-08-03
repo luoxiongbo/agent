@@ -81,3 +81,9 @@ print(output)
 
 print("\n每一行注意力权重之和：")
 print(attention_weights.sum(dim=-1))
+
+print(50*"-")
+print("以下是我的一些想法: ")
+print(output[0])
+x1ToX2 = output[0].dot(output[1])
+print(x1ToX2) # 这两就离得很近啊

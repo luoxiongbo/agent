@@ -1,0 +1,57 @@
+{
+  "document_id": "pdf_3adb2d8a3715657d5568",
+  "file_name": "input.pdf",
+  "sha256": "3adb2d8a3715657d55681fed096ccd065372cc61ad2b67bab27d20599f642056",
+  "page_count": 42,
+  "parent_count": 41,
+  "child_count": 78,
+  "quality_passed": true,
+  "config": {
+    "parser": {
+      "ocr_mode": "auto",
+      "ocr_language": "chi_sim+eng",
+      "ocr_dpi": 300,
+      "tessdata": null,
+      "min_native_text_chars": 30,
+      "fail_on_ocr_error": true,
+      "extract_tables": true,
+      "table_strategy": "lines",
+      "header_footer_zone_ratio": 0.08,
+      "repeated_header_footer_ratio": 0.35,
+      "min_repeated_header_footer_pages": 2
+    },
+    "chunk": {
+      "min_tokens": 180,
+      "target_tokens": 500,
+      "max_tokens": 800,
+      "overlap_tokens": 80,
+      "boundary_lookback_units": 24,
+      "semantic_weight": 1.0,
+      "length_weight": 0.35,
+      "same_group_break_penalty": 1.25,
+      "include_source_prefix": true
+    },
+    "semantic": {
+      "backend": "hashing",
+      "model_name_or_path": null,
+      "local_files_only": true,
+      "device": null,
+      "batch_size": 32,
+      "hashing_dimensions": 1024
+    },
+    "quality": {
+      "strict": true,
+      "max_duplicate_ratio": 0.05,
+      "max_ocr_page_ratio_warning": 0.8
+    }
+  },
+  "files": {
+    "document": "document.json",
+    "markdown": "document.md",
+    "atomic_units": "atomic_units.jsonl",
+    "parents": "parents.jsonl",
+    "children": "children.jsonl",
+    "quality": "quality_report.json",
+    "manifest": "manifest.json"
+  }
+}

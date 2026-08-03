@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "page_count": 3,
+  "parent_count": 3,
+  "child_count": 3,
+  "atomic_unit_count": 3,
+  "ocr_page_count": 0,
+  "duplicate_child_ratio": 0.666667,
+  "child_token_min": 40,
+  "child_token_median": 40.0,
+  "child_token_max": 40,
+  "issues": [
+    {
+      "severity": "warning",
+      "code": "HIGH_DUPLICATE_RATIO",
+      "message": "Child Chunk 重复率过高",
+      "context": {
+        "duplicate_ratio": 0.6666666666666666,
+        "threshold": 0.05
+      }
+    }
+  ]
+}
