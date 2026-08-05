@@ -1,0 +1,286 @@
+# RAG PDF Pipeline v0.6
+
+生产导向的 PDF 解析、结构恢复、Parent/Child 智能切分和质量审计工具。
+
+```text
+PDF
+→ 原生文本 / OCR
+→ 页眉页脚、UI 噪声、推广联系方式清洗
+→ 表格候选质量过滤
+→ 目录、封面、复杂页面识别
+→ 标题层级恢复
+→ 中文断词与跨页续句修复
+→ 代码坐标重建、标识符修复、AST 诊断
+→ 原子信息单元
+→ 规则 + 语义融合切分
+→ Parent / Child Chunk
+→ indexable_children.jsonl
+→ 可解释质量报告
+```
+
+## v0.6 重点改进
+
+### 1. Python 代码 AST 与缩进质量检查
+
+每个最终 Python 代码原子单元都会重新分析，而不是只检查解析前的原始代码块：
+
+- `ast.parse()` 可解析性；
+- `def/if/for/while/try` 后是否缺失缩进；
+- 标识符是否疑似被 PDF 换行拆开；
+- `return/yield/raise` 是否疑似被切到函数顶层；
+- 函数或类是否从中间开始。
+
+`quality_report.json` 新增：
+
+```json
+{
+  "python_code_unit_count": 12,
+  "python_ast_parseable_ratio": 0.916667,
+  "code_indentation_issue_ratio": 0.083333,
+  "split_identifier_candidate_ratio": 0.0,
+  "function_boundary_violation_ratio": 0.0,
+  "function_level_code_piece_count": 8
+}
+```
+
+语法失败只产生 warning，不会直接阻断，因为 PDF 中可能包含伪代码。
+
+### 2. 函数 / 类级代码切分
+
+Python 代码优先按以下安全边界切分：
+
+```text
+import / 前置定义
+完整 def
+完整 async def
+完整 class
+```
+
+不会为了接近 `target_tokens` 而把一个完整短函数从中间切开。
+
+只有单个函数本身超过 `max_tokens` 时，才在函数内部续切，并在每个续段重复函数签名：
+
+```python
+def build_context(query):
+    # PDF 代码续段：保留函数签名以提供检索上下文
+    ...
+```
+
+这些代码片段会设置强制 Child 边界，避免两个不同函数重新被语义打包到同一个 Child。
+
+### 3. 英文标识符断裂修复
+
+支持修复常见 PDF 断行：
+
+```text
+fine_tuned_i + ntent_model → fine_tuned_intent_model
+relevant_ + docs           → relevant_docs
+losse + s                   → losses
+i + f                       → if
+```
+
+对于未闭合字符串、括号和下划线结尾，采用高置信度拼接；不会无条件连接两行代码。
+
+### 4. 中文空行断词二次修复
+
+在 Atomic Unit 生成前再次检查高置信度中文词语断裂：
+
+```text
+能翻\n\n阅      → 能翻阅
+混\n\n杂        → 混杂
+因此候\n\n选  → 因此候选
+销售技\n\n巧  → 销售技巧
+```
+
+完整句末和明确新段落起始不会被合并。
+
+### 5. 复杂版面中的代码不再误判为 layout
+
+复杂图解或幻灯片页面仍然采用保守策略，但等宽代码块会先按坐标合并并识别为 `code`，不会因为文本短而被降级为 `layout`。
+
+### 6. 表格日志按页汇总
+
+被拒绝的每个候选表格改为 `DEBUG` 日志；`INFO` 只保留每页汇总：
+
+```text
+第 29 页表格候选汇总：候选=17，接受=0，拒绝=17，主要原因=[...]
+```
+
+## 安装
+
+建议 Python 3.11 或 3.12；项目支持 Python 3.11–3.13。
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install -e .
+```
+
+可选神经语义模型：
+
+```bash
+python -m pip install -e '.[semantic]'
+```
+
+生产环境建议使用已经下载好的本地模型目录，避免运行时隐式联网：
+
+```json
+{
+  "semantic": {
+    "backend": "sentence_transformers",
+    "model_name_or_path": "/models/embedding-model",
+    "local_files_only": true
+  }
+}
+```
+
+## 运行
+
+先用完全离线的 hashing 后端验证解析：
+
+```bash
+rag-pdf input.pdf \
+  -o output \
+  --semantic-backend hashing \
+  --min-tokens 180 \
+  --target-tokens 500 \
+  --max-tokens 800 \
+  --overlap-tokens 80 \
+  -v
+```
+
+使用配置文件：
+
+```bash
+rag-pdf input.pdf -o output --config config.example.json -v
+```
+
+确认实际运行版本和源码：
+
+```bash
+rag-pdf --version
+rag-pdf-diagnose
+```
+
+应看到：
+
+```json
+{
+  "pipeline_version": "0.6.0",
+  "code_fingerprint": "...",
+  "package_root": ".../rag_pdf_pipeline_production_v0.6/src/rag_pdf_pipeline"
+}
+```
+
+## 输出文件
+
+```text
+output/
+├── manifest.json
+├── document.json
+├── document.md
+├── atomic_units.jsonl
+├── parents.jsonl
+├── children.jsonl
+├── indexable_children.jsonl
+└── quality_report.json
+```
+
+向量数据库应优先写入：
+
+```text
+indexable_children.jsonl
+```
+
+目录和导航 Child 会保留在 `children.jsonl`，但默认：
+
+```json
+{
+  "content_type": "toc",
+  "index_enabled": false
+}
+```
+
+## 审计已有输出
+
+基础审计：
+
+```bash
+rag-pdf-audit \
+  --children output/children.jsonl \
+  --parents output/parents.jsonl \
+  --min-tokens 180 \
+  --target-tokens 500 \
+  --max-tokens 800 \
+  -o audit.json
+```
+
+增加 Python 代码质量审计：
+
+```bash
+rag-pdf-audit \
+  --children output/children.jsonl \
+  --parents output/parents.jsonl \
+  --atomic-units output/atomic_units.jsonl \
+  --min-tokens 180 \
+  --target-tokens 500 \
+  --max-tokens 800 \
+  -o audit.json
+```
+
+审计器会自动排除 `index_enabled=false` 的目录 Child，并避免把代码开头误判为半句话。
+
+## 质量指标建议
+
+普通正文：
+
+```text
+child_token_max                  必须 <= max_tokens
+short_child_ratio_lt_100         建议 < 10%
+under_min_tokens_ratio           建议 < 25%
+mid_sentence_start_ratio         建议 < 3%
+broken_line_candidate_ratio      建议 < 10%
+suspicious_heading_ratio         建议 < 12%
+```
+
+Python 代码：
+
+```text
+python_ast_parseable_ratio          建议 >= 65%，越高越好
+code_indentation_issue_ratio        建议 <= 20%
+split_identifier_candidate_ratio    建议 <= 10%
+function_boundary_violation_ratio   建议 <= 10%
+```
+
+这些是工程告警阈值，不等同于最终 RAG 效果。最终仍应使用真实问题集评测 Recall@K、MRR 和答案完整率。
+
+## OCR
+
+扫描 PDF 需要本地 Tesseract。
+
+macOS：
+
+```bash
+brew install tesseract
+brew install tesseract-lang
+tesseract --list-langs | grep -E 'chi_sim|eng'
+```
+
+Ubuntu / Debian：
+
+```bash
+sudo apt-get update
+sudo apt-get install -y \
+  tesseract-ocr \
+  tesseract-ocr-chi-sim \
+  tesseract-ocr-eng
+```
+
+## 已知限制
+
+- PDF 若把整段代码渲染成图片，需要 OCR 或视觉模型，坐标重建无法恢复原始源码。
+- AST 通过不代表代码业务逻辑正确，也不代表依赖和变量完整。
+- 对伪代码、SQL、JavaScript 等非 Python 代码，目前只做通用行级切分，不执行语言语法校验。
+- 多栏论文、复杂流程图和 PPT 导出 PDF 仍可能需要专门版面模型。
+- token 数仍是模型无关估算；生产中可替换为目标 Embedding/LLM 的真实 tokenizer。

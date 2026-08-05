@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "retrieval_readiness": "ready",
+  "page_count": 3,
+  "parent_count": 3,
+  "child_count": 3,
+  "atomic_unit_count": 8,
+  "ocr_page_count": 0,
+  "complex_layout_page_count": 0,
+  "rejected_table_count": 0,
+  "removed_noise_block_count": 0,
+  "removed_promotional_block_count": 0,
+  "reconstructed_code_block_count": 5,
+  "toc_page_count": 1,
+  "non_indexable_child_count": 1,
+  "duplicate_child_ratio": 0.0,
+  "non_indexable_child_ratio": 0.333333,
+  "malformed_code_chunk_ratio": 0.0,
+  "glued_list_paragraph_ratio": 0.0,
+  "short_child_ratio_lt_100": 1.0,
+  "under_min_tokens_ratio": 0.0,
+  "over_target_tokens_ratio": 0.0,
+  "single_child_parent_ratio": 1.0,
+  "flat_heading_path_ratio": 1.0,
+  "suspicious_heading_ratio": 0.0,
+  "mid_sentence_start_ratio": 0.0,
+  "broken_line_candidate_ratio": 0.0,
+  "child_token_min": 52,
+  "child_token_p10": 53.0,
+  "child_token_p25": 54.5,
+  "child_token_median": 57.0,
+  "child_token_p75": 59.5,
+  "child_token_p90": 61.0,
+  "child_token_max": 62,
+  "children_per_parent_median": 1.0,
+  "atomic_units_per_child_median": 3.0,
+  "issues": [
+    {
+      "severity": "info",
+      "code": "NON_INDEXABLE_NAVIGATION_CHUNKS",
+      "message": "检测到目录/导航 Chunk，已从 indexable_children.jsonl 排除",
+      "context": {
+        "toc_page_count": 1,
+        "non_indexable_child_count": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "passed": true,
+  "retrieval_readiness": "review",
+  "page_count": 42,
+  "parent_count": 27,
+  "child_count": 67,
+  "atomic_unit_count": 266,
+  "ocr_page_count": 0,
+  "complex_layout_page_count": 1,
+  "rejected_table_count": 103,
+  "removed_noise_block_count": 160,
+  "removed_promotional_block_count": 1,
+  "reconstructed_code_block_count": 17,
+  "python_code_unit_count": 22,
+  "function_level_code_piece_count": 15,
+  "toc_page_count": 1,
+  "non_indexable_child_count": 1,
+  "duplicate_child_ratio": 0.0,
+  "non_indexable_child_ratio": 0.014925,
+  "malformed_code_chunk_ratio": 0.0,
+  "python_ast_parseable_ratio": 0.181818,
+  "code_indentation_issue_ratio": 0.363636,
+  "split_identifier_candidate_ratio": 0.0,
+  "function_boundary_violation_ratio": 0.0,
+  "glued_list_paragraph_ratio": 0.0,
+  "short_child_ratio_lt_100": 0.045455,
+  "under_min_tokens_ratio": 0.121212,
+  "over_target_tokens_ratio": 0.227273,
+  "single_child_parent_ratio": 0.538462,
+  "flat_heading_path_ratio": 0.242424,
+  "suspicious_heading_ratio": 0.0,
+  "mid_sentence_start_ratio": 0.068182,
+  "broken_line_candidate_ratio": 0.075758,
+  "child_token_min": 52,
+  "child_token_p10": 160.5,
+  "child_token_p25": 259.5,
+  "child_token_median": 417.5,
+  "child_token_p75": 491.75,
+  "child_token_p90": 566.0,
+  "child_token_max": 756,
+  "children_per_parent_median": 1.0,
+  "atomic_units_per_child_median": 3.0,
+  "issues": [
+    {
+      "severity": "warning",
+      "code": "MID_SENTENCE_CHUNK_STARTS",
+      "message": "部分 Child 疑似从半句话开始",
+      "context": {
+        "value": 0.068182,
+        "threshold": 0.03,
+        "examples": [
+          "案例1:报销制度类查询:例如用户询问“差旅报销的上限是多少?”。公司内部的报销制度可能是PDF扫描件,包含分级标题和表格(各费用类别的报销上限)。通过优化解析,",
+          "此外,表格和代码块未经破坏地保存在Chunk中,当用户提问涉及这些部分时,也能直接检索到正确的片段。这套优化流程提高了RAG问答系统对金融保险文档的解析质量和检",
+          "print(answer_question(q2)) # 系统利用对话历史,将ABC寿险作为上下文,检索申请流程\n\n上述代码示例演示了:当检测到跟进问题时,将上"
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "PYTHON_AST_FAILURE_RATIO",
+      "message": "部分 Python 代码原子单元无法通过 AST 语法解析",
+      "context": {
+        "value": 0.818182,
+        "threshold": 0.35,
+        "examples": [
+          "SyntaxError: unterminated string literal (detected at line 10) (line 10)",
+          "SyntaxError: unterminated string literal (detected at line 5) (line 5)",
+          "IndentationError: unexpected indent (line 24)",
+          "IndentationError: unexpected indent (line 17)",
+          "IndentationError: unexpected indent (line 16)"
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "CODE_INDENTATION_ISSUE_RATIO",
+      "message": "部分 Python 代码块存在控制语句后无缩进等问题",
+      "context": {
+        "value": 0.363636,
+        "threshold": 0.2,
+        "examples": [
+          "def classify_intent_rule(query: str) -> str:\n    query = query.lower()  # 统一小写处理(如适用英文,此处对中文影响可忽略)\n    # 定义关键词列表\n    intent_keywords = {\"报销流程查询\": [\"报销\", \"费用\", \"报销流程\"],\"保险产品销售技巧\": [",
+          "import openai\nopenai.api_key = \"YOUR_API_KEY\"  # 设置API密钥\n\ndef classify_intent_llm(query: str) -> str:\n    system_prompt = \"你是一个智能助手,帮助分类用户意图。可能的意图类别包括:\\n1. 报\n    销流程查询\\n2. 保险产品销售技巧",
+          "def parse_document(file_path):\n    \"\"\"解析文档(PDF/PPT/文本),返回文本块列表,每块包含内容和类型等标记。\"\"\"\n    blocks = []\n    if file_path.lower().endswith('.pdf'):\n        doc = fitz.open(file_path)\n    fo",
+          "if title:\n    # 幻灯片标题作为单独块\nblocks.append({\"text\": title,\"type\": \"heading\",\"level\": 1,  # 幻灯片题目视为一级标题\"slide\": idx})\n# 提取其他文本框\nfor shape in slide.shapes:\n    if not shape.has_text_fr",
+          "query_vec = []\nvocab = list(inverted_index.keys())\nfor term in vocab:\n    tf = query_terms.count(term)\nquery_vec.append(tf * idf.get(term, 0))\nquery_vec = np.array(query_vec)\n# 计算每"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "code": "NON_INDEXABLE_NAVIGATION_CHUNKS",
+      "message": "检测到目录/导航 Chunk，已从 indexable_children.jsonl 排除",
+      "context": {
+        "toc_page_count": 1,
+        "non_indexable_child_count": 1
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "COMPLEX_LAYOUT_PAGES",
+      "message": "检测到复杂图解/幻灯片式页面，建议检查 document.md",
+      "context": {
+        "page_count": 1
+      }
+    }
+  ]
+}

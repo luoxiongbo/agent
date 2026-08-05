@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "retrieval_readiness": "review",
+  "page_count": 42,
+  "parent_count": 27,
+  "child_count": 63,
+  "atomic_unit_count": 261,
+  "ocr_page_count": 0,
+  "complex_layout_page_count": 1,
+  "rejected_table_count": 103,
+  "removed_noise_block_count": 160,
+  "removed_promotional_block_count": 1,
+  "reconstructed_code_block_count": 17,
+  "toc_page_count": 1,
+  "non_indexable_child_count": 1,
+  "duplicate_child_ratio": 0.0,
+  "non_indexable_child_ratio": 0.015873,
+  "malformed_code_chunk_ratio": 0.0625,
+  "glued_list_paragraph_ratio": 0.0,
+  "short_child_ratio_lt_100": 0.016129,
+  "under_min_tokens_ratio": 0.096774,
+  "over_target_tokens_ratio": 0.241935,
+  "single_child_parent_ratio": 0.538462,
+  "flat_heading_path_ratio": 0.225806,
+  "suspicious_heading_ratio": 0.0,
+  "mid_sentence_start_ratio": 0.065217,
+  "broken_line_candidate_ratio": 0.080645,
+  "child_token_min": 91,
+  "child_token_p10": 181.5,
+  "child_token_p25": 307.25,
+  "child_token_median": 429.0,
+  "child_token_p75": 494.25,
+  "child_token_p90": 610.6,
+  "child_token_max": 771,
+  "children_per_parent_median": 1.0,
+  "atomic_units_per_child_median": 3.0,
+  "issues": [
+    {
+      "severity": "warning",
+      "code": "MID_SENTENCE_CHUNK_STARTS",
+      "message": "部分 Child 疑似从半句话开始",
+      "context": {
+        "value": 0.065217,
+        "threshold": 0.03,
+        "examples": [
+          "案例1:报销制度类查询:例如用户询问“差旅报销的上限是多少?”。公司内部的报销制度可能是PDF扫描件,包含分级标题和表格(各费用类别的报销上限)。通过优化解析,",
+          "此外,表格和代码块未经破坏地保存在Chunk中,当用户提问涉及这些部分时,也能直接检索到正确的片段。这套优化流程提高了RAG问答系统对金融保险文档的解析质量和检",
+          "print(answer_question(q2)) # 系统利用对话历史,将ABC寿险作为上下文,检索申请流程\n\n上述代码示例演示了:当检测到跟进问题时,将上"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "code": "NON_INDEXABLE_NAVIGATION_CHUNKS",
+      "message": "检测到目录/导航 Chunk，已从 indexable_children.jsonl 排除",
+      "context": {
+        "toc_page_count": 1,
+        "non_indexable_child_count": 1
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "COMPLEX_LAYOUT_PAGES",
+      "message": "检测到复杂图解/幻灯片式页面，建议检查 document.md",
+      "context": {
+        "page_count": 1
+      }
+    }
+  ]
+}

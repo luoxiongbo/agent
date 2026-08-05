@@ -1,0 +1,63 @@
+{
+  "parent_count": 1,
+  "child_count": 3,
+  "indexable_parent_count": 1,
+  "indexable_child_count": 3,
+  "duplicate_child_ratio": 0.0,
+  "short_child_ratio_lt_100": 1.0,
+  "under_min_tokens_ratio": 0.333333,
+  "over_target_tokens_ratio": 0.0,
+  "over_max_tokens_count": 0,
+  "single_child_parent_ratio": 0.0,
+  "flat_heading_path_ratio": 1.0,
+  "multi_level_numbered_parent_count": 1,
+  "suspicious_heading_ratio": 0.0,
+  "mid_sentence_start_ratio": 0.0,
+  "broken_line_candidate_ratio": 0.0,
+  "child_token_min": 35,
+  "child_token_p10": 39.8,
+  "child_token_p25": 47.0,
+  "child_token_median": 59.0,
+  "child_token_p75": 59.5,
+  "child_token_p90": 59.8,
+  "child_token_max": 60,
+  "children_per_parent_median": 3.0,
+  "python_code_unit_count": 3,
+  "python_ast_parseable_ratio": 1.0,
+  "code_indentation_issue_ratio": 0.0,
+  "split_identifier_candidate_ratio": 0.0,
+  "function_boundary_violation_ratio": 0.0,
+  "examples": {
+    "short_children": [
+      {
+        "child_id": "child_1795d5d4a6ec0dae0e18edae",
+        "tokens": 35,
+        "heading_path": [
+          "6.1 Function-Level Code Chunking"
+        ],
+        "text": "model_path = \"./fine_tuned_intent_model\""
+      },
+      {
+        "child_id": "child_d17a94d2437426d224855a11",
+        "tokens": 59,
+        "heading_path": [
+          "6.1 Function-Level Code Chunking"
+        ],
+        "text": "def second(query):\n    normalized = query.strip().lower()\n    values = []\n    for index in range(20)"
+      },
+      {
+        "child_id": "child_a993b674aee3302119a6d872",
+        "tokens": 60,
+        "heading_path": [
+          "6.1 Function-Level Code Chunking"
+        ],
+        "text": "import os\n\ndef first(query):\n    normalized = query.strip().lower()\n    values = []\n    for index in"
+      }
+    ],
+    "suspicious_headings": [],
+    "mid_sentence_starts": [],
+    "broken_line_candidates": [],
+    "python_syntax_errors": []
+  },
+  "verdict": "not_ready"
+}
