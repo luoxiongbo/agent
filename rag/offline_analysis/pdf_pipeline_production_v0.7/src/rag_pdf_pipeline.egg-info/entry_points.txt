@@ -1,0 +1,5 @@
+[console_scripts]
+rag-pdf = rag_pdf_pipeline.cli:main
+rag-pdf-audit = rag_pdf_pipeline.audit:main
+rag-pdf-compare = rag_pdf_pipeline.compare:main
+rag-pdf-diagnose = rag_pdf_pipeline.runtime:main

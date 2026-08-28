@@ -1,0 +1,148 @@
+{
+  "parent_count": 27,
+  "child_count": 66,
+  "indexable_parent_count": 26,
+  "indexable_child_count": 65,
+  "duplicate_child_ratio": 0.0,
+  "short_child_ratio_lt_100": 0.0,
+  "under_min_tokens_ratio": 0.076923,
+  "over_target_tokens_ratio": 0.276923,
+  "over_max_tokens_count": 0,
+  "single_child_parent_ratio": 0.538462,
+  "flat_heading_path_ratio": 0.246154,
+  "multi_level_numbered_parent_count": 22,
+  "suspicious_heading_ratio": 0.0,
+  "mid_sentence_start_ratio": 0.046154,
+  "broken_line_candidate_ratio": 0.076923,
+  "child_token_min": 112,
+  "child_token_p10": 204.0,
+  "child_token_p25": 275.0,
+  "child_token_median": 437.0,
+  "child_token_p75": 513.0,
+  "child_token_p90": 592.6,
+  "child_token_max": 777,
+  "children_per_parent_median": 1.0,
+  "python_code_unit_count": 12,
+  "python_ast_parseable_ratio": 0.416667,
+  "normalized_python_ast_parseable_ratio": 0.916667,
+  "python_pseudocode_ratio": 0.083333,
+  "code_indentation_issue_ratio": 0.083333,
+  "split_identifier_candidate_ratio": 0.0,
+  "function_boundary_violation_ratio": 0.0,
+  "examples": {
+    "short_children": [
+      {
+        "child_id": "child_cd43cf6edbb6f2b700c25f73",
+        "tokens": 112,
+        "heading_path": [
+          "1.1 整体流程"
+        ],
+        "text": "检索增强生成(RAG)系统是一种结合外部知识库与大语言模型的智能架构。该系统通过检索相关文档来增强生成模型的回答能力,使其能够提供更准确、及时和可靠的信息。"
+      },
+      {
+        "child_id": "child_f4730928ea234ca9cc7fec77",
+        "tokens": 125,
+        "heading_path": [
+          "离线解析模块",
+          "3.4 示例代码"
+        ],
+        "text": "此外,表格和代码块未经破坏地保存在Chunk中,当用户提问涉及这些部分时,也能直接检索到正确的片段。这套优化流程提高了RAG问答系统对金融保险文档的解析质量和检索召回准确率。"
+      },
+      {
+        "child_id": "child_a1674476857d8d75ebdfe67b",
+        "tokens": 128,
+        "heading_path": [
+          "Query模块",
+          "2.1 意图识别(Intent Recognition)"
+        ],
+        "text": "意图识别旨在判断用户查询的意图类别,从而采用不同的检索或回答策略。例如,需要区分用户是在询问报销流程还是在寻求保险产品销售技巧。我们可以采用以下三种方法进行意图分类:"
+      },
+      {
+        "child_id": "child_ac6bf0bd6553dc63ee70b499",
+        "tokens": 137,
+        "heading_path": [
+          "Query模块",
+          "2.1 意图识别(Intent Recognition)",
+          "2.1.2 基于机器学习的方法(BERT 分类模型)"
+        ],
+        "text": "⚠️提示:实际应用中需先准备标注数据并训练模型。这可以使用Transformers提供的Trainer接口或TensorFlow/Keras等完成,对BERT模型在意图分类数据集上进行fine-tun"
+      },
+      {
+        "child_id": "child_1eb48de43646342ca7ad770f",
+        "tokens": 176,
+        "heading_path": [
+          "优化策略"
+        ],
+        "text": "print(answer_question(q2)) # 系统利用对话历史,将ABC寿险作为上下文,检索申请流程\n\n上述代码示例演示了:当检测到跟进问题时,将上一轮主题合并到当前问题中用于检索;从多模"
+      },
+      {
+        "child_id": "child_b582626a97e904d6d0dc39f4",
+        "tokens": 187,
+        "heading_path": [
+          "检索召回模块"
+        ],
+        "text": "RAG问答系统查询与Chunk匹配模块优化方案在金融保险公司的RAG(Retrieval-Augmented Generation)问答系统中,我们需要提升查询(query)和文档片段(chunk)匹"
+      },
+      {
+        "child_id": "child_a38b31be0cb2ee5fe5bde0d9",
+        "tokens": 202,
+        "heading_path": [
+          "离线解析模块",
+          "3.3 优化策略"
+        ],
+        "text": "引用与来源:每个Chunk还应记录来源文档名、页码或幻灯片编号等,以便命中后追溯原文。\n\n同时这些信息可在生成答案时用于引用出处。\n\n通过以上策略,系统能够最大程度保留文档原有信息结构,避免因解析不当"
+      },
+      {
+        "child_id": "child_1408fe71fd2aeee807758fe8",
+        "tokens": 207,
+        "heading_path": [
+          "1.2 离线处理流程"
+        ],
+        "text": "离线处理是系统的准备阶段,主要完成知识库的建立与向量化:\n1. 知识文档库:系统首先需要建立一个包含各类文档、知识和信息的库,这是RAG系统的知识基础\n2. 文档向量化:通过Embedding引擎将文"
+      },
+      {
+        "child_id": "child_c33d88d38c83b97db020aa00",
+        "tokens": 207,
+        "heading_path": [
+          "Query模块",
+          "2.3 Query 扩写(Query Expansion)"
+        ],
+        "text": "进阶:同义词扩展可以借助现有工具包,如 chatopera/Synonyms 提供了中文近义词词库,可直接调用获取某个词的近义词列表。另外,也可以使用向量检索的方法:将查询中的关键词通过词向量模型(如"
+      },
+      {
+        "child_id": "child_4b03ecf838786849367996e5",
+        "tokens": 224,
+        "heading_path": [
+          "4.5:评估指标与效果评估"
+        ],
+        "text": "def calculate_precision_at_k(gt, res, K=3):\n    \"\"\"计算每个查询的Precision@K,并返回平均Precision@K\"\"\"\n    precis"
+      }
+    ],
+    "suspicious_headings": [],
+    "mid_sentence_starts": [
+      "案例1:报销制度类查询:例如用户询问“差旅报销的上限是多少?”。公司内部的报销制度可能是PDF扫描件,包含分级标题和表格(各费用类别的报销上限)。通过优化解析,我们对扫描PDF进行OCR并准确提取表格内容,将“差旅报销”章节下的文字和限额表",
+      "此外,表格和代码块未经破坏地保存在Chunk中,当用户提问涉及这些部分时,也能直接检索到正确的片段。这套优化流程提高了RAG问答系统对金融保险文档的解析质量和检索召回准确率。",
+      "print(answer_question(q2)) # 系统利用对话历史,将ABC寿险作为上下文,检索申请流程\n\n上述代码示例演示了:当检测到跟进问题时,将上一轮主题合并到当前问题中用于检索;从多模态向量数据库中检索相关内容;在提示中加入"
+    ],
+    "broken_line_candidates": [
+      "一句话理解RAG:\n\nRAG就像是AI的\"开卷考试\"模式——不必死记硬背所有知识,而是在需要回答问题(用户query)时能翻\n\n阅自己的\"参考书\"(知识库)找到相关资料,然后用自己的语言组织回答。\n\n难点:\n\n1、离线知识库:怎么构建知识库(企业或个人的知识都是各种格式、各种模态(文字、图片、表格)混\n\n杂的)\n\n2、",
+      "离线处理是系统的准备阶段,主要完成知识库的建立与向量化:\n1. 知识文档库:系统首先需要建立一个包含各类文档、知识和信息的库,这是RAG系统的知识基础\n2. 文档向量化:通过Embedding引擎将文本内容转换为高维向量,捕捉文本的语义信息\n3. 向量数据库:存储所有文档的向量表示,并建立高效的检索索引,为后续的实时查",
+      "在线处理是系统的运行阶段,负责处理用户实时查询并生成回答:\n1. 用户查询:接收用户输入的问题或指令\n2. 查询向量化:将用户查询转换为与文档相同向量空间的表示\n3. 语义检索:在向量数据库中寻找与查询语义最相似的文档片段【解释在notebook】\n4. 大语言模型:将原始查询与检索到的相关文档结合,增强模型的上下文\n",
+      "优化策略与原理:\n1. 候选集获取:首先利用混合检索得到较宽松的候选列表,例如Top 50段落。\n2. 重排序模型选择:可以使用预训练的Cross-Encoder模型(如微软提供的MS MARCO上训练的cross-encoder)或微调一个领域重排模型。由于我们关注中文金融领域,理想情况下应在相应领域问答数据上微调一",
+      "print(answer_question(q2)) # 系统利用对话历史,将ABC寿险作为上下文,检索申请流程\n\n上述代码示例演示了:当检测到跟进问题时,将上一轮主题合并到当前问题中用于检索;从多模态向量数据库中检索相关内容;在提示中加入来源标记并让GPT-4按照指定格式作答。实际应用中可以更复杂的对话状态管理和Pr"
+    ],
+    "python_syntax_errors": [
+      "SyntaxError: invalid syntax (line 15)",
+      "SyntaxError: invalid syntax (line 27)",
+      "IndentationError: expected an indented block after 'for' statement on line 178 (line 179)",
+      "SyntaxError: invalid syntax (line 8)",
+      "SyntaxError: invalid syntax (line 14)",
+      "SyntaxError: invalid syntax (line 2)",
+      "SyntaxError: invalid character '、' (U+3001) (line 1)"
+    ],
+    "normalized_python_syntax_errors": [
+      "IndentationError: expected an indented block after 'for' statement on line 178 (line 179)"
+    ]
+  },
+  "verdict": "review"
+}

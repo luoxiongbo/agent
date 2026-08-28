@@ -1,0 +1,45 @@
+{
+  "target_document": "【RAG实战-第1天】RAG流程详解与优化方案：案例+代码+图解.pdf",
+  "comparison_note": "v0.6 counted split retrieval pieces; v0.7 evaluates each original code listing once, so denominator semantics are corrected.",
+  "v0.6": {
+    "page_count": 42,
+    "parent_count": 27,
+    "child_count": 69,
+    "atomic_unit_count": 266,
+    "python_code_unit_count": 22,
+    "python_ast_parseable_ratio": 0.181818,
+    "code_indentation_issue_ratio": 0.363636,
+    "split_identifier_candidate_ratio": 0.0,
+    "function_boundary_violation_ratio": 0.0,
+    "retrieval_readiness": "review"
+  },
+  "v0.7": {
+    "page_count": 42,
+    "parent_count": 27,
+    "child_count": 66,
+    "atomic_unit_count": 263,
+    "python_code_unit_count": 12,
+    "python_ast_parseable_ratio": 0.416667,
+    "normalized_python_ast_parseable_ratio": 0.916667,
+    "python_pseudocode_ratio": 0.083333,
+    "code_indentation_issue_ratio": 0.083333,
+    "split_identifier_candidate_ratio": 0.0,
+    "function_boundary_violation_ratio": 0.0,
+    "retrieval_readiness": "review"
+  },
+  "v0.7_runtime": {
+    "pipeline_version": "0.7.0",
+    "code_fingerprint": "2b7176587210e0e452e4",
+    "package_root": "/mnt/data/rag_pdf_pipeline_production_v0.7/src/rag_pdf_pipeline",
+    "module_file": "/mnt/data/rag_pdf_pipeline_production_v0.7/src/rag_pdf_pipeline/runtime.py",
+    "python_executable": "/opt/pyvenv/bin/python",
+    "python_version": "3.13.5"
+  },
+  "verified_root_causes": [
+    "The target PDF stores code indentation as leading spaces while code lines share nearly identical x0 coordinates.",
+    "v0.6 stripped those leading spaces and guessed indentation from x0.",
+    "Code panels contain visual soft wraps such as fine_tuned_i + ntent_model and doc_id + s).",
+    "Some Chinese presentation labels inside code panels are valid Python identifiers but are not executable statements.",
+    "Pages 18-21 form one continuous code listing with gutter line numbers 1-178."
+  ]
+}
