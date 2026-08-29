@@ -20,6 +20,7 @@ model = os.getenv("DEEPSEEK_MODEL")
 
 def chat(user_input, system_prompt, assistant_message, json_mode=False):
     stream = client.chat.completions.create(
+        model=model,
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_input},
@@ -59,5 +60,6 @@ def agent():
             raise RuntimeError(e, "运行出错")
         assistant_message += result
         i += 1
+
 
 agent()
