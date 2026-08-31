@@ -17,7 +17,7 @@ client = OpenAI(
 
 # 自动补全
 completion = client.chat.completions.create(
-    model=os.getenv("DEEPSEEK_MODEL", "deepseek-v4-flash"),
+    model=os.getenv("", "deepseek-v4-flash"),
     messages=[
         {"role": "user", "content": "请用一句话解释什么是大模型 API。"}
     ]

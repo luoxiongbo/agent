@@ -5,7 +5,7 @@
 # @Software : PyCharm
 
 """
-这个简单的旅行助手案例，集中演示了基于Thought-Action-Observation范式的智能体所具备的四项基本能力：任务分解、工具调用、上下文理解和结果合成。
+这个简单的旅行助手案例，集中演示了基于 Thought-Action-Observation 范式的智能体所具备的四项基本能力：任务分解、工具调用、上下文理解和结果合成。
 正是通过这个循环的不断迭代，智能体才得以将一个模糊的用户意图，转化为一系列具体、可执行的步骤，并最终达成目标。
 """
 
@@ -14,13 +14,16 @@ import re
 import requests
 from openai import OpenAI
 from tavily import TavilyClient
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # --- 1. 配置LLM客户端 ---
 # 请根据您使用的服务，将这里替换成对应的凭证和地址
-API_KEY = "YOUR_API_KEY"
-BASE_URL = "YOUR_BASE_URL"
-MODEL_ID = "YOUR_MODEL_ID"
-os.environ['TAVILY_API_KEY'] = "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"
+API_KEY = os.getenv("DEEPSEEK_API_KEY")
+BASE_URL = os.getenv("DEEPSEEK_BASE_URL")
+MODEL_ID = os.getenv("DEEPSEEK_MODEL")
+os.environ['TAVILY_API_KEY'] = ""
 
 AGENT_SYSTEM_PROMPT = """
 你是一个智能旅行助手。你的任务是分析用户的请求，并使用可用工具一步步地解决问题。
