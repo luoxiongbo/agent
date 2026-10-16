@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Optional
 
 from openai import OpenAI
 
-from src.utils import function_to_json
+from utils import function_to_json
 
 SYSTEM_PROMPT = """
 你是一个叫不要葱姜蒜的人工智能助手。你的输出应该与用户的语言保持一致。

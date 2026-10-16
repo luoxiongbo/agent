@@ -20,10 +20,9 @@ load_dotenv()
 
 # --- 1. 配置LLM客户端 ---
 # 请根据您使用的服务，将这里替换成对应的凭证和地址
-API_KEY = os.getenv("DEEPSEEK_API_KEY")
-BASE_URL = os.getenv("DEEPSEEK_BASE_URL")
-MODEL_ID = os.getenv("DEEPSEEK_MODEL")
-os.environ['TAVILY_API_KEY'] = ""
+API_KEY = os.getenv("GLM_API_KEY")
+BASE_URL = os.getenv("GLM_BASE_URL")
+MODEL_ID = os.getenv("GLM_MODEL")
 
 AGENT_SYSTEM_PROMPT = """
 你是一个智能旅行助手。你的任务是分析用户的请求，并使用可用工具一步步地解决问题。
@@ -87,7 +86,7 @@ def get_attraction(city: str, weather: str) -> str:
     根据城市和天气，使用Tavily Search API搜索并返回优化后的景点推荐。
     """
     # 1. 从环境变量中读取API密钥
-    api_key = os.environ.get("TAVILY_API_KEY")
+    api_key = os.getenv("TAVILY_API_KEY")
     if not api_key:
         return "错误:未配置TAVILY_API_KEY环境变量。"
 
@@ -199,7 +198,9 @@ for i in range(5):  # 设置最大循环次数
     action_str = action_match.group(1).strip()
 
     if action_str.startswith("Finish"):
-        final_answer = re.match(r"Finish\[(.*)\]", action_str).group(1)
+        final_answer = re.match(
+            r"Finish\[(.*)\]", action_str, re.DOTALL
+        ).group(1)
         print(f"任务完成，最终答案: {final_answer}")
         break
 
