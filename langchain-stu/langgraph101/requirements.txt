@@ -1,0 +1,5 @@
+langchain>=1.4.9,<2
+langchain-openai
+python-dotenv
+requests
+socksio

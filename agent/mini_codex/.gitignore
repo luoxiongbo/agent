@@ -1,7 +1,0 @@
-__pycache__/
-*.egg-info/
-.venv/
-.mini-codex/
-.demo-workspace/
-.pytest_cache/
-.env
