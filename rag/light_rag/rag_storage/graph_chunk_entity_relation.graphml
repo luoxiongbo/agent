@@ -1,0 +1,4053 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d13" for="edge" attr.name="truncate" attr.type="string"/>
+<key id="d12" for="edge" attr.name="created_at" attr.type="long"/>
+<key id="d11" for="edge" attr.name="file_path" attr.type="string"/>
+<key id="d10" for="edge" attr.name="source_id" attr.type="string"/>
+<key id="d9" for="edge" attr.name="keywords" attr.type="string"/>
+<key id="d8" for="edge" attr.name="description" attr.type="string"/>
+<key id="d7" for="edge" attr.name="weight" attr.type="double"/>
+<key id="d6" for="node" attr.name="truncate" attr.type="string"/>
+<key id="d5" for="node" attr.name="created_at" attr.type="long"/>
+<key id="d4" for="node" attr.name="file_path" attr.type="string"/>
+<key id="d3" for="node" attr.name="source_id" attr.type="string"/>
+<key id="d2" for="node" attr.name="description" attr.type="string"/>
+<key id="d1" for="node" attr.name="entity_type" attr.type="string"/>
+<key id="d0" for="node" attr.name="entity_id" attr.type="string"/>
+<graph edgedefault="undirected"><node id="Flink">
+  <data key="d0">Flink</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Flink是一个开源的分布式流处理与分布式计算框架，广泛应用于大规模数据的流式与批式处理。其运行时网络栈通过缓冲区机制优化网络开销，以网络缓冲作为消息传输的最小单位。由于每个缓冲区的开销远高于每条记录的开销，Flink在传输过程的输入端和输出端均使用网络缓冲队列来维持高吞吐。框架具有多个本地缓冲区池，支持缓冲消胀、透支缓冲区、反压处理以及Unaligned Checkpoint等特性。
+
+在内存管理方面，Flink拥有精细的内存模型。其TaskManager进程的内存由多个内存组成部分和配置参数构成，并区分框架内存与任务内存。在批处理场景中，批处理算子使用托管内存提高处理效率，可在不超过限额的前提下尽量分配托管内存，从而避免OutOfMemoryError的发生。内存管理机制还涵盖本地执行模式。值得注意的是，TaskManager负责执行用户代码，其内存配置方法在Flink 1.10版本中有较大改动，且内存配置可根据不同的部署模式进行调整。在实体类型归属上，Flink应归类为Artifact而非Software。&lt;SEP&gt;流处理计算框架，提供内存模型配置机制，内存部分不符合范围时将无法启动。&lt;SEP&gt;分布式流处理框架，其内存配置和启动脚本是本文描述的核心对象。&lt;SEP&gt;一个分布式计算框架，其集群由JobManager和TaskManager等组件构成，1.11版本对内存配置进行了较大幅度改动。&lt;SEP&gt;分布式计算框架，其内存配置参数体系发生了变更，不再支持堆上托管内存和内存预分配。&lt;SEP&gt;一个分布式流处理框架，本文描述其1.10和1.11版本中内存配置机制的变化。&lt;SEP&gt;一个计算框架/系统，其内存配置和配置文件在输入文本中被提及。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000&lt;SEP&gt;doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001&lt;SEP&gt;doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002&lt;SEP&gt;doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">network_mem_tuning.md&lt;SEP&gt;mem_tuning.md&lt;SEP&gt;mem_setup_tm.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275799</data>
+  <data key="d6"></data>
+</node>
+<node id="网络缓冲">
+  <data key="d0">网络缓冲</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink中每条消息都会被放入的缓冲单元，并以此为最小单位发送到下一个subtask。&lt;SEP&gt;任务之间网络数据传输使用的缓冲区，由网络内存分配。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d4">network_mem_tuning.md&lt;SEP&gt;mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="Subtask">
+  <data key="d0">Subtask</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink作业的执行单元，每个subtask都有一个输入队列来接收数据和一个输出队列来发送数据到下一个subtask。&lt;SEP&gt;Flink任务的执行单元，吞吐计算和缓冲消胀发生在subtask层面；subtask可能被下游subtasks反压，从而可能使用透支缓冲区。&lt;SEP&gt;Flink中的子任务，在接收到完整的record后才开始处理数据，可向下游发送数据。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000&lt;SEP&gt;doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001&lt;SEP&gt;doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="Checkpoint Barrier">
+  <data key="d0">Checkpoint Barrier</data>
+  <data key="d1">concept</data>
+  <data key="d2">用于触发快照的屏障，只有所有subtask都收到全部注入的checkpoint barrier才能完成快照。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="对齐的Checkpoints">
+  <data key="d0">对齐的Checkpoints</data>
+  <data key="d1">concept</data>
+  <data key="d2">一种checkpoint机制，其中checkpoint barrier会跟着网络缓冲数据在job graph中流动，缓冲数据越多，barrier流动时间越长。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="非对齐的Checkpoints">
+  <data key="d0">非对齐的Checkpoints</data>
+  <data key="d1">concept</data>
+  <data key="d2">一种checkpoint机制，缓冲数据会被持久化到checkpoint中，缓冲数据越多，checkpoint就会越大。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="缓冲消胀机制">
+  <data key="d0">缓冲消胀机制</data>
+  <data key="d1">method</data>
+  <data key="d2">Flink中的一种机制，通过限制使用的缓冲区大小上限来处理缓冲数据，但不会减少实际缓冲区大小、个数及作业内存使用；在高并行度(约200以上)下可能无法正常工作。&lt;SEP&gt;Flink 1.14新引入的机制，通过自动调整缓冲数据量到一个合理值来解决缓冲区参数难以配置的问题，基于过去吞吐数据预测消费剩余缓冲数据的时间。&lt;SEP&gt;Flink中用于简化网络内存配置调整的机制，当缓冲数据量存在问题时建议启用。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000&lt;SEP&gt;doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001&lt;SEP&gt;doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="Taskmanager.network.memory.buffer-debloat.enabled">
+  <data key="d0">Taskmanager.network.memory.buffer-debloat.enabled</data>
+  <data key="d1">data</data>
+  <data key="d2">配置参数，设置为true时开启缓冲消胀机制。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="Taskmanager.network.memory.buffer-debloat.target">
+  <data key="d0">Taskmanager.network.memory.buffer-debloat.target</data>
+  <data key="d1">data</data>
+  <data key="d2">配置参数，duration类型，用于指定消费缓冲数据的目标时间。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="Taskmanager.network.memory.buffer-debloat.period">
+  <data key="d0">Taskmanager.network.memory.buffer-debloat.period</data>
+  <data key="d1">data</data>
+  <data key="d2">配置参数，表示缓冲区大小重算的最小时间周期，周期越小机制反应越快但消耗更多CPU。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="Taskmanager.network.memory.buffer-debloat.samples">
+  <data key="d0">Taskmanager.network.memory.buffer-debloat.samples</data>
+  <data key="d1">data</data>
+  <data key="d2">配置参数，用于调整计算平均吞吐量的采样数，样本数越少反应越快但计算更容易出错。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="Taskmanager.network.memory.buffer-debloat.threshold-percentages">
+  <data key="d0">Taskmanager.network.memory.buffer-debloat.threshold-percentages</data>
+  <data key="d1">data</data>
+  <data key="d2">配置参数，防止缓冲区大小频繁改变的优化(如新大小与旧大小相差不大)。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="EstimatedTimeToConsumeBuffersMs">
+  <data key="d0">EstimatedTimeToConsumeBuffersMs</data>
+  <data key="d1">data</data>
+  <data key="d2">监控指标，表示消费所有输入通道中数据的总时间。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="DebloatedBufferSize">
+  <data key="d0">DebloatedBufferSize</data>
+  <data key="d1">data</data>
+  <data key="d2">监控指标，表示当前的缓冲区大小。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="网络缓冲队列">
+  <data key="d0">网络缓冲队列</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink在传输过程的输入端和输出端使用的缓冲队列，用于维持连续的高吞吐。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="Apache Software Foundation">
+  <data key="d0">Apache Software Foundation</data>
+  <data key="d1">organization</data>
+  <data key="d2">软件基金会，Flink相关文档以其许可证(Apache License, Version 2.0)授权发布。&lt;SEP&gt;Flink文档的许可方，依据Apache License, Version 2.0授权该文档。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-000</data>
+  <data key="d4">network_mem_tuning.md&lt;SEP&gt;mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="Job Graph">
+  <data key="d0">Job Graph</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink作业的执行图，在对齐的checkpoints中checkpoint barrier会跟着网络缓冲数据在其中流动。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="Input Channel">
+  <data key="d0">Input Channel</data>
+  <data key="d1">concept</data>
+  <data key="d2">Subtask的输入通道，指标estimatedTimeToConsumeBuffersMs度量消费所有输入通道中数据的总时间。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="快照">
+  <data key="d0">快照</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink状态的持久化过程，只有所有subtask都收到全部注入的checkpoint barrier才能完成快照；中间缓存数据越多，快照时间越长。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="透支缓冲区">
+  <data key="d0">透支缓冲区</data>
+  <data key="d1">concept</data>
+  <data key="d2">subtask输出数据时可请求的至多max-overdraft-buffers-per-gate(默认5)个额外缓冲区，仅在subtask被下游反压且需要请求超过1个网络缓冲区时使用，用于避免线程阻塞。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="Unaligned Checkpoint">
+  <data key="d0">Unaligned Checkpoint</data>
+  <data key="d1">method</data>
+  <data key="d2">Flink的一种检查点机制，若无透支缓冲区，subtask线程被反压阻塞时会阻止其完成。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="Pipelined Shuffle">
+  <data key="d0">Pipelined Shuffle</data>
+  <data key="d1">method</data>
+  <data key="d2">Flink的一种Shuffle方式，透支缓冲区特性只对其生效。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="WindowOperator">
+  <data key="d0">WindowOperator</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Flink中的算子，其触发器可能周期性或由事件触发产生大量records。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="必须缓冲区">
+  <data key="d0">必须缓冲区</data>
+  <data key="d1">concept</data>
+  <data key="d2">目标缓冲区数中小于阈值的部分，无法获得时会导致任务失败。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="可选缓冲区">
+  <data key="d0">可选缓冲区</data>
+  <data key="d1">concept</data>
+  <data key="d2">目标缓冲区数中除必须缓冲区外的剩余部分，无法获得时任务不会失败但可能降低性能。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="缓冲区池">
+  <data key="d0">缓冲区池</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink中的本地缓冲区池，每个输出和输入流对应一个；其目标缓冲区数由公式计算，且不一定总能达到目标数量。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="网络缓冲区">
+  <data key="d0">网络缓冲区</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink中用于传输数据的缓冲区，大小可通过taskmanager.memory.segment-size设置；subtask完成操作可能需要请求多个网络缓冲区。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="独占缓冲区">
+  <data key="d0">独占缓冲区</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink网络栈中的缓冲区类型，用于提供流畅的吞吐量，当一个缓冲区在传输数据时另一个缓冲区被填充，默认每个通道为2个，高吞吐时是决定Flink缓冲数据的主要因素。&lt;SEP&gt;缓冲区的一种类型，输出场景下被当作推荐值；如需最小化缓冲数据量可将其设置为0。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001&lt;SEP&gt;doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="流动缓冲区">
+  <data key="d0">流动缓冲区</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink网络栈中的缓冲区类型，目的是处理数据倾斜，默认数量为8个。&lt;SEP&gt;缓冲区的一种类型，高并行度下建议将其数量提高到至少与并行度相等，配置项为taskmanager.network.memory.floating-buffers-per-gate。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001&lt;SEP&gt;doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="Subpartition">
+  <data key="d0">Subpartition</data>
+  <data key="d1">concept</data>
+  <data key="d2">输出缓冲区中共享缓冲区的分区单位，其缓冲区数量可通过taskmanager.network.memory.max-buffers-per-channel限制以避免数据倾斜。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="execution.buffer-timeout">
+  <data key="d0">execution.buffer-timeout</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于控制缓冲区刷新的频率，值过小可能导致吞吐量降低以及内存分配使用率较低。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.network.memory.buffers-per-channel">
+  <data key="d0">taskmanager.network.memory.buffers-per-channel</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于配置每个通道的缓冲区数量。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.network.memory.floating-buffers-per-gate">
+  <data key="d0">taskmanager.network.memory.floating-buffers-per-gate</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于配置每个gate的流动缓冲区数量。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="内存段">
+  <data key="d0">内存段</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Flink中网络缓冲的内存单元，默认大小为32KB，可通过减小其大小来减少网络栈内存消耗。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="缓冲区数量计算公式">
+  <data key="d0">缓冲区数量计算公式</data>
+  <data key="d1">method</data>
+  <data key="d2">用于计算维持吞吐所需缓冲区数量的公式：number_of_buffers = expected_throughput * buffer_roundtrip / buffer_size。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="Checkpoint">
+  <data key="d0">Checkpoint</data>
+  <data key="d1">method</data>
+  <data key="d2">Flink中的检查点机制，缓冲区太大会导致大量checkpoint数据(针对非对齐checkpoints)或漫长的checkpoint时间(针对对齐的checkpoints)。&lt;SEP&gt;Flink机制，其完成后的回调函数中会执行用户代码。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d4">network_mem_tuning.md&lt;SEP&gt;mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="反压">
+  <data key="d0">反压</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink中的现象，属于网络瓶颈的表现之一，低吞吐量下出现反压时应考虑减少独占缓冲区数量。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="数据倾斜">
+  <data key="d0">数据倾斜</data>
+  <data key="d1">concept</data>
+  <data key="d2">数据分布不均匀的现象，流动缓冲区的目的就是处理数据倾斜。</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="快照时间">
+  <data key="d0">快照时间</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d2">拥有更多的中间缓存数据可以使Flink提供更高、更富有弹性的吞吐量，但也会增加快照时间。</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="缓冲区">
+  <data key="d0">缓冲区</data>
+  <data key="d3">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d2">该参数控制缓冲区刷新频率，刷新过于频繁可能降低吞吐量。</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">network_mem_tuning.md</data>
+  <data key="d5">1791275663</data>
+  <data key="d6"></data>
+</node>
+<node id="IllegalConfigurationException">
+  <data key="d0">IllegalConfigurationException</data>
+  <data key="d1">other</data>
+  <data key="d2">当TaskExecutorProcessUtils或JobManagerProcessUtils抛出该异常时，通常表示配置参数存在无效值(如内存大小为负数、占比大于1)或配置冲突。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="OutOfMemoryError: Java Heap Space">
+  <data key="d0">OutOfMemoryError: Java Heap Space</data>
+  <data key="d1">other</data>
+  <data key="d2">表示JVM堆空间过小的异常，可通过增大总内存、TaskManager任务堆内存或JobManager的JVM堆内存来解决。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="OutOfMemoryError: Direct Buffer Memory">
+  <data key="d0">OutOfMemoryError: Direct Buffer Memory</data>
+  <data key="d1">event</data>
+  <data key="d2">表示JVM直接内存限制过小或存在直接内存泄漏的异常，可通过调整堆外内存来增大直接内存限制。&lt;SEP&gt;JobManager进程可能抛出的直接内存缓冲区不足异常，可通过调大堆外内存配置解决。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="OutOfMemoryError: Metaspace">
+  <data key="d0">OutOfMemoryError: Metaspace</data>
+  <data key="d1">other</data>
+  <data key="d2">表示JVM Metaspace限制过小的异常，可调整TaskManager和JobManager的JVM Metaspace配置。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="IOException: Insufficient Number Of Network Buffers">
+  <data key="d0">IOException: Insufficient Number Of Network Buffers</data>
+  <data key="d1">other</data>
+  <data key="d2">仅与TaskManager相关的异常，通常说明网络内存过小，可通过调整taskmanager.memory.network相关参数解决。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="容器内存超用">
+  <data key="d0">容器内存超用</data>
+  <data key="d1">other</data>
+  <data key="d2">指Flink容器(Yarn或Kubernetes环境)尝试分配超过其申请大小的内存的情况，通常说明Flink没有预留足够的本地内存。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="TaskManager">
+  <data key="d0">TaskManager</data>
+  <data key="d1">artifact</data>
+  <data key="d2">TaskManager 是 Apache Flink 集群中的工作进程，是负责任务执行的核心组件，负责执行用户代码。它是 Flink 中任务执行的基本单元，其内存模型与 JobManager 相似，但结构更为复杂。
+
+TaskManager 的内存配置涉及多个部分，包括任务堆内存、框架堆内存、网络内存、JVM Metaspace 以及堆外内存等。其中，网络内存和托管内存具有各自相应的内存配置方式，同时也可通过环境变量和托管内存配置来调整其内存行为。
+
+在版本演进方面，TaskManager 的内存配置方法适用于 Flink 1.10 及以上版本。从 1.10 版本起，其 JVM Metaspace 和直接内存开始受到限制。此外，容器切除内存（container cut-off memory）相关的配置参数从该版本起将不再对 TaskManager 生效。
+
+关于 TaskManager 的使用，官方提供了相应的本地执行文档以及详细的内存配置细节文档，可供用户参考和查阅。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_setup_tm.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275806</data>
+  <data key="d6"></data>
+</node>
+<node id="JobManager">
+  <data key="d0">JobManager</data>
+  <data key="d1">software</data>
+  <data key="d2">JobManager 是 Apache Flink 集群中的管理和控制进程组件，也被称为作业管理组件。作为 Flink 集群的控制单元，JobManager 由三种组件组成：ResourceManager、Dispatcher 以及每个正在运行作业对应的 JobMaster。
+
+在内存模型方面，JobManager 与 TaskManager 相似，但结构更为简单。其内存配置主要包括 JVM 堆内存、JVM Metaspace 和堆外内存等部分。其中，直接内存限制可由 jobmanager.memory.enable-jvm-direct-memory-limit 配置项控制，用户可通过 JVM 堆内存、堆外内存等相关参数对 JobManager 的内存进行配置。这些内存配置方法适用于 Flink 1.11 及以上版本，官方文档中还提供了本地执行的相关说明以及详细的内存配置细节文档，并说明了内存配置的升级方式。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_setup_tm.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275807</data>
+  <data key="d6"></data>
+</node>
+<node id="TaskExecutorProcessUtils">
+  <data key="d0">TaskExecutorProcessUtils</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Flink中用于处理TaskExecutor进程内存配置的工具类，配置无效时会抛出IllegalConfigurationException。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="JobManagerProcessUtils">
+  <data key="d0">JobManagerProcessUtils</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Flink中用于处理JobManager进程内存配置的工具类，配置无效时会抛出IllegalConfigurationException。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="Taskmanager.memory.network.min">
+  <data key="d0">Taskmanager.memory.network.min</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于设置TaskManager网络内存的最小值，可用来增大网络内存。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="Taskmanager.memory.network.max">
+  <data key="d0">Taskmanager.memory.network.max</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于设置TaskManager网络内存的最大值，可用来增大网络内存。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="Taskmanager.memory.network.fraction">
+  <data key="d0">Taskmanager.memory.network.fraction</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于设置TaskManager网络内存的占比，可用来增大网络内存。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="Jobmanager.memory.enable-jvm-direct-memory-limit">
+  <data key="d0">Jobmanager.memory.enable-jvm-direct-memory-limit</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于为JobManager进程启用JVM直接内存限制，以排查JVM直接内存泄漏。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="RocksDBStateBackend">
+  <data key="d0">RocksDBStateBackend</data>
+  <data key="d1">method</data>
+  <data key="d2">Apache Flink的一种状态后端，使用时涉及内存控制与托管内存配置。&lt;SEP&gt;Flink的状态后端，在容器内存超用时其内存控制配置会影响内存使用情况。&lt;SEP&gt;使用本地内存的状态后端，RocksDB默认限制其内存用量不超过配置的托管内存</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001&lt;SEP&gt;doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_tuning.md</data>
+  <data key="d5">1791275691</data>
+  <data key="d6"></data>
+</node>
+<node id="JVM直接内存泄漏">
+  <data key="d0">JVM直接内存泄漏</data>
+  <data key="d1">concept</data>
+  <data key="d2">可能出现的JVM直接内存泄漏问题，可通过启用直接内存限制来排查。&lt;SEP&gt;指JVM直接内存被持续占用而无法释放的问题，可能导致OutOfMemoryError: Direct buffer memory或容器内存超用。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="Apache Flink">
+  <data key="d0">Apache Flink</data>
+  <data key="d1">artifact</data>
+  <data key="d2">流处理框架，本文档描述其内存配置相关的常见问题与解决方案。&lt;SEP&gt;基于JVM的流批一体分布式处理框架，支持从整体和细粒度两个层面调整集群的内存分配。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d5">1791275759</data>
+  <data key="d6"></data>
+</node>
+<node id="总内存">
+  <data key="d0">总内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink内存配置中的整体内存概念，增大总内存可用于解决OutOfMemoryError: Java heap space异常。&lt;SEP&gt;Flink用于指定进程总内存的概念，原由堆内存配置参数指定，实际包含JVM堆内存及其他堆外内存部分，其变化会影响网络内存的占比计算。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275799</data>
+  <data key="d6"></data>
+</node>
+<node id="任务堆内存">
+  <data key="d0">任务堆内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">TaskManager内存模型中用于任务执行的堆内存部分，增大该内存可解决JVM堆空间过小的问题。&lt;SEP&gt;可通过taskmanager.memory.task.heap.size明确指定的JVM堆内存，专门用于Flink算子及用户代码的执行。&lt;SEP&gt;Flink任务内存的一部分，本地执行时默认值为无穷大(Long.MAX_VALUE字节)&lt;SEP&gt;用于Flink应用的算子及用户代码的JVM堆内存，由参数taskmanager.memory.task.heap.size控制。&lt;SEP&gt;TaskManager中的一种内存部分，配置其大小会影响JVM开销的推导。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_setup_tm.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d5">1791275766</data>
+  <data key="d6"></data>
+</node>
+<node id="框架堆内存">
+  <data key="d0">框架堆内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">TaskManager中供Flink框架自身使用的堆内存，属于进阶配置，仅在确认框架自身需要更多内存时才调整。&lt;SEP&gt;Flink框架内存的一部分，通常不建议调整，除非Flink内部数据结构及操作需要更多内存&lt;SEP&gt;Flink TaskManager内存模型组成部分，用于Flink框架的JVM堆内存，属进阶配置，由参数taskmanager.memory.framework.heap.size控制。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="JVM Metaspace">
+  <data key="d0">JVM Metaspace</data>
+  <data key="d1">concept</data>
+  <data key="d2">JVM的元空间内存区域，其限制过小会导致OutOfMemoryError: Metaspace异常，可对TaskManager和JobManager分别调整。&lt;SEP&gt;JVM元空间，出现Metaspace不足问题时可调整其大小&lt;SEP&gt;Flink JVM进程的Metaspace，由参数taskmanager.memory.jvm-metaspace.size控制。&lt;SEP&gt;Flink JVM进程的Metaspace，通过jobmanager.memory.jvm-metaspace.size配置。&lt;SEP&gt;JVM进程使用的内存区域，Flink从1.10起对TaskManager、从1.11起对JobManager进行限制。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_tuning.md&lt;SEP&gt;mem_setup_tm.md&lt;SEP&gt;mem_setup_jobmanager.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275803</data>
+  <data key="d6"></data>
+</node>
+<node id="直接内存">
+  <data key="d0">直接内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">JVM的直接内存区域，用户代码及外部依赖可能使用，若限制过小或存在泄漏会导致OutOfMemoryError: Direct buffer memory。&lt;SEP&gt;堆外内存的组成部分之一。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d5">1791275759</data>
+  <data key="d6"></data>
+</node>
+<node id="堆外内存">
+  <data key="d0">堆外内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink中JVM堆之外的内存，调整堆外内存可增大直接内存限制，TaskManager和JobManager均可配置。&lt;SEP&gt;直接内存或本地内存，Flink框架和应用算子及用户代码均可使用堆外内存。&lt;SEP&gt;Flink总内存的组成部分之一，包括直接内存和本地内存。&lt;SEP&gt;JobManager的默认内存部分之一。&lt;SEP&gt;包括JVM直接内存和本地内存，可通过jobmanager.memory.off-heap.size配置大小。&lt;SEP&gt;JobManager内存模型的组成部分，即直接内存或本地内存，通过jobmanager.memory.off-heap.size配置。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_setup_tm.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="网络内存">
+  <data key="d0">网络内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">TaskManager详细内存模型中用于网络缓冲的内存部分，过小会导致IOException: Insufficient number of network buffers。&lt;SEP&gt;Flink内存组成部分，本地执行时默认值为64MB，由network.min和network.max参数控制&lt;SEP&gt;用于任务之间数据传输的直接内存(如网络传输缓冲)，是基于Flink总内存的受限等比内存部分，用于分配网络缓冲，由network.min/max/fraction参数控制。&lt;SEP&gt;可配置为占用Flink总内存固定比例的内存部分，仅针对TaskManager。&lt;SEP&gt;Flink内存模型中的组成部分，其大小可能受其他内存部分(如总内存)变化的影响，配置参数变化不大但建议检查配置结果。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_setup_tm.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275802</data>
+  <data key="d6"></data>
+</node>
+<node id="Yarn">
+  <data key="d0">Yarn</data>
+  <data key="d1">software</data>
+  <data key="d2">Flink可部署的资源调度平台之一，容器内存超用问题可能出现在Yarn环境中。&lt;SEP&gt;一种容器化部署Flink的资源管理系统&lt;SEP&gt;一种容器化部署资源提供方式，RocksDB需限制内存以避免其上的容器被杀。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_tuning.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275802</data>
+  <data key="d6"></data>
+</node>
+<node id="Kubernetes">
+  <data key="d0">Kubernetes</data>
+  <data key="d1">software</data>
+  <data key="d2">Flink可部署的容器编排平台之一，容器内存超用问题可能出现在Kubernetes环境中。&lt;SEP&gt;一种容器化部署Flink的资源提供平台&lt;SEP&gt;一种容器化部署资源提供方式，与Yarn一起构成容器化部署模式。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_tuning.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275802</data>
+  <data key="d6"></data>
+</node>
+<node id="直接内存限制">
+  <data key="d0">直接内存限制</data>
+  <data key="d1">concept</data>
+  <data key="d2">通过配置项jobmanager.memory.enable-jvm-direct-memory-limit设置的JVM直接内存限制机制，用于排除JVM直接内存泄漏的可能性。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="托管内存">
+  <data key="d0">托管内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">托管内存（Managed Memory）是Apache Flink中TaskManager内存模型的一个组成部分，由Flink统一负责分配和管理的本地（堆外）内存。自Flink 1.10版本起，托管内存总是在堆外分配，使用本地内存而非直接内存，并且不再支持堆上分配，同时总是采用惰性分配方式。
+
+托管内存主要用于以下场景：RocksDB State Backend存储状态数据、批处理算子的排序和哈希表操作、缓存中间结果，以及Python进程中执行用户自定义函数。其大小可通过taskmanager.memory.managed.size和taskmanager.memory.managed.fraction两项配置进行控制，并且具有默认占比。在本地执行模式下，托管内存的默认值为128MB，该默认值仅针对本地执行模式生效。
+
+作为由用户配置的内存限额，托管内存对应用性能有实质性影响。使用Heap State Backend时，建议将托管内存设置为0；而使用RocksDBStateBackend时，则需要为其配置足够大的内存。此外，当关闭内存控制时，可以尝试增大托管内存。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001&lt;SEP&gt;doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_tuning.md&lt;SEP&gt;mem_setup_tm.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275807</data>
+  <data key="d6"></data>
+</node>
+<node id="glibc">
+  <data key="d0">glibc</data>
+  <data key="d1">artifact</data>
+  <data key="d2">一种内存分配器，其已知缺陷可能在保存点或全量检查点期间导致非堆内存持续增长。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="MALLOC_ARENA_MAX">
+  <data key="d0">MALLOC_ARENA_MAX</data>
+  <data key="d1">concept</data>
+  <data key="d2">可为TaskManager添加的环境变量，设置为1以缓解glibc分配器导致的内存增长问题。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="JVM开销">
+  <data key="d0">JVM开销</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink内存配置中的组成部分，可通过增大JVM开销缓解内存问题。&lt;SEP&gt;与机器物理资源相关的内存部分，Flink和部署环境通常不对其加以限制&lt;SEP&gt;用于其他JVM开销的本地内存，如栈空间、垃圾回收空间等，是基于进程总内存的受限等比内存部分，由jvm-overhead.min/max/fraction参数控制。&lt;SEP&gt;可配置为占用进程总内存固定比例的内存部分，大小受限于JVM开销最小值和最大值范围。&lt;SEP&gt;用于其他JVM开销(如栈空间、垃圾回收空间等)的本地内存，是基于进程总内存的受限等比内存部分，通过jvm-overhead系列参数配置。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001&lt;SEP&gt;doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_trouble.md&lt;SEP&gt;mem_tuning.md&lt;SEP&gt;mem_setup_tm.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="内存控制">
+  <data key="d0">内存控制</data>
+  <data key="d1">concept</data>
+  <data key="d2">RocksDBStateBackend的一项内存管理机制，可开启或关闭，影响托管内存与非堆内存的增长行为。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="保存点">
+  <data key="d0">保存点</data>
+  <data key="d1">method</data>
+  <data key="d2">Flink的一种状态持久化机制，在启用内存控制时其执行期间非堆内存可能持续增长。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="全量检查点">
+  <data key="d0">全量检查点</data>
+  <data key="d1">method</data>
+  <data key="d2">Flink的一种完整状态快照机制，在启用内存控制时其执行期间非堆内存可能持续增长。</data>
+  <data key="d3">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d4">mem_trouble.md</data>
+  <data key="d5">1791275675</data>
+  <data key="d6"></data>
+</node>
+<node id="调优指南">
+  <data key="d0">调优指南</data>
+  <data key="d1">content</data>
+  <data key="d2">介绍如何根据具体使用场景调整Flink内存配置以及不同场景下需重点关注配置参数的文档</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d4">mem_tuning.md</data>
+  <data key="d5">1791275684</data>
+  <data key="d6"></data>
+</node>
+<node id="独立部署模式">
+  <data key="d0">独立部署模式</data>
+  <data key="d1">method</data>
+  <data key="d2">一种Flink部署模式，此时通常更关注Flink应用本身使用的内存大小&lt;SEP&gt;Flink的一种部署模式，该模式下建议通过配置Flink总内存来指定Flink应用本身使用的内存大小。&lt;SEP&gt;Flink的部署模式之一，在该模式下被弃用的taskmanager.heap.size将被解读为taskmanager.memory.flink.size。&lt;SEP&gt;Flink的一种部署方式，旧堆内存参数在该模式下完全对应JVM堆内存。</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_tuning.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275799</data>
+  <data key="d6"></data>
+</node>
+<node id="容器化部署模式">
+  <data key="d0">容器化部署模式</data>
+  <data key="d1">method</data>
+  <data key="d2">Flink在容器中的部署模式，如Kubernetes或Yarn上部署&lt;SEP&gt;Flink的一种部署模式，配置进程总内存相当于申请的容器大小。&lt;SEP&gt;Flink的部署模式之一，在该模式下被弃用的taskmanager.heap.size将被解读为taskmanager.memory.process.size。&lt;SEP&gt;Flink的部署方式，包括Kubernetes和Yarn，旧堆内存参数在该模式下还包含其他堆外内存部分。</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_tuning.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275800</data>
+  <data key="d6"></data>
+</node>
+<node id="Flink总内存">
+  <data key="d0">Flink总内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink应用本身使用的总内存，可通过taskmanager.memory.flink.size或jobmanager.memory.flink.size配置&lt;SEP&gt;由Flink应用使用的内存，包括JVM堆内存、托管内存以及其他直接内存或本地内存。&lt;SEP&gt;Flink TaskManager进程内存的整体配置，网络内存等受限等比内存部分以其为基准计算。&lt;SEP&gt;由Flink应用使用的内存，包括JVM堆内存和堆外内存。&lt;SEP&gt;Flink的总内存，网络内存按其固定比例配置。&lt;SEP&gt;JobManager内存的一种总量配置方式，若已设置JVM堆内存则不建议同时设置。</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d4">mem_tuning.md&lt;SEP&gt;mem_setup_tm.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="进程总内存">
+  <data key="d0">进程总内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">容器化部署中申请容器的内存大小，RocksDB分配内存超出该值可能导致问题。&lt;SEP&gt;Flink JVM进程占用的总内存，即容器化部署中需申请的容器大小，可通过taskmanager.memory.process.size或jobmanager.memory.process.size配置&lt;SEP&gt;Flink JVM进程的总内存，包含Flink应用使用的内存及运行Flink的JVM使用的内存。&lt;SEP&gt;TaskManager进程的总内存，JVM开销等受限等比内存部分以其为基准计算。&lt;SEP&gt;Flink JVM进程使用的总内存，包含Flink应用使用的内存以及运行Flink的JVM使用的内存。&lt;SEP&gt;Flink进程占用的总内存，是各内存部分比例配置的基数。&lt;SEP&gt;JobManager内存的一种总量配置方式，与堆内存配置同时设置可能造成冲突。</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d4">mem_tuning.md&lt;SEP&gt;mem_setup_tm.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="State Backend">
+  <data key="d0">State Backend</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink流处理应用中存储状态的组件类型，可根据其类型优化集群配置</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d4">mem_tuning.md</data>
+  <data key="d5">1791275691</data>
+  <data key="d6"></data>
+</node>
+<node id="Heap State Backend">
+  <data key="d0">Heap State Backend</data>
+  <data key="d1">concept</data>
+  <data key="d2">基于堆内存的状态后端，包括MemoryStateBackend和FsStateBackend</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d4">mem_tuning.md</data>
+  <data key="d5">1791275691</data>
+  <data key="d6"></data>
+</node>
+<node id="MemoryStateBackend">
+  <data key="d0">MemoryStateBackend</data>
+  <data key="d1">method</data>
+  <data key="d2">一种基于堆内存的State Backend实现</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_tuning.md</data>
+  <data key="d5">1791275691</data>
+  <data key="d6"></data>
+</node>
+<node id="FsStateBackend">
+  <data key="d0">FsStateBackend</data>
+  <data key="d1">method</data>
+  <data key="d2">一种基于堆内存、状态可持久化到文件系统的State Backend实现</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_tuning.md</data>
+  <data key="d5">1791275691</data>
+  <data key="d6"></data>
+</node>
+<node id="RocksDB">
+  <data key="d0">RocksDB</data>
+  <data key="d1">artifact</data>
+  <data key="d2">一种状态后端存储引擎，默认限制其内存用量不超过用户配置的托管内存，关闭内存控制时在容器化部署中可能因内存超限导致TaskExecutor被杀掉。&lt;SEP&gt;本地键值存储，被RocksDBStateBackend用于存储状态，默认限制内存用量</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_tuning.md</data>
+  <data key="d5">1791275691</data>
+  <data key="d6"></data>
+</node>
+<node id="配置指南">
+  <data key="d0">配置指南</data>
+  <data key="d1">content</data>
+  <data key="d2">介绍Flink内存基础配置的文档，调优指南在其基础上展开</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d4">mem_tuning.md</data>
+  <data key="d5">1791275691</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.flink.size">
+  <data key="d0">taskmanager.memory.flink.size</data>
+  <data key="d1">artifact</data>
+  <data key="d2">用于配置TaskManager的Flink总内存的配置参数&lt;SEP&gt;TaskManager上配置Flink总内存的配置参数。&lt;SEP&gt;新配置参数，独立部署模式下对应被弃用的taskmanager.heap.size。</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_tuning.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275798</data>
+  <data key="d6"></data>
+</node>
+<node id="jobmanager.memory.flink.size">
+  <data key="d0">jobmanager.memory.flink.size</data>
+  <data key="d1">method</data>
+  <data key="d2">用于配置JobManager的Flink总内存的配置参数&lt;SEP&gt;JobManager上配置Flink总内存的配置参数。</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d4">mem_tuning.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d5">1791275766</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.process.size">
+  <data key="d0">taskmanager.memory.process.size</data>
+  <data key="d1">artifact</data>
+  <data key="d2">用于配置TaskManager的进程总内存的配置参数&lt;SEP&gt;TaskManager上配置进程总内存的配置参数。&lt;SEP&gt;新配置参数，容器化部署模式下对应被弃用的taskmanager.heap.size。</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_tuning.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275798</data>
+  <data key="d6"></data>
+</node>
+<node id="jobmanager.memory.process.size">
+  <data key="d0">jobmanager.memory.process.size</data>
+  <data key="d1">configuration</data>
+  <data key="d2">用于配置JobManager的进程总内存的配置参数&lt;SEP&gt;JobManager上配置进程总内存的配置参数。&lt;SEP&gt;新配置参数，用于指定JobManager进程总内存，适用于容器化部署模式。</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_tuning.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275802</data>
+  <data key="d6"></data>
+</node>
+<node id="JVM进程">
+  <data key="d0">JVM进程</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink运行所在的Java虚拟机进程，进程总内存即分配给它的总内存</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d4">mem_tuning.md</data>
+  <data key="d5">1791275691</data>
+  <data key="d6"></data>
+</node>
+<node id="容器">
+  <data key="d0">容器</data>
+  <data key="d1">artifact</data>
+  <data key="d2">容器化部署中承载Flink JVM进程的资源单元，内存超用可能被部署环境杀掉</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d4">mem_tuning.md</data>
+  <data key="d5">1791275691</data>
+  <data key="d6"></data>
+</node>
+<node id="TaskExecutor">
+  <data key="d0">TaskExecutor</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Flink的任务执行组件，在容器化部署中若RocksDB分配内存超出容器大小，可能被部署环境杀掉。</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001</data>
+  <data key="d4">mem_tuning.md</data>
+  <data key="d5">1791275691</data>
+  <data key="d6"></data>
+</node>
+<node id="OutOfMemoryError">
+  <data key="d0">OutOfMemoryError</data>
+  <data key="d1">event</data>
+  <data key="d2">一种内存溢出错误，Flink通过明确知道可用内存大小来有效避免其发生。</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_tuning.md</data>
+  <data key="d5">1791275691</data>
+  <data key="d6"></data>
+</node>
+<node id="批处理作业">
+  <data key="d0">批处理作业</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink中的一类作业，其内存配置涉及批处理算子使用托管内存来提高处理效率。</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001</data>
+  <data key="d4">mem_tuning.md</data>
+  <data key="d5">1791275691</data>
+  <data key="d6"></data>
+</node>
+<node id="state.backend.rocksdb.memory.managed">
+  <data key="d0">state.backend.rocksdb.memory.managed</data>
+  <data key="d1">method</data>
+  <data key="d2">Flink的配置项，用于控制RocksDB是否使用托管内存，需结合RocksDB内存调整参考使用。&lt;SEP&gt;Flink配置参数，可用于关闭RocksDB的内存控制。</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d4">mem_tuning.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275803</data>
+  <data key="d6"></data>
+</node>
+<node id="批处理算子">
+  <data key="d0">批处理算子</data>
+  <data key="d3">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001</data>
+  <data key="d2">批处理算子运行时部分操作可直接在原始数据上进行而无需反序列化成Java对象，托管内存对此有实质影响。</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">mem_tuning.md</data>
+  <data key="d5">1791275691</data>
+  <data key="d6"></data>
+</node>
+<node id="JVM堆内存">
+  <data key="d0">JVM堆内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink总内存的组成部分，其中任务堆内存专用于Flink算子及用户代码的执行。&lt;SEP&gt;Flink总内存的组成部分之一，属于JVM堆内存空间。&lt;SEP&gt;JobManager中的一种内存部分。&lt;SEP&gt;可通过jobmanager.memory.heap.size配置的内存部分，供Flink框架和用户代码使用。&lt;SEP&gt;JobManager内存模型的组成部分，通过jobmanager.memory.heap.size配置，用于Flink框架等用途。&lt;SEP&gt;JVM中的堆内存部分，被弃用的taskmanager.heap.size或taskmanager.heap.mb指定的内存除JVM堆内存外还包含其他堆外内存部分。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_setup_tm.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275800</data>
+  <data key="d6"></data>
+</node>
+<node id="RocksDB State Backend">
+  <data key="d0">RocksDB State Backend</data>
+  <data key="d1">method</data>
+  <data key="d2">Flink流处理作业的状态后端，使用托管内存。&lt;SEP&gt;Flink的状态后端，使用托管内存存储状态数据。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.task.heap.size">
+  <data key="d0">taskmanager.memory.task.heap.size</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于设置任务堆内存大小。&lt;SEP&gt;Flink配置参数，用于明确指定任务堆内存大小，确保指定大小的JVM堆内存给用户代码使用。&lt;SEP&gt;用于配置任务堆内存大小的配置参数</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="Flink 1.10版本">
+  <data key="d0">Flink 1.10版本</data>
+  <data key="d1">event</data>
+  <data key="d2">Flink在该版本中对内存配置部分进行了较大幅度的改动，本文介绍的内存配置方法适用于1.10及以上版本。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-000</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="Flink TaskManager内存模型">
+  <data key="d0">Flink TaskManager内存模型</data>
+  <data key="d1">concept</data>
+  <data key="d2">描述Flink TaskManager进程内存组成的模型，包含框架堆内存、任务堆内存、托管内存、框架堆外内存、任务堆外内存、网络内存、JVM Metaspace和JVM开销等组成部分。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="框架堆外内存">
+  <data key="d0">框架堆外内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink框架内存的一部分，通常不建议调整，特定依赖(如Hadoop)可能需要更多直接或本地内存&lt;SEP&gt;用于Flink框架的堆外内存(直接内存或本地内存)，属进阶配置，由参数taskmanager.memory.framework.off-heap.size控制。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="任务堆外内存">
+  <data key="d0">任务堆外内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink任务内存的一部分，本地执行时默认值为无穷大&lt;SEP&gt;用于Flink应用的算子及用户代码的堆外内存(直接内存或本地内存)，由参数taskmanager.memory.task.off-heap.size控制。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.framework.heap.size">
+  <data key="d0">taskmanager.memory.framework.heap.size</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于设置框架堆内存大小。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.managed.size">
+  <data key="d0">taskmanager.memory.managed.size</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Flink配置参数，用于设置托管内存大小。&lt;SEP&gt;用于配置托管内存大小的配置参数&lt;SEP&gt;新配置参数，对应被弃用的taskmanager.memory.size。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_setup_tm.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275799</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.framework.off-heap.size">
+  <data key="d0">taskmanager.memory.framework.off-heap.size</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于设置框架堆外内存大小。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.task.off-heap.size">
+  <data key="d0">taskmanager.memory.task.off-heap.size</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于设置任务堆外内存大小。&lt;SEP&gt;用于配置任务堆外内存大小的配置参数</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.jvm-metaspace.size">
+  <data key="d0">taskmanager.memory.jvm-metaspace.size</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于设置JVM Metaspace大小。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.managed.fraction">
+  <data key="d0">taskmanager.memory.managed.fraction</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Flink配置参数，用于按比例设置托管内存大小。&lt;SEP&gt;新配置参数，取代被移除的taskmanager.memory.fraction，二者语义有所差别，配置值通常需要适当调整。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_setup_tm.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275798</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.network.min">
+  <data key="d0">taskmanager.memory.network.min</data>
+  <data key="d1">artifact</data>
+  <data key="d2">用于配置网络内存下限的配置参数，与network.max共同控制网络内存&lt;SEP&gt;Flink配置参数，用于设置网络内存的最小值。&lt;SEP&gt;新配置参数，对应被弃用的taskmanager.network.memory.min。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d4">mem_setup_tm.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275799</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.network.max">
+  <data key="d0">taskmanager.memory.network.max</data>
+  <data key="d1">artifact</data>
+  <data key="d2">用于配置网络内存上限的配置参数，与network.min共同控制网络内存&lt;SEP&gt;Flink配置参数，用于设置网络内存的最大值。&lt;SEP&gt;新配置参数，对应被弃用的taskmanager.network.memory.max。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d4">mem_setup_tm.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275799</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.network.fraction">
+  <data key="d0">taskmanager.memory.network.fraction</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Flink配置参数，用于按比例设置网络内存大小。&lt;SEP&gt;新配置参数，对应被弃用的taskmanager.network.memory.fraction。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d4">mem_setup_tm.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275799</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.jvm-overhead.min">
+  <data key="d0">taskmanager.memory.jvm-overhead.min</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于设置JVM开销内存的最小值。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.jvm-overhead.max">
+  <data key="d0">taskmanager.memory.jvm-overhead.max</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于设置JVM开销内存的最大值。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.jvm-overhead.fraction">
+  <data key="d0">taskmanager.memory.jvm-overhead.fraction</data>
+  <data key="d1">data</data>
+  <data key="d2">Flink配置参数，用于按比例设置JVM开销内存大小。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="受限的等比内存部分">
+  <data key="d0">受限的等比内存部分</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flink内存模型中的一种内存部分类型，基于总内存按比例计算，并受最小值和最大值限制。&lt;SEP&gt;Flink内存模型中可通过指定占总内存比例并受最大/最小值限制进行配置的内存部分。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d4">mem_setup_tm.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d5">1791275766</data>
+  <data key="d6"></data>
+</node>
+<node id="本地执行模式">
+  <data key="d0">本地执行模式</data>
+  <data key="d1">method</data>
+  <data key="d2">将Flink作为单独Java程序在本地运行(如在IDE中)而非创建集群的执行方式，仅部分配置生效&lt;SEP&gt;Flink的一种执行模式，在该模式下不需要为JobManager进行内存配置，相关配置参数将不会生效。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d4">mem_setup_tm.md&lt;SEP&gt;mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="Hadoop">
+  <data key="d0">Hadoop</data>
+  <data key="d1">software</data>
+  <data key="d2">Flink的依赖之一，在特定情况下可能需要更多的直接内存或本地内存</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="JVM">
+  <data key="d0">JVM</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Java虚拟机，本地执行模式下其堆空间实际大小不受Flink掌控，可通过-Xmx和-Xms参数控制&lt;SEP&gt;运行Flink的Java虚拟机，Flink的高效处理能力基于JVM，其内存占用构成进程总内存的一部分。</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d4">mem_setup_tm.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d5">1791275766</data>
+  <data key="d6"></data>
+</node>
+<node id="-Xmx">
+  <data key="d0">-Xmx</data>
+  <data key="d1">method</data>
+  <data key="d2">JVM启动参数，用于指定JVM堆空间的最大大小</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="-Xms">
+  <data key="d0">-Xms</data>
+  <data key="d1">method</data>
+  <data key="d2">JVM启动参数，用于指定JVM堆空间的初始大小</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275729</data>
+  <data key="d6"></data>
+</node>
+<node id="Python进程">
+  <data key="d0">Python进程</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-000</data>
+  <data key="d2">托管内存用于在Python进程中执行用户自定义函数。</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275746</data>
+  <data key="d6"></data>
+</node>
+<node id="Python UDF">
+  <data key="d0">Python UDF</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d2">Python进程执行用户自定义函数时消耗托管内存。</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275746</data>
+  <data key="d6"></data>
+</node>
+<node id="消费者权重">
+  <data key="d0">消费者权重</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d2">消费者权重决定托管内存在不同消费者之间的分配比例。</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275746</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.managed.consumer-weights">
+  <data key="d0">taskmanager.memory.managed.consumer-weights</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d2">该参数用于为每种托管内存消费者类型指定权重。</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275746</data>
+  <data key="d6"></data>
+</node>
+<node id="JVM直接内存">
+  <data key="d0">JVM直接内存</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d2">框架堆外内存被计算在JVM直接内存限制中。&lt;SEP&gt;堆外内存的组成部分，可通过jobmanager.memory.enable-jvm-direct-memory-limit设置限制。&lt;SEP&gt;JVM进程使用的堆外内存区域，托管内存不再受其限制，Flink也可对进程的该内存进行限制。</data>
+  <data key="d1">concept</data>
+  <data key="d4">mem_setup_tm.md&lt;SEP&gt;mem_setup_jobmanager.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275803</data>
+  <data key="d6"></data>
+</node>
+<node id="OPERATOR">
+  <data key="d0">OPERATOR</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d2">OPERATOR是消费者权重支持的消费者类型之一，用于内置算法。</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275746</data>
+  <data key="d6"></data>
+</node>
+<node id="STATE_BACKEND">
+  <data key="d0">STATE_BACKEND</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d2">STATE_BACKEND是消费者权重支持的消费者类型之一，对应RocksDB State Backend。</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275746</data>
+  <data key="d6"></data>
+</node>
+<node id="PYTHON">
+  <data key="d0">PYTHON</data>
+  <data key="d3">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d2">PYTHON是消费者权重支持的消费者类型之一，对应Python进程。</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">mem_setup_tm.md</data>
+  <data key="d5">1791275746</data>
+  <data key="d6"></data>
+</node>
+<node id="本地内存">
+  <data key="d0">本地内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">堆外内存的组成部分之一。&lt;SEP&gt;堆外内存的组成部分。</data>
+  <data key="d3">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d4">mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="网络内存调优指南">
+  <data key="d0">网络内存调优指南</data>
+  <data key="d1">content</data>
+  <data key="d2">介绍Flink网络内存优化的参考文档。</data>
+  <data key="d3">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d4">mem_setup.md</data>
+  <data key="d5">1791275766</data>
+  <data key="d6"></data>
+</node>
+<node id="升级指南">
+  <data key="d0">升级指南</data>
+  <data key="d1">content</data>
+  <data key="d2">供从早期版本升级的用户参考的文档，介绍Flink 1.10和1.11版本中内存配置部分的较大改动。&lt;SEP&gt;面向从早期版本升级用户的Flink内存配置迁移参考文档。</data>
+  <data key="d3">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d4">mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="JVM开销占比">
+  <data key="d0">JVM开销占比</data>
+  <data key="d1">data</data>
+  <data key="d2">用于确定JVM开销大小的配置参数，表示JVM开销占进程总内存的比例，例如0.1。</data>
+  <data key="d3">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d4">mem_setup.md</data>
+  <data key="d5">1791275766</data>
+  <data key="d6"></data>
+</node>
+<node id="JVM开销最小值">
+  <data key="d0">JVM开销最小值</data>
+  <data key="d1">data</data>
+  <data key="d2">限制JVM开销实际大小的下限配置参数，例如64MB或128MB。</data>
+  <data key="d3">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d4">mem_setup.md</data>
+  <data key="d5">1791275766</data>
+  <data key="d6"></data>
+</node>
+<node id="JVM开销最大值">
+  <data key="d0">JVM开销最大值</data>
+  <data key="d1">data</data>
+  <data key="d2">限制JVM开销实际大小的上限配置参数，例如128MB或256MB。</data>
+  <data key="d3">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d4">mem_setup.md</data>
+  <data key="d5">1791275766</data>
+  <data key="d6"></data>
+</node>
+<node id="最大值/最小值">
+  <data key="d0">最大值/最小值</data>
+  <data key="d1">concept</data>
+  <data key="d2">各受限等比内存部分的大小范围限制，具有默认值，也可通过配置参数设置；超出范围时Flink将无法启动。</data>
+  <data key="d3">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d4">mem_setup.md</data>
+  <data key="d5">1791275766</data>
+  <data key="d6"></data>
+</node>
+<node id="ResourceManager">
+  <data key="d0">ResourceManager</data>
+  <data key="d1">artifact</data>
+  <data key="d2">JobManager的组成组件之一。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="Dispatcher">
+  <data key="d0">Dispatcher</data>
+  <data key="d1">artifact</data>
+  <data key="d2">JobManager的组成组件之一。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="JobMaster">
+  <data key="d0">JobMaster</data>
+  <data key="d1">artifact</data>
+  <data key="d2">JobManager中对应每个正在运行作业的组件。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="jobmanager.memory.heap.size">
+  <data key="d0">jobmanager.memory.heap.size</data>
+  <data key="d1">configuration</data>
+  <data key="d2">用于明确指定JobManager JVM堆内存大小的配置参数。&lt;SEP&gt;配置JobManager JVM堆内存大小的参数。&lt;SEP&gt;新配置参数，用于直接指定JobManager的JVM堆内存。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d4">mem_setup_jobmanager.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275802</data>
+  <data key="d6"></data>
+</node>
+<node id="jobmanager.memory.off-heap.size">
+  <data key="d0">jobmanager.memory.off-heap.size</data>
+  <data key="d1">data</data>
+  <data key="d2">用于设置堆外内存大小的配置参数，遇到Direct buffer memory异常时可调大该项。&lt;SEP&gt;配置JobManager堆外内存大小的参数。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="jobmanager.memory.jvm-metaspace.size">
+  <data key="d0">jobmanager.memory.jvm-metaspace.size</data>
+  <data key="d1">data</data>
+  <data key="d2">配置Flink JVM进程Metaspace大小的参数。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="jobmanager.memory.jvm-overhead.fraction">
+  <data key="d0">jobmanager.memory.jvm-overhead.fraction</data>
+  <data key="d1">data</data>
+  <data key="d2">配置JVM开销在进程总内存中所占比重的参数。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="配置总内存">
+  <data key="d0">配置总内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">配置JobManager内存最简单的方式，即配置进程的总内存；本地执行模式下不需要为JobManager进行内存配置。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="Flink 1.11">
+  <data key="d0">Flink 1.11</data>
+  <data key="d1">event</data>
+  <data key="d2">Flink的版本，该版本对内存配置部分进行了较大幅度的改动，本篇文档介绍的内存配置方法适用于该版本及以上。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="jobmanager.memory.jvm-overhead.min">
+  <data key="d0">jobmanager.memory.jvm-overhead.min</data>
+  <data key="d1">data</data>
+  <data key="d2">配置JVM开销最小值的参数。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="jobmanager.memory.jvm-overhead.max">
+  <data key="d0">jobmanager.memory.jvm-overhead.max</data>
+  <data key="d1">data</data>
+  <data key="d2">配置JVM开销最大值的参数。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="jobmanager.memory.enable-jvm-direct-memory-limit">
+  <data key="d0">jobmanager.memory.enable-jvm-direct-memory-limit</data>
+  <data key="d1">method</data>
+  <data key="d2">用于设置是否启用JVM直接内存限制的配置参数。&lt;SEP&gt;Flink配置参数，用于对JobManager进程的JVM直接内存进行限制。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_setup_jobmanager.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d5">1791275803</data>
+  <data key="d6"></data>
+</node>
+<node id="Pekko">
+  <data key="d0">Pekko</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Flink框架依赖之一，用于网络通信。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="-Xms和-Xmx">
+  <data key="d0">-Xms和-Xmx</data>
+  <data key="d1">method</data>
+  <data key="d2">Flink启动脚本及客户端在启动JobManager进程时用于管理JVM堆空间大小的JVM参数。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="-XX:MaxDirectMemorySize">
+  <data key="d0">-XX:MaxDirectMemorySize</data>
+  <data key="d1">method</data>
+  <data key="d2">当启用JVM直接内存限制时，Flink根据堆外内存大小设置的JVM参数。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="本地执行">
+  <data key="d0">本地执行</data>
+  <data key="d1">concept</data>
+  <data key="d2">在本地(例如IDE中)运行Flink而非创建集群的执行方式，此时JobManager的内存配置将不会生效。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="批处理Source">
+  <data key="d0">批处理Source</data>
+  <data key="d1">artifact</data>
+  <data key="d2">一类特殊的批处理数据源，其在作业提交时执行的用户代码可能消耗JVM堆内存和堆外内存。</data>
+  <data key="d3">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d4">mem_setup_jobmanager.md</data>
+  <data key="d5">1791275789</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.fraction">
+  <data key="d0">taskmanager.memory.fraction</data>
+  <data key="d1">artifact</data>
+  <data key="d2">已被彻底移除的Flink配置参数，配置后将不会产生任何效果，其功能由新参数taskmanager.memory.managed.fraction取代。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275798</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.off-heap">
+  <data key="d0">taskmanager.memory.off-heap</data>
+  <data key="d1">artifact</data>
+  <data key="d2">已被彻底移除的Flink配置参数，因为Flink不再支持堆上的托管内存。&lt;SEP&gt;已被彻底移除的配置参数，配置它不会产生任何效果。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275798</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.preallocate">
+  <data key="d0">taskmanager.memory.preallocate</data>
+  <data key="d1">artifact</data>
+  <data key="d2">已被彻底移除的Flink配置参数，因为Flink不再支持内存预分配，托管内存今后都是惰性分配的。&lt;SEP&gt;已被彻底移除的配置参数，配置它不会产生任何效果。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275798</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.heap.size">
+  <data key="d0">taskmanager.heap.size</data>
+  <data key="d1">artifact</data>
+  <data key="d2">被弃用的Flink配置参数，原本用于指定Flink总内存，实际包含JVM堆内存和其他堆外内存部分，出于向后兼容性考虑将被解读为新配置参数。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275798</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.memory.size">
+  <data key="d0">taskmanager.memory.size</data>
+  <data key="d1">artifact</data>
+  <data key="d2">被弃用的Flink配置参数，将被解读为新配置参数taskmanager.memory.managed.size。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275798</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.network.memory.min">
+  <data key="d0">taskmanager.network.memory.min</data>
+  <data key="d1">artifact</data>
+  <data key="d2">被弃用的Flink配置参数，将被解读为新配置参数taskmanager.memory.network.min。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275799</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.network.memory.max">
+  <data key="d0">taskmanager.network.memory.max</data>
+  <data key="d1">artifact</data>
+  <data key="d2">被弃用的Flink配置参数，将被解读为新配置参数taskmanager.memory.network.max。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275799</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.network.memory.fraction">
+  <data key="d0">taskmanager.network.memory.fraction</data>
+  <data key="d1">artifact</data>
+  <data key="d2">被弃用的Flink配置参数，将被解读为新配置参数taskmanager.memory.network.fraction。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275799</data>
+  <data key="d6"></data>
+</node>
+<node id="containerized.heap-cutoff-ratio">
+  <data key="d0">containerized.heap-cutoff-ratio</data>
+  <data key="d1">artifact</data>
+  <data key="d2">容器切除内存相关配置参数，将不再对TaskManager进程生效。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275799</data>
+  <data key="d6"></data>
+</node>
+<node id="containerized.heap-cutoff-min">
+  <data key="d0">containerized.heap-cutoff-min</data>
+  <data key="d1">artifact</data>
+  <data key="d2">容器切除内存相关配置参数，将不再对TaskManager进程生效。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275799</data>
+  <data key="d6"></data>
+</node>
+<node id="taskmanager.heap.mb">
+  <data key="d0">taskmanager.heap.mb</data>
+  <data key="d1">artifact</data>
+  <data key="d2">已被弃用的Flink配置参数，与taskmanager.heap.size一样原本用于指定Flink的总内存，实际既包含JVM堆内存也包含其他堆外内存部分。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275799</data>
+  <data key="d6"></data>
+</node>
+<node id="RocksDB StateBackend">
+  <data key="d0">RocksDB StateBackend</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Flink的一种状态后端，其使用的本地内存被归入托管内存，并默认限制内存用量不超过托管内存大小。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275802</data>
+  <data key="d6"></data>
+</node>
+<node id="jobmanager.heap.size">
+  <data key="d0">jobmanager.heap.size</data>
+  <data key="d1">configuration</data>
+  <data key="d2">旧的JobManager JVM堆内存配置参数，已被弃用。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275802</data>
+  <data key="d6"></data>
+</node>
+<node id="jobmanager.heap.mb">
+  <data key="d0">jobmanager.heap.mb</data>
+  <data key="d1">configuration</data>
+  <data key="d2">旧的JobManager JVM堆内存配置参数，已被弃用。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275802</data>
+  <data key="d6"></data>
+</node>
+<node id="容器切除内存">
+  <data key="d0">容器切除内存</data>
+  <data key="d1">concept</data>
+  <data key="d2">旧内存配置方法中从容器内存中扣除的部分，在1.11及以上版本中被彻底移除。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275802</data>
+  <data key="d6"></data>
+</node>
+<node id="总内存配置">
+  <data key="d0">总内存配置</data>
+  <data key="d1">method</data>
+  <data key="d2">指配置Flink总内存的方法，值从1024MB增加到了1600MB，具体可参考部署文档中的内存配置说明。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275803</data>
+  <data key="d6"></data>
+</node>
+<node id="Flink配置文件">
+  <data key="d0">Flink配置文件</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Flink的配置文件，使用新的默认配置可能造成各内存部分大小发生变化，从而产生性能变化。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275803</data>
+  <data key="d6"></data>
+</node>
+<node id="1600MB">
+  <data key="d0">1600MB</data>
+  <data key="d1">data</data>
+  <data key="d2">内存值从1024MB增加后的新数值。</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275803</data>
+  <data key="d6"></data>
+</node>
+<node id="容器化部署">
+  <data key="d0">容器化部署</data>
+  <data key="d3">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d2">容器切除内存是容器化部署模式下预留的内存</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">mem_migration.md</data>
+  <data key="d5">1791275807</data>
+  <data key="d6"></data>
+</node>
+<edge source="Flink" target="网络缓冲">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink中每条消息都会被放到网络缓冲中，并以此为最小单位发送到下一个subtask。</data>
+  <data key="d9">使用</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="Subtask">
+  <data key="d7">1.0</data>
+  <data key="d8">每个subtask都有输入队列和输出队列，是Flink作业的基本执行单元。</data>
+  <data key="d9">组成</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="缓冲消胀机制">
+  <data key="d7">3.0</data>
+  <data key="d8">缓冲消胀是Flink提供的一种吞吐计算与缓冲处理机制。&lt;SEP&gt;Flink 1.14引入缓冲消胀机制，自动调整缓冲数据量到合理值。&lt;SEP&gt;开启缓冲消胀机制可简化Flink网络内存配置的调整。</data>
+  <data key="d9">属于,提供,机制,简化配置</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000&lt;SEP&gt;doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001&lt;SEP&gt;doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="网络缓冲队列">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink在传输过程的输入端和输出端使用网络缓冲队列来维持连续的高吞吐。</data>
+  <data key="d9">使用</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="Apache Software Foundation">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink文档由Apache Software Foundation按Apache License, Version 2.0授权。</data>
+  <data key="d9">授权</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="透支缓冲区">
+  <data key="d7">1.0</data>
+  <data key="d8">透支缓冲区由Flink引入，用于缓解反压导致的subtask线程阻塞。</data>
+  <data key="d9">反压,缓解</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="反压">
+  <data key="d7">1.0</data>
+  <data key="d8">反压是Flink运行时中网络瓶颈的表现之一，与下游算子空闲、缓冲区队列满等现象共同构成网络瓶颈的观察指标。</data>
+  <data key="d9">运行时现象</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="内存段">
+  <data key="d7">1.0</data>
+  <data key="d8">减小内存段大小可加快checkpoint并减少Flink网络栈消耗的内存量。</data>
+  <data key="d9">内存配置</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="调优指南">
+  <data key="d7">1.0</data>
+  <data key="d8">调优指南介绍如何根据使用场景调整Flink的内存配置</data>
+  <data key="d9">内存,配置</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="托管内存">
+  <data key="d7">6.0</data>
+  <data key="d8">Flink批处理算子使用托管内存提高处理效率，并在不超过限额的前提下尽可能分配更多托管内存。&lt;SEP&gt;托管内存是由Flink负责分配和管理的本地(堆外)内存。&lt;SEP&gt;托管内存是Flink内存的组成部分&lt;SEP&gt;Flink根据配置和消费者权重管理并分配托管内存。&lt;SEP&gt;Flink不再支持堆上的托管内存，托管内存今后将都是惰性分配的。&lt;SEP&gt;Flink 1.10对托管内存引入堆外化、本地内存化、惰性分配等变化。</data>
+  <data key="d9">内存分配,内存管理,分配,分配管理,性能优化,管理,组成部分,配置变更</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_tuning.md&lt;SEP&gt;mem_setup_tm.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="OutOfMemoryError">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink明确知道可用内存大小，从而有效避免OutOfMemoryError的发生。</data>
+  <data key="d9">避免机制</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="TaskManager">
+  <data key="d7">4.0</data>
+  <data key="d8">TaskManager是Flink中负责执行用户代码的组件。&lt;SEP&gt;TaskManager是Flink的部署组件之一。&lt;SEP&gt;Flink 1.10起对TaskManager进程的JVM Metaspace和JVM直接内存进行限制。&lt;SEP&gt;TaskManager是Flink的工作进程，其内存由新的内存配置项管理</data>
+  <data key="d9">内存管理,内存限制,组件,组成,组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_setup_tm.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="JobManager">
+  <data key="d7">6.0</data>
+  <data key="d8">JobManager是Flink的组件之一，具有与TaskManager相似但更简单的内存模型。&lt;SEP&gt;JobManager是Flink的部署组件之一。&lt;SEP&gt;Flink启动脚本及客户端在启动JobManager进程时通过JVM参数-Xms和-Xmx管理堆空间。&lt;SEP&gt;JobManager是Flink集群的控制单元。&lt;SEP&gt;Flink 1.11起对JobManager进程的JVM Metaspace进行限制，并升级其内存配置参数。&lt;SEP&gt;JobManager是Flink的主进程，Flink对其JVM Metaspace和JVM直接内存进行限制</data>
+  <data key="d9">内存管理,内存配置,启动,属于,控制单元,管理,组件,组成,组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_setup_tm.md&lt;SEP&gt;mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="Flink 1.10版本">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink在1.10版本中对内存配置部分进行了较大幅度的改动。</data>
+  <data key="d9">版本更新</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-000</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="网络内存">
+  <data key="d7">2.0</data>
+  <data key="d8">网络内存是Flink内存的组成部分&lt;SEP&gt;Flink负责管理网络内存，保证其实际用量不超过配置大小。</data>
+  <data key="d9">管理,组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="Flink TaskManager内存模型">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink TaskManager内存模型描述Flink TaskManager进程的内存组成。</data>
+  <data key="d9">拥有</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="框架堆内存">
+  <data key="d7">1.0</data>
+  <data key="d8">框架堆内存是Flink框架内存的一部分</data>
+  <data key="d9">组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="框架堆外内存">
+  <data key="d7">1.0</data>
+  <data key="d8">框架堆外内存是Flink框架内存的一部分</data>
+  <data key="d9">组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="任务堆内存">
+  <data key="d7">1.0</data>
+  <data key="d8">任务堆内存是Flink任务内存的一部分</data>
+  <data key="d9">组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="任务堆外内存">
+  <data key="d7">1.0</data>
+  <data key="d8">任务堆外内存是Flink任务内存的一部分</data>
+  <data key="d9">组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="Hadoop">
+  <data key="d7">1.0</data>
+  <data key="d8">Hadoop是Flink的依赖，特定情况下需要更多直接内存或本地内存</data>
+  <data key="d9">依赖</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="本地执行模式">
+  <data key="d7">1.0</data>
+  <data key="d8">本地执行模式是将Flink作为单独Java程序在本地运行的方式</data>
+  <data key="d9">运行方式</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="受限的等比内存部分">
+  <data key="d7">1.0</data>
+  <data key="d8">受限的等比内存部分是Flink内存模型中的配置方式，大小由总内存、占比及最大/最小值范围决定。</data>
+  <data key="d9">配置机制</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="最大值/最小值">
+  <data key="d7">1.0</data>
+  <data key="d8">内存部分大小若不符合最大/最小值范围，Flink将无法启动。</data>
+  <data key="d9">启动校验</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275771</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="升级指南">
+  <data key="d7">1.0</data>
+  <data key="d8">升级指南供从早期版本升级的Flink用户参考内存配置迁移。</data>
+  <data key="d9">参考文档</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="Pekko">
+  <data key="d7">1.0</data>
+  <data key="d8">Pekko是Flink框架依赖之一，用于网络通信。</data>
+  <data key="d9">依赖</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="-Xms和-Xmx">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink启动脚本及客户端通过设置JVM参数-Xms和-Xmx来管理JobManager的JVM堆空间大小。</data>
+  <data key="d9">参数设置,启动</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="-XX:MaxDirectMemorySize">
+  <data key="d7">1.0</data>
+  <data key="d8">启用JVM直接内存限制时，Flink根据配置的堆外内存大小设置该JVM参数。</data>
+  <data key="d9">参数设置</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="JVM堆内存">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink的总内存配置实际同时包含JVM堆内存和其他堆外内存。</data>
+  <data key="d9">内存管理</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="Yarn">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink支持在Yarn容器化部署模式下运行。</data>
+  <data key="d9">部署模式</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="JVM Metaspace">
+  <data key="d7">1.0</data>
+  <data key="d8">从1.11版本开始，Flink对JobManager进程的JVM Metaspace进行限制</data>
+  <data key="d9">内存限制</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="JVM直接内存">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink可通过配置参数对JobManager进程的JVM直接内存进行限制</data>
+  <data key="d9">内存限制</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink" target="Flink配置文件">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink配置文件是Flink框架用于内存等配置的文件。</data>
+  <data key="d9">属于,配置</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="网络缓冲" target="非对齐的Checkpoints">
+  <data key="d7">1.0</data>
+  <data key="d8">在非对齐的checkpoints中，网络缓冲数据会被持久化到checkpoint中，缓冲越多checkpoint越大。</data>
+  <data key="d9">持久化</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="网络缓冲" target="快照时间">
+  <data key="d7">1.0</data>
+  <data key="d8">拥有更多的中间缓存数据可以使Flink提供更高、更富有弹性的吞吐量，但也会增加快照时间。</data>
+  <data key="d9">影响</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="网络缓冲" target="网络内存">
+  <data key="d7">1.0</data>
+  <data key="d8">网络内存被用于分配网络缓冲。</data>
+  <data key="d9">分配</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Subtask" target="Checkpoint Barrier">
+  <data key="d7">1.0</data>
+  <data key="d8">只有所有subtask都收到全部注入的checkpoint barrier才能完成快照。</data>
+  <data key="d9">接收</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Subtask" target="网络缓冲队列">
+  <data key="d7">1.0</data>
+  <data key="d8">每个subtask都有一个输入队列和一个输出队列，属于网络缓冲队列。</data>
+  <data key="d9">持有</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Subtask" target="缓冲消胀机制">
+  <data key="d7">2.0</data>
+  <data key="d8">吞吐计算和缓冲消胀发生在subtask层面；具有多个输入或合并输入的subtask可能受缓冲消胀影响。&lt;SEP&gt;当前吞吐计算和缓冲消胀发生在subtask层面，subtask有多个不同输入或合并输入时可能导致缓冲分配失衡。</data>
+  <data key="d9">作用层面,作用范围</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000&lt;SEP&gt;doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Subtask" target="透支缓冲区">
+  <data key="d7">1.0</data>
+  <data key="d8">每个subtask输出数据时可至多请求若干个透支缓冲区。</data>
+  <data key="d9">使用,请求</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Subtask" target="Unaligned Checkpoint">
+  <data key="d7">1.0</data>
+  <data key="d8">subtask线程被反压阻塞时会阻止Unaligned Checkpoint的完成。</data>
+  <data key="d9">依赖</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Subtask" target="缓冲区">
+  <data key="d7">1.0</data>
+  <data key="d8">缓冲区通过汇集record向下游subtask发送数据以优化网络开销，下游subtask需接收完整record后才开始处理。</data>
+  <data key="d9">优化传输</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Checkpoint Barrier" target="对齐的Checkpoints">
+  <data key="d7">1.0</data>
+  <data key="d8">在对齐的checkpoints中，checkpoint barrier跟着网络缓冲数据在job graph中流动。</data>
+  <data key="d9">依赖</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Checkpoint Barrier" target="Job Graph">
+  <data key="d7">1.0</data>
+  <data key="d8">在对齐的checkpoints中，checkpoint barrier会跟着网络缓冲数据在job graph中流动。</data>
+  <data key="d9">流动</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Checkpoint Barrier" target="快照">
+  <data key="d7">1.0</data>
+  <data key="d8">只有所有subtask都收到全部注入的checkpoint barrier才能完成快照。</data>
+  <data key="d9">触发</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="缓冲消胀机制" target="Taskmanager.network.memory.buffer-debloat.enabled">
+  <data key="d7">1.0</data>
+  <data key="d8">将该参数设置为true可开启缓冲消胀机制。</data>
+  <data key="d9">配置</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="缓冲消胀机制" target="Taskmanager.network.memory.buffer-debloat.target">
+  <data key="d7">1.0</data>
+  <data key="d8">该参数指定缓冲消胀机制消费缓冲数据的目标时间。</data>
+  <data key="d9">配置</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="缓冲消胀机制" target="Taskmanager.network.memory.buffer-debloat.period">
+  <data key="d7">1.0</data>
+  <data key="d8">该参数定义缓冲消胀机制重算缓冲区大小的最小时间周期。</data>
+  <data key="d9">配置</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="缓冲消胀机制" target="Taskmanager.network.memory.buffer-debloat.samples">
+  <data key="d7">1.0</data>
+  <data key="d8">该参数调整缓冲消胀机制计算平均吞吐量的采样数。</data>
+  <data key="d9">配置</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="缓冲消胀机制" target="Taskmanager.network.memory.buffer-debloat.threshold-percentages">
+  <data key="d7">1.0</data>
+  <data key="d8">该参数用于防止缓冲消胀机制频繁改变缓冲区大小。</data>
+  <data key="d9">配置</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="缓冲消胀机制" target="EstimatedTimeToConsumeBuffersMs">
+  <data key="d7">1.0</data>
+  <data key="d8">该指标用于监控缓冲消胀机制下消费所有输入通道数据的总时间。</data>
+  <data key="d9">监控</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="缓冲消胀机制" target="DebloatedBufferSize">
+  <data key="d7">1.0</data>
+  <data key="d8">该指标用于监控缓冲消胀机制当前的缓冲区大小。</data>
+  <data key="d9">监控</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="缓冲消胀机制" target="流动缓冲区">
+  <data key="d7">1.0</data>
+  <data key="d8">高并行度下缓冲消胀可能无法正常工作，建议将浮动缓冲区数量提高到至少与并行度相等。</data>
+  <data key="d9">影响,配置建议</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="EstimatedTimeToConsumeBuffersMs" target="Input Channel">
+  <data key="d7">1.0</data>
+  <data key="d8">指标estimatedTimeToConsumeBuffersMs表示消费所有输入通道中数据的总时间。</data>
+  <data key="d9">度量</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="透支缓冲区" target="Unaligned Checkpoint">
+  <data key="d7">1.0</data>
+  <data key="d8">透支缓冲区可避免subtask线程被反压阻塞，从而不阻止Unaligned Checkpoint的完成。</data>
+  <data key="d9">完成,支持</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="透支缓冲区" target="Pipelined Shuffle">
+  <data key="d7">1.0</data>
+  <data key="d8">透支缓冲区特性只对Pipelined Shuffle生效。</data>
+  <data key="d9">生效范围</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="透支缓冲区" target="WindowOperator">
+  <data key="d7">1.0</data>
+  <data key="d8">WindowOperator触发时可能产生大量records，是使用透支缓冲区的场景之一。</data>
+  <data key="d9">使用,触发</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="透支缓冲区" target="网络缓冲区">
+  <data key="d7">1.0</data>
+  <data key="d8">透支缓冲区是在常规网络缓冲区之外额外请求的缓冲区，用于反压时完成当前操作。</data>
+  <data key="d9">补充</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="必须缓冲区" target="可选缓冲区">
+  <data key="d7">1.0</data>
+  <data key="d8">目标缓冲区数由必须缓冲区和可选缓冲区构成，二者获取失败时的后果不同。</data>
+  <data key="d9">互补,组成</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="缓冲区池" target="网络缓冲区">
+  <data key="d7">1.0</data>
+  <data key="d8">缓冲区池管理网络缓冲区的分配，目标缓冲区数按公式计算。</data>
+  <data key="d9">包含,管理</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="缓冲区池" target="Subpartition">
+  <data key="d7">1.0</data>
+  <data key="d8">输出缓冲区池只有一种类型的缓冲区，被所有subpartitions共享。</data>
+  <data key="d9">共享</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="独占缓冲区" target="流动缓冲区">
+  <data key="d7">1.0</data>
+  <data key="d8">两者的默认配置(独占缓冲区每通道2个、流动缓冲区8个)理想情况下能使网络吞吐量饱和。</data>
+  <data key="d9">共同配置,默认值</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="独占缓冲区" target="taskmanager.network.memory.buffers-per-channel">
+  <data key="d7">1.0</data>
+  <data key="d8">该参数用于配置独占缓冲区的数量。</data>
+  <data key="d9">配置</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="独占缓冲区" target="反压">
+  <data key="d7">1.0</data>
+  <data key="d8">当低吞吐量下出现反压时，应考虑减少独占缓冲区的数量。</data>
+  <data key="d9">调优建议</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="独占缓冲区" target="Subpartition">
+  <data key="d7">1.0</data>
+  <data key="d8">每个输出subpartition在缓冲区不足时可只使用一个独占缓冲区而没有流动缓冲区。</data>
+  <data key="d9">使用,限制</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="流动缓冲区" target="taskmanager.network.memory.floating-buffers-per-gate">
+  <data key="d7">1.0</data>
+  <data key="d8">该参数用于配置流动缓冲区的数量。</data>
+  <data key="d9">配置</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="流动缓冲区" target="数据倾斜">
+  <data key="d7">1.0</data>
+  <data key="d8">流动缓冲区的目的是处理数据倾斜。</data>
+  <data key="d9">处理倾斜</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="execution.buffer-timeout" target="缓冲区">
+  <data key="d7">1.0</data>
+  <data key="d8">该参数控制缓冲区刷新频率，刷新过于频繁可能降低吞吐量。</data>
+  <data key="d9">控制刷新频率</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="内存段" target="缓冲区数量计算公式">
+  <data key="d7">1.0</data>
+  <data key="d8">公式中使用内存段(缓冲区)大小作为除数来计算所需缓冲区数量。</data>
+  <data key="d9">计算依据</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Checkpoint" target="缓冲区">
+  <data key="d7">1.0</data>
+  <data key="d8">缓冲区太大会导致非对齐checkpoints的数据量增大以及使对齐checkpoints的时间变长。</data>
+  <data key="d9">影响检查点</data>
+  <data key="d10">doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002</data>
+  <data key="d11">network_mem_tuning.md</data>
+  <data key="d12">1791275663</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Checkpoint" target="JVM堆内存">
+  <data key="d7">1.0</data>
+  <data key="d8">Checkpoint完成的回调函数中执行的用户代码会消耗JVM堆内存。</data>
+  <data key="d9">资源消耗</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="IllegalConfigurationException" target="TaskExecutorProcessUtils">
+  <data key="d7">1.0</data>
+  <data key="d8">TaskExecutorProcessUtils在配置参数无效时抛出IllegalConfigurationException异常。</data>
+  <data key="d9">原因,抛出</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275675</data>
+  <data key="d13"></data>
+</edge>
+<edge source="IllegalConfigurationException" target="JobManagerProcessUtils">
+  <data key="d7">1.0</data>
+  <data key="d8">JobManagerProcessUtils在配置参数无效时抛出IllegalConfigurationException异常。</data>
+  <data key="d9">原因,抛出</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="OutOfMemoryError: Java Heap Space" target="总内存">
+  <data key="d7">1.0</data>
+  <data key="d8">可通过增大总内存来解决JVM堆空间过小的异常。</data>
+  <data key="d9">解决方法,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="OutOfMemoryError: Java Heap Space" target="任务堆内存">
+  <data key="d7">1.0</data>
+  <data key="d8">可通过增大TaskManager的任务堆内存来增大JVM堆空间。</data>
+  <data key="d9">解决方法,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="OutOfMemoryError: Java Heap Space" target="JobManager">
+  <data key="d7">1.0</data>
+  <data key="d8">可通过增大JobManager的JVM堆内存来解决该异常。</data>
+  <data key="d9">解决方法,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="OutOfMemoryError: Direct Buffer Memory" target="JVM直接内存泄漏">
+  <data key="d7">1.0</data>
+  <data key="d8">该异常通常说明JVM直接内存限制过小或存在直接内存泄漏。</data>
+  <data key="d9">关联,原因</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275675</data>
+  <data key="d13"></data>
+</edge>
+<edge source="OutOfMemoryError: Direct Buffer Memory" target="直接内存">
+  <data key="d7">1.0</data>
+  <data key="d8">该异常通常说明JVM直接内存限制过小或存在直接内存泄漏。</data>
+  <data key="d9">关联,原因</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="OutOfMemoryError: Direct Buffer Memory" target="堆外内存">
+  <data key="d7">1.0</data>
+  <data key="d8">可通过调整堆外内存来增大直接内存限制以解决该异常。</data>
+  <data key="d9">解决方法,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="OutOfMemoryError: Direct Buffer Memory" target="JobManager">
+  <data key="d7">1.0</data>
+  <data key="d8">JobManager进程可能抛出OutOfMemoryError: Direct buffer memory异常，可通过调大jobmanager.memory.off-heap.size缓解。</data>
+  <data key="d9">异常,故障排查</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="OutOfMemoryError: Metaspace" target="JVM Metaspace">
+  <data key="d7">1.0</data>
+  <data key="d8">该异常说明JVM Metaspace限制过小，可调整TaskManager和JobManager的Metaspace解决。</data>
+  <data key="d9">原因,解决方法</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="IOException: Insufficient Number Of Network Buffers" target="TaskManager">
+  <data key="d7">1.0</data>
+  <data key="d8">该异常仅与TaskManager相关，通常说明TaskManager的网络内存过小。</data>
+  <data key="d9">关联,影响组件</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275675</data>
+  <data key="d13"></data>
+</edge>
+<edge source="IOException: Insufficient Number Of Network Buffers" target="Taskmanager.memory.network.min">
+  <data key="d7">1.0</data>
+  <data key="d8">可通过调整taskmanager.memory.network.min等配置参数增大网络内存以解决该异常。</data>
+  <data key="d9">解决方法,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="IOException: Insufficient Number Of Network Buffers" target="网络内存">
+  <data key="d7">1.0</data>
+  <data key="d8">该异常通常说明TaskManager的网络内存过小。</data>
+  <data key="d9">原因,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="容器内存超用" target="RocksDBStateBackend">
+  <data key="d7">1.0</data>
+  <data key="d8">出现容器内存超用时，若使用RocksDBStateBackend，其内存控制配置是需要考虑的因素。</data>
+  <data key="d9">关联,处理方案</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275675</data>
+  <data key="d13"></data>
+</edge>
+<edge source="容器内存超用" target="JobManager">
+  <data key="d7">1.0</data>
+  <data key="d8">容器内存超用时，针对JobManager进程可启用JVM直接内存限制以排查泄漏。</data>
+  <data key="d9">关联,排查</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="容器内存超用" target="Yarn">
+  <data key="d7">1.0</data>
+  <data key="d8">容器内存超用问题可能出现在Yarn部署环境中。</data>
+  <data key="d9">发生环境,部署</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="容器内存超用" target="Kubernetes">
+  <data key="d7">1.0</data>
+  <data key="d8">容器内存超用问题可能出现在Kubernetes部署环境中。</data>
+  <data key="d9">发生环境,部署</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="Apache Flink">
+  <data key="d7">2.0</data>
+  <data key="d8">TaskManager是Apache Flink的核心组件之一。&lt;SEP&gt;TaskManager是Apache Flink的工作进程组件。</data>
+  <data key="d9">属于,组件</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_trouble.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="框架堆内存">
+  <data key="d7">1.0</data>
+  <data key="d8">框架堆内存是TaskManager内存模型的一部分，属于进阶配置。</data>
+  <data key="d9">属于,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="RocksDBStateBackend">
+  <data key="d7">1.0</data>
+  <data key="d8">使用RocksDBStateBackend时可通过调整TaskManager的托管内存或环境变量缓解内存问题。</data>
+  <data key="d9">依赖,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="glibc">
+  <data key="d7">1.0</data>
+  <data key="d8">glibc内存分配器缺陷可能导致TaskManager在保存点或全量检查点期间非堆内存持续增长。</data>
+  <data key="d9">内存问题,影响</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="MALLOC_ARENA_MAX">
+  <data key="d7">1.0</data>
+  <data key="d8">可为TaskManager添加环境变量MALLOC_ARENA_MAX=1以缓解glibc导致的内存增长。</data>
+  <data key="d9">环境变量,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="托管内存">
+  <data key="d7">2.0</data>
+  <data key="d8">托管内存是TaskManager的内存组成部分，可在关闭内存控制时尝试增大。&lt;SEP&gt;托管内存是TaskManager的内存部分，具有默认占比。</data>
+  <data key="d9">内存组成,属于,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_trouble.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d12">1791275771</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="JVM开销">
+  <data key="d7">2.0</data>
+  <data key="d8">可尝试增大JVM开销以缓解TaskManager的内存问题。&lt;SEP&gt;JVM开销是TaskManager内存模型的组成部分</data>
+  <data key="d9">内存组成,组成部分,调整</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_trouble.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="框架堆外内存">
+  <data key="d7">2.0</data>
+  <data key="d8">框架堆外内存是TaskManager内存模型的组成部分之一。&lt;SEP&gt;框架堆外内存是TaskManager内存模型的组成部分</data>
+  <data key="d9">组成,组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_setup_tm.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="任务堆外内存">
+  <data key="d7">2.0</data>
+  <data key="d8">任务堆外内存是TaskManager内存模型的组成部分之一。&lt;SEP&gt;任务堆外内存是TaskManager内存模型的组成部分</data>
+  <data key="d9">组成,组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_setup_tm.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="taskmanager.memory.flink.size">
+  <data key="d7">1.0</data>
+  <data key="d8">该参数用于在TaskManager上配置Flink总内存。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="taskmanager.memory.process.size">
+  <data key="d7">2.0</data>
+  <data key="d8">该参数用于在TaskManager上配置进程总内存。&lt;SEP&gt;该配置项取代原有的taskmanager.heap.size成为TaskManager总内存配置</data>
+  <data key="d9">取代,配置参数,配置项</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_setup.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="网络内存">
+  <data key="d7">1.0</data>
+  <data key="d8">网络内存的配置仅针对TaskManager。</data>
+  <data key="d9">仅适用于</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="JVM">
+  <data key="d7">1.0</data>
+  <data key="d8">TaskManager作为Flink进程运行在JVM之上。</data>
+  <data key="d9">运行环境</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="任务堆内存">
+  <data key="d7">1.0</data>
+  <data key="d8">任务堆内存是TaskManager的内存部分。</data>
+  <data key="d9">属于</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275768</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="JobManager">
+  <data key="d7">1.0</data>
+  <data key="d8">JobManager与TaskManager相比具有相似但更简单的内存模型。</data>
+  <data key="d9">对比,相似</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="containerized.heap-cutoff-ratio">
+  <data key="d7">1.0</data>
+  <data key="d8">容器切除内存配置参数containerized.heap-cutoff-ratio将不再对TaskManager进程生效。</data>
+  <data key="d9">不再生效</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="containerized.heap-cutoff-min">
+  <data key="d7">1.0</data>
+  <data key="d8">容器切除内存配置参数containerized.heap-cutoff-min将不再对TaskManager进程生效。</data>
+  <data key="d9">不再生效</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="JVM直接内存">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink 1.10起TaskManager进程的JVM直接内存受到限制。</data>
+  <data key="d9">内存限制</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="taskmanager.memory.task.off-heap.size">
+  <data key="d7">1.0</data>
+  <data key="d8">该配置参数用于设置TaskManager的任务堆外内存</data>
+  <data key="d9">堆外内存,配置项</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="taskmanager.memory.framework.off-heap.size">
+  <data key="d7">1.0</data>
+  <data key="d8">该配置参数用于设置TaskManager的框架堆外内存</data>
+  <data key="d9">堆外内存,配置项</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="TaskManager" target="taskmanager.memory.jvm-metaspace.size">
+  <data key="d7">1.0</data>
+  <data key="d8">该配置参数用于设置TaskManager的JVM Metaspace大小</data>
+  <data key="d9">JVM Metaspace,配置项</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="Jobmanager.memory.enable-jvm-direct-memory-limit">
+  <data key="d7">1.0</data>
+  <data key="d8">JobManager进程可启用JVM直接内存限制配置以排查直接内存泄漏的可能性。</data>
+  <data key="d9">排查手段,配置项</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275675</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="Apache Flink">
+  <data key="d7">2.0</data>
+  <data key="d8">JobManager是Apache Flink的核心组件之一。&lt;SEP&gt;JobManager是Apache Flink的管理进程组件。</data>
+  <data key="d9">属于,组件</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_trouble.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="直接内存限制">
+  <data key="d7">1.0</data>
+  <data key="d8">直接内存限制通过jobmanager.memory.enable-jvm-direct-memory-limit配置项对JobManager生效。</data>
+  <data key="d9">适用对象,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="jobmanager.memory.flink.size">
+  <data key="d7">1.0</data>
+  <data key="d8">该参数用于在JobManager上配置Flink总内存。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="jobmanager.memory.process.size">
+  <data key="d7">2.0</data>
+  <data key="d8">该参数用于在JobManager上配置进程总内存。&lt;SEP&gt;该配置项取代原有的jobmanager.heap.size成为JobManager总内存配置</data>
+  <data key="d9">取代,配置参数,配置项</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_setup.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="JVM堆内存">
+  <data key="d7">3.0</data>
+  <data key="d8">JVM堆内存是JobManager的内存部分。&lt;SEP&gt;JobManager可通过明确指定JVM堆内存大小的方式进行内存配置。&lt;SEP&gt;JVM堆内存是JobManager内存模型的组成部分，通过jobmanager.memory.heap.size配置。</data>
+  <data key="d9">内存管理,内存组成,属于,配置</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="JVM">
+  <data key="d7">1.0</data>
+  <data key="d8">JobManager作为Flink进程运行在JVM之上。</data>
+  <data key="d9">运行环境</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275769</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="堆外内存">
+  <data key="d7">3.0</data>
+  <data key="d8">堆外内存是JobManager的默认内存部分。&lt;SEP&gt;JobManager的堆外内存包括JVM直接内存和本地内存，可通过配置参数设置大小。&lt;SEP&gt;堆外内存是JobManager内存模型的组成部分，通过jobmanager.memory.off-heap.size配置。</data>
+  <data key="d9">内存管理,内存组成,属于,配置</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="ResourceManager">
+  <data key="d7">1.0</data>
+  <data key="d8">ResourceManager是JobManager的组成组件之一。</data>
+  <data key="d9">组成组件</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="Dispatcher">
+  <data key="d7">1.0</data>
+  <data key="d8">Dispatcher是JobManager的组成组件之一。</data>
+  <data key="d9">组成组件</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="JobMaster">
+  <data key="d7">1.0</data>
+  <data key="d8">每个正在运行的作业在JobManager中对应一个JobMaster。</data>
+  <data key="d9">组成组件</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="JVM Metaspace">
+  <data key="d7">2.0</data>
+  <data key="d8">JVM Metaspace是JobManager内存模型的组成部分，通过jobmanager.memory.jvm-metaspace.size配置。&lt;SEP&gt;Flink 1.11起JobManager进程的JVM Metaspace受到限制。</data>
+  <data key="d9">内存组成,内存限制,配置</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_setup_jobmanager.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="JVM开销">
+  <data key="d7">2.0</data>
+  <data key="d8">JVM开销是JobManager内存模型的组成部分，基于进程总内存按比例受限配置。&lt;SEP&gt;JVM开销也是JobManager内存模型的组成部分</data>
+  <data key="d9">内存组成,组成部分,配置</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_setup_jobmanager.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="配置总内存">
+  <data key="d7">1.0</data>
+  <data key="d8">配置总内存是配置JobManager内存最简单的方法。</data>
+  <data key="d9">配置方式</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="本地执行模式">
+  <data key="d7">1.0</data>
+  <data key="d8">本地执行模式下JobManager的内存配置参数将不会生效。</data>
+  <data key="d9">不适用</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="本地执行">
+  <data key="d7">1.0</data>
+  <data key="d8">本地执行Flink时，JobManager的内存配置将不会生效。</data>
+  <data key="d9">配置失效</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="jobmanager.memory.enable-jvm-direct-memory-limit">
+  <data key="d7">2.0</data>
+  <data key="d8">通过设置该参数可对JobManager进程的JVM直接内存进行限制。&lt;SEP&gt;该配置参数用于对JobManager进程的JVM直接内存进行限制</data>
+  <data key="d9">内存限制,配置限制,配置项</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="taskmanager.memory.jvm-metaspace.size">
+  <data key="d7">1.0</data>
+  <data key="d8">该配置参数同样用于设置JobManager的JVM Metaspace大小</data>
+  <data key="d9">JVM Metaspace,配置项</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JobManager" target="jobmanager.memory.off-heap.size">
+  <data key="d7">1.0</data>
+  <data key="d8">该配置参数用于设置JobManager的堆外内存</data>
+  <data key="d9">堆外内存,配置项</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Taskmanager.memory.network.max" target="网络内存">
+  <data key="d7">1.0</data>
+  <data key="d8">可通过taskmanager.memory.network.max等参数调整网络内存大小。</data>
+  <data key="d9">调整,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Taskmanager.memory.network.fraction" target="网络内存">
+  <data key="d7">1.0</data>
+  <data key="d8">可通过taskmanager.memory.network.fraction参数调整网络内存占比。</data>
+  <data key="d9">调整,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="RocksDBStateBackend" target="内存控制">
+  <data key="d7">1.0</data>
+  <data key="d8">内存控制是使用RocksDBStateBackend时可开启或关闭的机制，影响托管内存调整建议。</data>
+  <data key="d9">机制,配置</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="RocksDBStateBackend" target="托管内存">
+  <data key="d7">3.0</data>
+  <data key="d8">使用RocksDBStateBackend且关闭内存控制时，可尝试增大托管内存。&lt;SEP&gt;RocksDB默认限制其内存用量不超过用户配置的托管内存，因此需配置足够的托管内存&lt;SEP&gt;RocksDBStateBackend使用的本地内存被归为托管内存，RocksDB默认限制其内存用量不超过托管内存大小。</data>
+  <data key="d9">归类,调优,配置,限制</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001&lt;SEP&gt;doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_trouble.md&lt;SEP&gt;mem_tuning.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="RocksDBStateBackend" target="RocksDB">
+  <data key="d7">3.0</data>
+  <data key="d8">RocksDBStateBackend基于RocksDB使用本地内存存储状态&lt;SEP&gt;RocksDBStateBackend基于RocksDB实现状态存储。&lt;SEP&gt;RocksDBStateBackend使用RocksDB作为底层存储引擎</data>
+  <data key="d9">使用,依赖,实现,构建</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_tuning.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="RocksDBStateBackend" target="State Backend">
+  <data key="d7">1.0</data>
+  <data key="d8">RocksDBStateBackend是State Backend的一种类型</data>
+  <data key="d9">包含,类型</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM直接内存泄漏" target="直接内存限制">
+  <data key="d7">1.0</data>
+  <data key="d8">启用直接内存限制可排除JVM直接内存泄漏的可能性。</data>
+  <data key="d9">排查,预防</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Apache Flink" target="Yarn">
+  <data key="d7">1.0</data>
+  <data key="d8">Apache Flink可部署在Yarn资源调度平台上。</data>
+  <data key="d9">运行环境,部署于</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Apache Flink" target="Kubernetes">
+  <data key="d7">1.0</data>
+  <data key="d8">Apache Flink可部署在Kubernetes容器编排平台上。</data>
+  <data key="d9">运行环境,部署于</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Apache Flink" target="网络内存调优指南">
+  <data key="d7">1.0</data>
+  <data key="d8">Apache Flink的网络内存优化可参考网络内存调优指南。</data>
+  <data key="d9">参考文档</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Apache Flink" target="JVM">
+  <data key="d7">1.0</data>
+  <data key="d8">Apache Flink基于JVM运行，其高效处理能力依赖于对JVM各组件内存用量的细致掌控。</data>
+  <data key="d9">运行环境</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Apache Flink" target="升级指南">
+  <data key="d7">1.0</data>
+  <data key="d8">从早期版本升级的Apache Flink用户需参考升级指南了解1.10和1.11版本内存配置的改动。</data>
+  <data key="d9">参考文档</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="总内存" target="taskmanager.memory.network.fraction">
+  <data key="d7">1.0</data>
+  <data key="d8">总内存变化时，根据占比计算出的网络内存也可能发生变化。</data>
+  <data key="d9">影响计算</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="总内存" target="taskmanager.heap.mb">
+  <data key="d7">1.0</data>
+  <data key="d8">taskmanager.heap.mb原本用于指定Flink的总内存，尽管以“堆”命名，实际包含JVM堆内存和其他堆外内存部分。</data>
+  <data key="d9">配置指定</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="总内存" target="网络内存">
+  <data key="d7">1.0</data>
+  <data key="d8">总内存变化时，根据占比计算出的网络内存也可能发生变化，建议检查网络内存的配置结果。</data>
+  <data key="d9">影响计算</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="总内存" target="JVM堆内存">
+  <data key="d7">1.0</data>
+  <data key="d8">总内存既包含JVM堆内存，也包含其他堆外内存部分。</data>
+  <data key="d9">包含</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="总内存" target="taskmanager.heap.size">
+  <data key="d7">1.0</data>
+  <data key="d8">taskmanager.heap.size原本用于指定Flink的总内存，实际包含JVM堆内存和其他堆外内存部分。</data>
+  <data key="d9">配置指定</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="任务堆内存" target="JVM堆内存">
+  <data key="d7">1.0</data>
+  <data key="d8">任务堆内存包含在总的JVM堆空间中，用于Flink算子及用户代码的执行。</data>
+  <data key="d9">组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-000</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="任务堆内存" target="taskmanager.memory.task.heap.size">
+  <data key="d7">3.0</data>
+  <data key="d8">任务堆内存大小由配置参数taskmanager.memory.task.heap.size设置。&lt;SEP&gt;taskmanager.memory.task.heap.size是用于指定任务堆内存大小的配置参数。&lt;SEP&gt;该参数用于配置任务堆内存的大小</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="任务堆内存" target="Flink TaskManager内存模型">
+  <data key="d7">1.0</data>
+  <data key="d8">任务堆内存是Flink TaskManager内存模型的组成部分之一。</data>
+  <data key="d9">组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="任务堆内存" target="本地执行模式">
+  <data key="d7">1.0</data>
+  <data key="d8">本地执行模式下任务堆内存默认值为无穷大(Long.MAX_VALUE字节)</data>
+  <data key="d9">默认值</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="任务堆内存" target="JVM开销">
+  <data key="d7">1.0</data>
+  <data key="d8">配置任务堆内存等其他内存部分大小后，JVM开销可推导为进程总内存减去其他所有内存部分后的剩余部分。</data>
+  <data key="d9">推导影响</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275771</data>
+  <data key="d13"></data>
+</edge>
+<edge source="框架堆内存" target="Flink TaskManager内存模型">
+  <data key="d7">1.0</data>
+  <data key="d8">框架堆内存是Flink TaskManager内存模型的组成部分之一。</data>
+  <data key="d9">组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="框架堆内存" target="taskmanager.memory.framework.heap.size">
+  <data key="d7">1.0</data>
+  <data key="d8">框架堆内存大小由配置参数taskmanager.memory.framework.heap.size设置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM Metaspace" target="独立部署模式">
+  <data key="d7">1.0</data>
+  <data key="d8">独立部署模式下若出现Metaspace不足问题，可调整JVM Metaspace大小</data>
+  <data key="d9">场景,调优</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM Metaspace" target="taskmanager.memory.jvm-metaspace.size">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM Metaspace大小由配置参数taskmanager.memory.jvm-metaspace.size设置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM Metaspace" target="Flink TaskManager内存模型">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM Metaspace是Flink TaskManager内存模型的组成部分之一。</data>
+  <data key="d9">组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM Metaspace" target="jobmanager.memory.jvm-metaspace.size">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM Metaspace大小由参数jobmanager.memory.jvm-metaspace.size配置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM Metaspace" target="OutOfMemoryError">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM Metaspace可能发生OutOfMemoryError异常</data>
+  <data key="d9">内存溢出,异常</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="直接内存" target="堆外内存">
+  <data key="d7">1.0</data>
+  <data key="d8">堆外内存包括直接内存和本地内存。</data>
+  <data key="d9">包含</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="堆外内存" target="框架堆外内存">
+  <data key="d7">1.0</data>
+  <data key="d8">框架堆外内存是用于Flink框架的堆外内存(直接内存或本地内存)。</data>
+  <data key="d9">类型</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="堆外内存" target="任务堆外内存">
+  <data key="d7">1.0</data>
+  <data key="d8">任务堆外内存是用于Flink应用算子及用户代码的堆外内存(直接内存或本地内存)。</data>
+  <data key="d9">类型</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="堆外内存" target="本地内存">
+  <data key="d7">2.0</data>
+  <data key="d8">堆外内存包括直接内存和本地内存。&lt;SEP&gt;本地内存是堆外内存的组成部分。</data>
+  <data key="d9">包含,组成</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="堆外内存" target="Flink总内存">
+  <data key="d7">2.0</data>
+  <data key="d8">Flink总内存由JVM堆内存和堆外内存组成。&lt;SEP&gt;同时配置Flink总内存和JVM堆内存而未配置堆外内存时，堆外内存等于Flink总内存减去JVM堆内存。</data>
+  <data key="d9">包含,推导计算</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup.md&lt;SEP&gt;mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="堆外内存" target="jobmanager.memory.off-heap.size">
+  <data key="d7">2.0</data>
+  <data key="d8">该参数用于设置堆外内存的大小。&lt;SEP&gt;堆外内存大小由参数jobmanager.memory.off-heap.size配置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="堆外内存" target="JVM直接内存">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM直接内存是堆外内存的组成部分。</data>
+  <data key="d9">组成</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="堆外内存" target="批处理Source">
+  <data key="d7">1.0</data>
+  <data key="d8">特殊批处理Source在作业提交时执行的用户代码可能用到堆外内存。</data>
+  <data key="d9">资源消耗</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="网络内存" target="JVM直接内存">
+  <data key="d7">1.0</data>
+  <data key="d8">网络内存同样被计算在JVM直接内存中。</data>
+  <data key="d9">计入</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="网络内存" target="taskmanager.memory.network.min">
+  <data key="d7">2.0</data>
+  <data key="d8">该参数用于配置网络内存的下限&lt;SEP&gt;网络内存最小值由配置参数taskmanager.memory.network.min设置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="网络内存" target="taskmanager.memory.network.max">
+  <data key="d7">2.0</data>
+  <data key="d8">该参数用于配置网络内存的上限&lt;SEP&gt;网络内存最大值由配置参数taskmanager.memory.network.max设置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="网络内存" target="taskmanager.memory.network.fraction">
+  <data key="d7">1.0</data>
+  <data key="d8">网络内存大小可由配置参数taskmanager.memory.network.fraction按比例设置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="网络内存" target="Flink TaskManager内存模型">
+  <data key="d7">1.0</data>
+  <data key="d8">网络内存是Flink TaskManager内存模型的组成部分之一。</data>
+  <data key="d9">组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="网络内存" target="受限的等比内存部分">
+  <data key="d7">2.0</data>
+  <data key="d8">网络内存是基于Flink总内存的受限等比内存部分。&lt;SEP&gt;网络内存是一种受限的等比内存部分，按Flink总内存的固定比例配置。</data>
+  <data key="d9">属于,类型</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup_tm.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d12">1791275769</data>
+  <data key="d13"></data>
+</edge>
+<edge source="网络内存" target="Flink总内存">
+  <data key="d7">2.0</data>
+  <data key="d8">网络内存作为受限等比内存部分，基于Flink总内存计算。&lt;SEP&gt;网络内存可配置为占用Flink总内存的固定比例。</data>
+  <data key="d9">基于,按比例配置</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup_tm.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="网络内存" target="taskmanager.memory.fraction">
+  <data key="d7">1.0</data>
+  <data key="d8">原托管内存占比参数在计算时需先扣除网络内存。</data>
+  <data key="d9">依赖计算</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Yarn" target="容器化部署模式">
+  <data key="d7">3.0</data>
+  <data key="d8">Yarn是Flink容器化部署模式的平台之一&lt;SEP&gt;容器化部署模式在文中以Yarn为例说明。&lt;SEP&gt;Yarn是容器化部署模式的一种。</data>
+  <data key="d9">实现,等同,部署方式</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_tuning.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Yarn" target="托管内存">
+  <data key="d7">1.0</data>
+  <data key="d8">RocksDB限制内存用量以避免在Yarn上容器被杀。</data>
+  <data key="d9">内存限制</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Yarn" target="RocksDB">
+  <data key="d7">1.0</data>
+  <data key="d8">RocksDB限制内存用量以避免在Yarn容器中被切除。</data>
+  <data key="d9">避免超限</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Kubernetes" target="容器化部署模式">
+  <data key="d7">2.0</data>
+  <data key="d8">Kubernetes是Flink容器化部署模式的平台之一&lt;SEP&gt;Kubernetes是容器化部署模式的一种。</data>
+  <data key="d9">部署方式</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_tuning.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="Heap State Backend">
+  <data key="d7">2.0</data>
+  <data key="d8">使用Heap State Backend时建议将托管内存设置为0以最大化用户代码内存&lt;SEP&gt;Heap State Backend不使用托管内存，因此其权重份额会分配给其他消费者。</data>
+  <data key="d9">不使用,建议,配置</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d11">mem_tuning.md&lt;SEP&gt;mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="RocksDB">
+  <data key="d7">3.0</data>
+  <data key="d8">RocksDB默认限制其内存用量不超过用户配置的托管内存。&lt;SEP&gt;RocksDB的本地内存被归为托管内存，且默认限制用量不超过托管内存大小。&lt;SEP&gt;流处理作业中RocksDB使用的本地内存被归为托管内存，且默认限制其用量不超过托管内存大小</data>
+  <data key="d9">内存归类,内存控制,归类,配置依赖,限制</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_tuning.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="批处理作业">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink批处理作业的算子使用托管内存来提高处理效率。</data>
+  <data key="d9">内存使用,性能提升</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="批处理算子">
+  <data key="d7">1.0</data>
+  <data key="d8">批处理算子运行时部分操作可直接在原始数据上进行而无需反序列化成Java对象，托管内存对此有实质影响。</data>
+  <data key="d9">减少反序列化,直接操作</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="RocksDB State Backend">
+  <data key="d7">3.0</data>
+  <data key="d8">流处理作业中RocksDB State Backend需要使用托管内存。&lt;SEP&gt;RocksDB State Backend在流处理中使用托管内存。&lt;SEP&gt;托管内存被用于RocksDB State Backend存储状态数据。</data>
+  <data key="d9">使用,分配,消费</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="Python进程">
+  <data key="d7">1.0</data>
+  <data key="d8">托管内存用于在Python进程中执行用户自定义函数。</data>
+  <data key="d9">使用场景</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-000</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="Python UDF">
+  <data key="d7">1.0</data>
+  <data key="d8">Python进程执行用户自定义函数时消耗托管内存。</data>
+  <data key="d9">分配,消费</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="消费者权重">
+  <data key="d7">1.0</data>
+  <data key="d8">消费者权重决定托管内存在不同消费者之间的分配比例。</data>
+  <data key="d9">分配,控制</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="Flink总内存">
+  <data key="d7">1.0</data>
+  <data key="d8">托管内存是Flink总内存的组成部分。</data>
+  <data key="d9">包含</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-000</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="taskmanager.memory.managed.size">
+  <data key="d7">4.0</data>
+  <data key="d8">托管内存大小由配置参数taskmanager.memory.managed.size设置。&lt;SEP&gt;该参数用于配置托管内存的大小&lt;SEP&gt;通过该参数可明确指定托管内存的大小，优先级高于占比配置。&lt;SEP&gt;taskmanager.memory.managed.size用于指定明确的托管内存大小。</data>
+  <data key="d9">指定,配置,配置参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_setup_tm.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="taskmanager.memory.managed.fraction">
+  <data key="d7">3.0</data>
+  <data key="d8">通过该参数指定托管内存在Flink总内存中的占比，用于计算托管内存大小。&lt;SEP&gt;托管内存大小可由配置参数taskmanager.memory.managed.fraction按比例设置。&lt;SEP&gt;taskmanager.memory.managed.fraction指定托管内存占Flink总内存的比例。</data>
+  <data key="d9">计算,配置,配置参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_setup_tm.md&lt;SEP&gt;mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="Flink TaskManager内存模型">
+  <data key="d7">1.0</data>
+  <data key="d8">托管内存是Flink TaskManager内存模型的组成部分之一。</data>
+  <data key="d9">组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="本地执行模式">
+  <data key="d7">1.0</data>
+  <data key="d8">本地执行模式下托管内存默认值为128MB，仅针对本地执行模式</data>
+  <data key="d9">默认值</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="RocksDB StateBackend">
+  <data key="d7">1.0</data>
+  <data key="d8">RocksDB状态后端使用的本地内存被归入托管内存，默认限制用量不超过托管内存大小。</data>
+  <data key="d9">内存管理</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="taskmanager.memory.off-heap">
+  <data key="d7">1.0</data>
+  <data key="d8">托管内存现在总是在堆外，该配置参数已被彻底移除。</data>
+  <data key="d9">配置移除</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="JVM直接内存">
+  <data key="d7">1.0</data>
+  <data key="d8">托管内存现在使用本地内存而非直接内存，不在JVM直接内存限制范围内。</data>
+  <data key="d9">内存机制</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="托管内存" target="taskmanager.memory.preallocate">
+  <data key="d7">1.0</data>
+  <data key="d8">托管内存现在总是惰性分配，该配置参数已被彻底移除。</data>
+  <data key="d9">配置移除</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="glibc" target="保存点">
+  <data key="d7">1.0</data>
+  <data key="d8">启用内存控制时，保存点执行期间非堆内存持续增长可能由glibc内存分配器缺陷导致。</data>
+  <data key="d9">内存问题,影响</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="glibc" target="全量检查点">
+  <data key="d7">1.0</data>
+  <data key="d8">启用内存控制时，全量检查点执行期间非堆内存持续增长可能由glibc内存分配器缺陷导致。</data>
+  <data key="d9">内存问题,影响</data>
+  <data key="d10">doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001</data>
+  <data key="d11">mem_trouble.md</data>
+  <data key="d12">1791275676</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="Flink总内存">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink总内存加上JVM相关内存部分(含JVM开销)可推算出进程总内存</data>
+  <data key="d9">推算,组成</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="taskmanager.memory.jvm-overhead.min">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM开销最小值由配置参数taskmanager.memory.jvm-overhead.min设置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="taskmanager.memory.jvm-overhead.max">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM开销最大值由配置参数taskmanager.memory.jvm-overhead.max设置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="taskmanager.memory.jvm-overhead.fraction">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM开销大小可由配置参数taskmanager.memory.jvm-overhead.fraction按比例设置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="受限的等比内存部分">
+  <data key="d7">2.0</data>
+  <data key="d8">JVM开销是基于进程总内存的受限等比内存部分。&lt;SEP&gt;JVM开销是一种受限的等比内存部分，按进程总内存的固定比例配置并受最大/最小值限制。</data>
+  <data key="d9">属于,类型</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup_tm.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="进程总内存">
+  <data key="d7">2.0</data>
+  <data key="d8">JVM开销作为受限等比内存部分，基于进程总内存计算。&lt;SEP&gt;JVM开销可配置为占用进程总内存的固定比例。</data>
+  <data key="d9">基于,按比例配置</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup_tm.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="Flink TaskManager内存模型">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM开销是Flink TaskManager内存模型的组成部分之一。</data>
+  <data key="d9">组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="JVM开销占比">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM开销的大小可由进程总内存乘以JVM开销占比计算得出。</data>
+  <data key="d9">由…计算</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275771</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="JVM开销最小值">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM开销的推导大小若小于最小值(如100MB小于128MB)，则实际大小取最小值。</data>
+  <data key="d9">受限于</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275771</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="JVM开销最大值">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM开销的推导大小不能超过最大值。</data>
+  <data key="d9">受限于</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275771</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="jobmanager.memory.jvm-overhead.fraction">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM开销在进程总内存中的占比由jobmanager.memory.jvm-overhead.fraction等参数配置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="jobmanager.memory.jvm-overhead.min">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM开销的最小值由参数jobmanager.memory.jvm-overhead.min配置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="jobmanager.memory.jvm-overhead.max">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM开销的最大值由参数jobmanager.memory.jvm-overhead.max配置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销" target="配置总内存">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM开销是基于进程总内存的受限等比内存部分。</data>
+  <data key="d9">受限比例,基于</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="调优指南" target="配置指南">
+  <data key="d7">1.0</data>
+  <data key="d8">调优指南在配置指南的基础上介绍内存配置调整方法</data>
+  <data key="d9">基于,扩展</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="独立部署模式" target="Flink总内存">
+  <data key="d7">2.0</data>
+  <data key="d8">独立部署模式下建议配置Flink总内存或其组成部分&lt;SEP&gt;独立部署模式下建议通过配置Flink总内存来指定Flink应用使用的内存大小。</data>
+  <data key="d9">建议,配置,配置建议</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_tuning.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="独立部署模式" target="taskmanager.memory.flink.size">
+  <data key="d7">2.0</data>
+  <data key="d8">新配置参数taskmanager.memory.flink.size是独立部署模式下对应被弃用的taskmanager.heap.size的参数。&lt;SEP&gt;独立部署模式下弃用参数对应到taskmanager.memory.flink.size。</data>
+  <data key="d9">适用于,适用场景</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="独立部署模式" target="jobmanager.memory.heap.size">
+  <data key="d7">1.0</data>
+  <data key="d8">独立部署模式下弃用的堆内存参数对应新参数jobmanager.memory.heap.size。</data>
+  <data key="d9">参数对应</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="容器化部署模式" target="进程总内存">
+  <data key="d7">2.0</data>
+  <data key="d8">容器化部署模式下建议配置进程总内存以确定申请的容器大小&lt;SEP&gt;容器化部署模式下配置进程总内存相当于申请的容器大小。</data>
+  <data key="d9">建议,配置,配置建议</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_tuning.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="容器化部署模式" target="taskmanager.memory.process.size">
+  <data key="d7">2.0</data>
+  <data key="d8">新配置参数taskmanager.memory.process.size是容器化部署模式下对应被弃用的taskmanager.heap.size的参数。&lt;SEP&gt;容器化部署(Yarn)模式下弃用参数对应到taskmanager.memory.process.size。</data>
+  <data key="d9">适用于,适用场景</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="容器化部署模式" target="jobmanager.memory.process.size">
+  <data key="d7">1.0</data>
+  <data key="d8">容器化部署模式下弃用的堆内存参数对应新参数jobmanager.memory.process.size。</data>
+  <data key="d9">参数对应</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="容器化部署模式" target="容器切除内存">
+  <data key="d7">1.0</data>
+  <data key="d8">旧配置方法中JVM堆空间实际大小为参数指定大小减去容器切除内存，该内存在1.11及以上版本被彻底移除。</data>
+  <data key="d9">内存机制</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink总内存" target="进程总内存">
+  <data key="d7">3.0</data>
+  <data key="d8">配置Flink总内存后Flink会自动加上JVM相关内存部分推算出进程总内存&lt;SEP&gt;进程总内存包含Flink总内存以及JVM自身使用的内存。&lt;SEP&gt;进程总内存包含由Flink应用使用的Flink总内存以及JVM使用的内存。</data>
+  <data key="d9">包含,推算,组成</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_tuning.md&lt;SEP&gt;mem_setup_tm.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink总内存" target="taskmanager.memory.flink.size">
+  <data key="d7">1.0</data>
+  <data key="d8">taskmanager.memory.flink.size用于配置TaskManager的Flink总内存</data>
+  <data key="d9">参数,配置</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink总内存" target="jobmanager.memory.flink.size">
+  <data key="d7">1.0</data>
+  <data key="d8">jobmanager.memory.flink.size用于配置JobManager的Flink总内存</data>
+  <data key="d9">参数,配置</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink总内存" target="JVM堆内存">
+  <data key="d7">2.0</data>
+  <data key="d8">Flink总内存包括JVM堆内存、托管内存及其他直接或本地内存。&lt;SEP&gt;Flink总内存由JVM堆内存和堆外内存组成。</data>
+  <data key="d9">包含</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-000&lt;SEP&gt;doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_setup_tm.md&lt;SEP&gt;mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="进程总内存" target="taskmanager.memory.process.size">
+  <data key="d7">1.0</data>
+  <data key="d8">taskmanager.memory.process.size用于配置TaskManager的进程总内存</data>
+  <data key="d9">参数,配置</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="进程总内存" target="jobmanager.memory.process.size">
+  <data key="d7">1.0</data>
+  <data key="d8">jobmanager.memory.process.size用于配置JobManager的进程总内存</data>
+  <data key="d9">参数,配置</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="进程总内存" target="JVM进程">
+  <data key="d7">1.0</data>
+  <data key="d8">进程总内存指分配给Flink JVM进程的总内存</data>
+  <data key="d9">分配,度量</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="进程总内存" target="RocksDB">
+  <data key="d7">1.0</data>
+  <data key="d8">RocksDB分配的内存若超出进程总内存(申请容器大小)会造成风险。</data>
+  <data key="d9">内存超限</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="进程总内存" target="JVM">
+  <data key="d7">1.0</data>
+  <data key="d8">进程总内存包含由运行Flink的JVM使用的内存。</data>
+  <data key="d9">组成</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275766</data>
+  <data key="d13"></data>
+</edge>
+<edge source="State Backend" target="Heap State Backend">
+  <data key="d7">1.0</data>
+  <data key="d8">Heap State Backend是State Backend的一种类型</data>
+  <data key="d9">包含,类型</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Heap State Backend" target="MemoryStateBackend">
+  <data key="d7">1.0</data>
+  <data key="d8">MemoryStateBackend属于Heap State Backend的一种</data>
+  <data key="d9">属于,类型</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Heap State Backend" target="FsStateBackend">
+  <data key="d7">1.0</data>
+  <data key="d8">FsStateBackend属于Heap State Backend的一种</data>
+  <data key="d9">属于,类型</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="MemoryStateBackend" target="JVM堆内存">
+  <data key="d7">1.0</data>
+  <data key="d8">MemoryStateBackend状态后端需要使用JVM堆内存。</data>
+  <data key="d9">依赖使用</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="FsStateBackend" target="JVM堆内存">
+  <data key="d7">1.0</data>
+  <data key="d8">FsStateBackend状态后端需要使用JVM堆内存。</data>
+  <data key="d9">依赖使用</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="RocksDB" target="TaskExecutor">
+  <data key="d7">1.0</data>
+  <data key="d8">RocksDB内存控制关闭后若分配内存超出容器大小，可能导致TaskExecutor被部署环境杀掉。</data>
+  <data key="d9">内存超限,风险影响</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="RocksDB" target="state.backend.rocksdb.memory.managed">
+  <data key="d7">1.0</data>
+  <data key="d8">该配置项用于控制RocksDB的托管内存使用方式。</data>
+  <data key="d9">配置控制</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="RocksDB" target="容器切除内存">
+  <data key="d7">1.0</data>
+  <data key="d8">容器切除内存的主要来源之一是不受Flink直接管理的RocksDB等依赖使用的内存</data>
+  <data key="d9">依赖,内存来源</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="taskmanager.memory.flink.size" target="taskmanager.heap.size">
+  <data key="d7">2.0</data>
+  <data key="d8">独立部署模式下，弃用参数taskmanager.heap.size对应新参数taskmanager.memory.flink.size。&lt;SEP&gt;独立部署模式下，被弃用的taskmanager.heap.size将被解读为taskmanager.memory.flink.size。</data>
+  <data key="d9">对应,弃用替代,替代</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="taskmanager.memory.process.size" target="taskmanager.heap.size">
+  <data key="d7">3.0</data>
+  <data key="d8">容器化部署(Yarn)模式下，弃用参数taskmanager.heap.size对应新参数taskmanager.memory.process.size。&lt;SEP&gt;容器化部署模式下，被弃用的taskmanager.heap.size将被解读为taskmanager.memory.process.size。&lt;SEP&gt;TaskManager总内存配置项taskmanager.heap.size被taskmanager.memory.process.size取代</data>
+  <data key="d9">取代,对应,弃用替代,替代</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="jobmanager.memory.process.size" target="jobmanager.heap.size">
+  <data key="d7">2.0</data>
+  <data key="d8">容器化部署模式下，弃用参数jobmanager.heap.size对应新参数jobmanager.memory.process.size。&lt;SEP&gt;JobManager总内存配置项jobmanager.heap.size被jobmanager.memory.process.size取代</data>
+  <data key="d9">参数替代,取代</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM进程" target="容器">
+  <data key="d7">1.0</data>
+  <data key="d8">容器化部署时JVM进程运行于容器中，容器大小等于进程总内存</data>
+  <data key="d9">承载,部署</data>
+  <data key="d10">doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000</data>
+  <data key="d11">mem_tuning.md</data>
+  <data key="d12">1791275691</data>
+  <data key="d13"></data>
+</edge>
+<edge source="OutOfMemoryError" target="JVM直接内存">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM直接内存可能发生OutOfMemoryError异常</data>
+  <data key="d9">内存溢出,异常</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="state.backend.rocksdb.memory.managed" target="RocksDB StateBackend">
+  <data key="d7">1.0</data>
+  <data key="d8">通过设置该参数可以关闭RocksDB的内存控制。</data>
+  <data key="d9">配置控制</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM堆内存" target="jobmanager.memory.heap.size">
+  <data key="d7">2.0</data>
+  <data key="d8">该参数用于明确指定JVM堆内存的大小。&lt;SEP&gt;JVM堆内存大小由参数jobmanager.memory.heap.size明确指定。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000&lt;SEP&gt;doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM堆内存" target="批处理Source">
+  <data key="d7">1.0</data>
+  <data key="d8">特殊批处理Source在作业提交时执行的用户代码需要使用JVM堆内存。</data>
+  <data key="d9">资源消耗</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM堆内存" target="taskmanager.memory.task.heap.size">
+  <data key="d7">1.0</data>
+  <data key="d8">taskmanager.memory.task.heap.size直接控制任务和算子使用的JVM堆内存。</data>
+  <data key="d9">配置</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink TaskManager内存模型" target="框架堆外内存">
+  <data key="d7">1.0</data>
+  <data key="d8">框架堆外内存是Flink TaskManager内存模型的组成部分之一。</data>
+  <data key="d9">组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flink TaskManager内存模型" target="任务堆外内存">
+  <data key="d7">1.0</data>
+  <data key="d8">任务堆外内存是Flink TaskManager内存模型的组成部分之一。</data>
+  <data key="d9">组成部分</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="框架堆外内存" target="JVM直接内存">
+  <data key="d7">1.0</data>
+  <data key="d8">框架堆外内存被计算在JVM直接内存限制中。</data>
+  <data key="d9">计入</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="框架堆外内存" target="taskmanager.memory.framework.off-heap.size">
+  <data key="d7">1.0</data>
+  <data key="d8">框架堆外内存大小由配置参数taskmanager.memory.framework.off-heap.size设置。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-002</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="任务堆外内存" target="taskmanager.memory.task.off-heap.size">
+  <data key="d7">3.0</data>
+  <data key="d8">任务堆外内存大小由配置参数taskmanager.memory.task.off-heap.size设置。&lt;SEP&gt;该参数用于配置任务堆外内存的大小&lt;SEP&gt;通过该参数指定任务堆外内存的大小。</data>
+  <data key="d9">指定,配置,配置参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-002&lt;SEP&gt;doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="任务堆外内存" target="JVM直接内存">
+  <data key="d7">1.0</data>
+  <data key="d8">任务堆外内存被计算在JVM直接内存限制中。</data>
+  <data key="d9">计入</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="taskmanager.memory.managed.size" target="taskmanager.memory.size">
+  <data key="d7">2.0</data>
+  <data key="d8">taskmanager.memory.size已弃用，语义由新参数taskmanager.memory.managed.size替代。&lt;SEP&gt;被弃用的taskmanager.memory.size将被解读为taskmanager.memory.managed.size。</data>
+  <data key="d9">对应,弃用替代,替代</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="taskmanager.memory.managed.fraction" target="taskmanager.memory.fraction">
+  <data key="d7">2.0</data>
+  <data key="d8">taskmanager.memory.fraction已被彻底移除，由taskmanager.memory.managed.fraction替代。&lt;SEP&gt;被移除的taskmanager.memory.fraction由新参数taskmanager.memory.managed.fraction取代，二者语义有所差别。</data>
+  <data key="d9">取代,替代,移除</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001&lt;SEP&gt;doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="taskmanager.memory.network.min" target="taskmanager.network.memory.min">
+  <data key="d7">1.0</data>
+  <data key="d8">被弃用的taskmanager.network.memory.min将被解读为taskmanager.memory.network.min。</data>
+  <data key="d9">弃用替代</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="taskmanager.memory.network.max" target="taskmanager.network.memory.max">
+  <data key="d7">1.0</data>
+  <data key="d8">被弃用的taskmanager.network.memory.max将被解读为taskmanager.memory.network.max。</data>
+  <data key="d9">弃用替代</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="taskmanager.memory.network.fraction" target="taskmanager.network.memory.fraction">
+  <data key="d7">1.0</data>
+  <data key="d8">被弃用的taskmanager.network.memory.fraction将被解读为taskmanager.memory.network.fraction。</data>
+  <data key="d9">弃用替代</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="本地执行模式" target="JVM">
+  <data key="d7">1.0</data>
+  <data key="d8">本地执行模式下JVM堆空间实际大小不受Flink掌控，取决于本地进程启动方式</data>
+  <data key="d9">运行环境</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM" target="-Xmx">
+  <data key="d7">1.0</data>
+  <data key="d8">-Xmx用于在启动进程时指定JVM堆空间的最大大小</data>
+  <data key="d9">启动参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM" target="-Xms">
+  <data key="d7">1.0</data>
+  <data key="d8">-Xms用于在启动进程时指定JVM堆空间的初始大小</data>
+  <data key="d9">启动参数</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-003</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="消费者权重" target="taskmanager.memory.managed.consumer-weights">
+  <data key="d7">1.0</data>
+  <data key="d8">该参数用于为每种托管内存消费者类型指定权重。</data>
+  <data key="d9">定义,配置</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="消费者权重" target="OPERATOR">
+  <data key="d7">1.0</data>
+  <data key="d8">OPERATOR是消费者权重支持的消费者类型之一，用于内置算法。</data>
+  <data key="d9">类型,组成</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="消费者权重" target="STATE_BACKEND">
+  <data key="d7">1.0</data>
+  <data key="d8">STATE_BACKEND是消费者权重支持的消费者类型之一，对应RocksDB State Backend。</data>
+  <data key="d9">类型,组成</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="消费者权重" target="PYTHON">
+  <data key="d7">1.0</data>
+  <data key="d8">PYTHON是消费者权重支持的消费者类型之一，对应Python进程。</data>
+  <data key="d9">类型,组成</data>
+  <data key="d10">doc-80f1d496c923f43242912a26d7d69f02-chunk-001</data>
+  <data key="d11">mem_setup_tm.md</data>
+  <data key="d12">1791275746</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM直接内存" target="jobmanager.memory.enable-jvm-direct-memory-limit">
+  <data key="d7">1.0</data>
+  <data key="d8">该参数用于设置是否启用JVM直接内存限制。</data>
+  <data key="d9">配置参数</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM直接内存" target="-XX:MaxDirectMemorySize">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM直接内存的大小限制通过-XX:MaxDirectMemorySize参数实现。</data>
+  <data key="d9">参数设置,限制</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-001</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销最小值" target="最大值/最小值">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM开销最小值是最大值/最小值限制机制在JVM开销上的具体应用。</data>
+  <data key="d9">实例</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275769</data>
+  <data key="d13"></data>
+</edge>
+<edge source="JVM开销最大值" target="最大值/最小值">
+  <data key="d7">1.0</data>
+  <data key="d8">JVM开销最大值是最大值/最小值限制机制在JVM开销上的具体应用。</data>
+  <data key="d9">实例</data>
+  <data key="d10">doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002</data>
+  <data key="d11">mem_setup.md</data>
+  <data key="d12">1791275771</data>
+  <data key="d13"></data>
+</edge>
+<edge source="jobmanager.memory.heap.size" target="jobmanager.heap.size">
+  <data key="d7">1.0</data>
+  <data key="d8">独立部署模式下，弃用参数jobmanager.heap.size对应新参数jobmanager.memory.heap.size。</data>
+  <data key="d9">参数替代</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="配置总内存" target="Flink 1.11">
+  <data key="d7">1.0</data>
+  <data key="d8">Flink 1.11对内存配置部分进行了较大幅度改动，本文介绍的配置方法适用于该版本及以上。</data>
+  <data key="d9">影响,版本变更</data>
+  <data key="d10">doc-f3c1c22469a68bc75a30439deafa7436-chunk-000</data>
+  <data key="d11">mem_setup_jobmanager.md</data>
+  <data key="d12">1791275789</data>
+  <data key="d13"></data>
+</edge>
+<edge source="taskmanager.memory.fraction" target="容器切除内存">
+  <data key="d7">1.0</data>
+  <data key="d8">原托管内存占比参数在Yarn下计算时需扣除容器切除内存。</data>
+  <data key="d9">依赖计算</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="taskmanager.heap.size" target="taskmanager.heap.mb">
+  <data key="d7">1.0</data>
+  <data key="d8">两个参数语义相同，均已被弃用，用于配置Flink总内存。</data>
+  <data key="d9">弃用,等价</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="containerized.heap-cutoff-ratio" target="容器切除内存">
+  <data key="d7">1.0</data>
+  <data key="d8">containerized.heap-cutoff-ratio是容器切除内存的配置参数，现已不再生效</data>
+  <data key="d9">失效,配置项</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="containerized.heap-cutoff-min" target="容器切除内存">
+  <data key="d7">1.0</data>
+  <data key="d8">containerized.heap-cutoff-min是容器切除内存的最小值配置参数，现已不再生效</data>
+  <data key="d9">失效,配置项</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="容器切除内存" target="容器化部署">
+  <data key="d7">1.0</data>
+  <data key="d8">容器切除内存是容器化部署模式下预留的内存</data>
+  <data key="d9">适用范围,部署模式</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="总内存配置" target="Flink配置文件">
+  <data key="d7">1.0</data>
+  <data key="d8">新的默认Flink配置文件可能改变各内存部分(包括总内存)的大小，从而产生性能变化。</data>
+  <data key="d9">内存配置,影响</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+<edge source="总内存配置" target="1600MB">
+  <data key="d7">1.0</data>
+  <data key="d8">1600MB是总内存配置项调整后的新取值。</data>
+  <data key="d9">数值,配置值</data>
+  <data key="d10">doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005</data>
+  <data key="d11">mem_migration.md</data>
+  <data key="d12">1791275807</data>
+  <data key="d13"></data>
+</edge>
+</graph></graphml>

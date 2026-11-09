@@ -1,0 +1,1044 @@
+{
+  "status": "success",
+  "message": "Query processed successfully",
+  "data": {
+    "entities": [
+      {
+        "entity_name": "Flink TaskManager内存模型",
+        "entity_type": "concept",
+        "description": "描述Flink TaskManager进程内存组成的模型，包含框架堆内存、任务堆内存、托管内存、框架堆外内存、任务堆外内存、网络内存、JVM Metaspace和JVM开销等组成部分。",
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275729
+      },
+      {
+        "entity_name": "Flink",
+        "entity_type": "artifact",
+        "description": "Flink是一个开源的分布式流处理与分布式计算框架，广泛应用于大规模数据的流式与批式处理。其运行时网络栈通过缓冲区机制优化网络开销，以网络缓冲作为消息传输的最小单位。由于每个缓冲区的开销远高于每条记录的开销，Flink在传输过程的输入端和输出端均使用网络缓冲队列来维持高吞吐。框架具有多个本地缓冲区池，支持缓冲消胀、透支缓冲区、反压处理以及Unaligned Checkpoint等特性。\n\n在内存管理方面，Flink拥有精细的内存模型。其TaskManager进程的内存由多个内存组成部分和配置参数构成，并区分框架内存与任务内存。在批处理场景中，批处理算子使用托管内存提高处理效率，可在不超过限额的前提下尽量分配托管内存，从而避免OutOfMemoryError的发生。内存管理机制还涵盖本地执行模式。值得注意的是，TaskManager负责执行用户代码，其内存配置方法在Flink 1.10版本中有较大改动，且内存配置可根据不同的部署模式进行调整。在实体类型归属上，Flink应归类为Artifact而非Software。<SEP>流处理计算框架，提供内存模型配置机制，内存部分不符合范围时将无法启动。<SEP>分布式流处理框架，其内存配置和启动脚本是本文描述的核心对象。<SEP>一个分布式计算框架，其集群由JobManager和TaskManager等组件构成，1.11版本对内存配置进行了较大幅度改动。<SEP>分布式计算框架，其内存配置参数体系发生了变更，不再支持堆上托管内存和内存预分配。<SEP>一个分布式流处理框架，本文描述其1.10和1.11版本中内存配置机制的变化。<SEP>一个计算框架/系统，其内存配置和配置文件在输入文本中被提及。",
+        "source_id": "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000<SEP>doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001<SEP>doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002<SEP>doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000<SEP>doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-000<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-002<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-003<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-001<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-000<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "network_mem_tuning.md<SEP>mem_tuning.md<SEP>mem_setup_tm.md<SEP>mem_setup.md<SEP>mem_setup_jobmanager.md<SEP>mem_migration.md",
+        "created_at": 1791275799
+      },
+      {
+        "entity_name": "堆外内存",
+        "entity_type": "concept",
+        "description": "Flink中JVM堆之外的内存，调整堆外内存可增大直接内存限制，TaskManager和JobManager均可配置。<SEP>直接内存或本地内存，Flink框架和应用算子及用户代码均可使用堆外内存。<SEP>Flink总内存的组成部分之一，包括直接内存和本地内存。<SEP>JobManager的默认内存部分之一。<SEP>包括JVM直接内存和本地内存，可通过jobmanager.memory.off-heap.size配置大小。<SEP>JobManager内存模型的组成部分，即直接内存或本地内存，通过jobmanager.memory.off-heap.size配置。",
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-002<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-000<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_trouble.md<SEP>mem_setup_tm.md<SEP>mem_setup.md<SEP>mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "entity_name": "托管内存",
+        "entity_type": "concept",
+        "description": "托管内存（Managed Memory）是Apache Flink中TaskManager内存模型的一个组成部分，由Flink统一负责分配和管理的本地（堆外）内存。自Flink 1.10版本起，托管内存总是在堆外分配，使用本地内存而非直接内存，并且不再支持堆上分配，同时总是采用惰性分配方式。\n\n托管内存主要用于以下场景：RocksDB State Backend存储状态数据、批处理算子的排序和哈希表操作、缓存中间结果，以及Python进程中执行用户自定义函数。其大小可通过taskmanager.memory.managed.size和taskmanager.memory.managed.fraction两项配置进行控制，并且具有默认占比。在本地执行模式下，托管内存的默认值为128MB，该默认值仅针对本地执行模式生效。\n\n作为由用户配置的内存限额，托管内存对应用性能有实质性影响。使用Heap State Backend时，建议将托管内存设置为0；而使用RocksDBStateBackend时，则需要为其配置足够大的内存。此外，当关闭内存控制时，可以尝试增大托管内存。",
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001<SEP>doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000<SEP>doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-000<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-002<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-003<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-001<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_trouble.md<SEP>mem_tuning.md<SEP>mem_setup_tm.md<SEP>mem_setup.md<SEP>mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "entity_name": "框架堆外内存",
+        "entity_type": "concept",
+        "description": "Flink框架内存的一部分，通常不建议调整，特定依赖(如Hadoop)可能需要更多直接或本地内存<SEP>用于Flink框架的堆外内存(直接内存或本地内存)，属进阶配置，由参数taskmanager.memory.framework.off-heap.size控制。",
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-003<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275807
+      },
+      {
+        "entity_name": "JVM堆内存",
+        "entity_type": "concept",
+        "description": "Flink总内存的组成部分，其中任务堆内存专用于Flink算子及用户代码的执行。<SEP>Flink总内存的组成部分之一，属于JVM堆内存空间。<SEP>JobManager中的一种内存部分。<SEP>可通过jobmanager.memory.heap.size配置的内存部分，供Flink框架和用户代码使用。<SEP>JobManager内存模型的组成部分，通过jobmanager.memory.heap.size配置，用于Flink框架等用途。<SEP>JVM中的堆内存部分，被弃用的taskmanager.heap.size或taskmanager.heap.mb指定的内存除JVM堆内存外还包含其他堆外内存部分。",
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-000<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-000<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+        "file_path": "mem_setup_tm.md<SEP>mem_setup.md<SEP>mem_setup_jobmanager.md<SEP>mem_migration.md",
+        "created_at": 1791275800
+      },
+      {
+        "entity_name": "JVM直接内存",
+        "entity_type": "concept",
+        "description": "框架堆外内存被计算在JVM直接内存限制中。<SEP>堆外内存的组成部分，可通过jobmanager.memory.enable-jvm-direct-memory-limit设置限制。<SEP>JVM进程使用的堆外内存区域，托管内存不再受其限制，Flink也可对进程的该内存进行限制。",
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-001<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_setup_tm.md<SEP>mem_setup_jobmanager.md<SEP>mem_migration.md",
+        "created_at": 1791275803
+      },
+      {
+        "entity_name": "TaskManager",
+        "entity_type": "artifact",
+        "description": "TaskManager 是 Apache Flink 集群中的工作进程，是负责任务执行的核心组件，负责执行用户代码。它是 Flink 中任务执行的基本单元，其内存模型与 JobManager 相似，但结构更为复杂。\n\nTaskManager 的内存配置涉及多个部分，包括任务堆内存、框架堆内存、网络内存、JVM Metaspace 以及堆外内存等。其中，网络内存和托管内存具有各自相应的内存配置方式，同时也可通过环境变量和托管内存配置来调整其内存行为。\n\n在版本演进方面，TaskManager 的内存配置方法适用于 Flink 1.10 及以上版本。从 1.10 版本起，其 JVM Metaspace 和直接内存开始受到限制。此外，容器切除内存（container cut-off memory）相关的配置参数从该版本起将不再对 TaskManager 生效。\n\n关于 TaskManager 的使用，官方提供了相应的本地执行文档以及详细的内存配置细节文档，可供用户参考和查阅。",
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000<SEP>doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-000<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-001<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-000<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_trouble.md<SEP>mem_setup_tm.md<SEP>mem_setup.md<SEP>mem_setup_jobmanager.md<SEP>mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "entity_name": "Flink总内存",
+        "entity_type": "concept",
+        "description": "Flink应用本身使用的总内存，可通过taskmanager.memory.flink.size或jobmanager.memory.flink.size配置<SEP>由Flink应用使用的内存，包括JVM堆内存、托管内存以及其他直接内存或本地内存。<SEP>Flink TaskManager进程内存的整体配置，网络内存等受限等比内存部分以其为基准计算。<SEP>由Flink应用使用的内存，包括JVM堆内存和堆外内存。<SEP>Flink的总内存，网络内存按其固定比例配置。<SEP>JobManager内存的一种总量配置方式，若已设置JVM堆内存则不建议同时设置。",
+        "source_id": "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-000<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-002<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_tuning.md<SEP>mem_setup_tm.md<SEP>mem_setup.md<SEP>mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "entity_name": "任务堆内存",
+        "entity_type": "concept",
+        "description": "TaskManager内存模型中用于任务执行的堆内存部分，增大该内存可解决JVM堆空间过小的问题。<SEP>可通过taskmanager.memory.task.heap.size明确指定的JVM堆内存，专门用于Flink算子及用户代码的执行。<SEP>Flink任务内存的一部分，本地执行时默认值为无穷大(Long.MAX_VALUE字节)<SEP>用于Flink应用的算子及用户代码的JVM堆内存，由参数taskmanager.memory.task.heap.size控制。<SEP>TaskManager中的一种内存部分，配置其大小会影响JVM开销的推导。",
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-000<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-002<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-003<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+        "file_path": "mem_trouble.md<SEP>mem_setup_tm.md<SEP>mem_setup.md",
+        "created_at": 1791275766
+      },
+      {
+        "entity_name": "任务堆外内存",
+        "entity_type": "concept",
+        "description": "Flink任务内存的一部分，本地执行时默认值为无穷大<SEP>用于Flink应用的算子及用户代码的堆外内存(直接内存或本地内存)，由参数taskmanager.memory.task.off-heap.size控制。",
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-003<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275807
+      },
+      {
+        "entity_name": "-XX:MaxDirectMemorySize",
+        "entity_type": "method",
+        "description": "当启用JVM直接内存限制时，Flink根据堆外内存大小设置的JVM参数。",
+        "source_id": "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "entity_name": "taskmanager.memory.framework.off-heap.size",
+        "entity_type": "data",
+        "description": "Flink配置参数，用于设置框架堆外内存大小。",
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275807
+      },
+      {
+        "entity_name": "批处理作业",
+        "entity_type": "concept",
+        "description": "Flink中的一类作业，其内存配置涉及批处理算子使用托管内存来提高处理效率。",
+        "source_id": "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001",
+        "file_path": "mem_tuning.md",
+        "created_at": 1791275691
+      },
+      {
+        "entity_name": "框架堆内存",
+        "entity_type": "concept",
+        "description": "TaskManager中供Flink框架自身使用的堆内存，属于进阶配置，仅在确认框架自身需要更多内存时才调整。<SEP>Flink框架内存的一部分，通常不建议调整，除非Flink内部数据结构及操作需要更多内存<SEP>Flink TaskManager内存模型组成部分，用于Flink框架的JVM堆内存，属进阶配置，由参数taskmanager.memory.framework.heap.size控制。",
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-002<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+        "file_path": "mem_trouble.md<SEP>mem_setup_tm.md",
+        "created_at": 1791275729
+      },
+      {
+        "entity_name": "内存段",
+        "entity_type": "artifact",
+        "description": "Flink中网络缓冲的内存单元，默认大小为32KB，可通过减小其大小来减少网络栈内存消耗。",
+        "source_id": "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002",
+        "file_path": "network_mem_tuning.md",
+        "created_at": 1791275663
+      },
+      {
+        "entity_name": "网络内存",
+        "entity_type": "concept",
+        "description": "TaskManager详细内存模型中用于网络缓冲的内存部分，过小会导致IOException: Insufficient number of network buffers。<SEP>Flink内存组成部分，本地执行时默认值为64MB，由network.min和network.max参数控制<SEP>用于任务之间数据传输的直接内存(如网络传输缓冲)，是基于Flink总内存的受限等比内存部分，用于分配网络缓冲，由network.min/max/fraction参数控制。<SEP>可配置为占用Flink总内存固定比例的内存部分，仅针对TaskManager。<SEP>Flink内存模型中的组成部分，其大小可能受其他内存部分(如总内存)变化的影响，配置参数变化不大但建议检查配置结果。",
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-002<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-003<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-001<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+        "file_path": "mem_trouble.md<SEP>mem_setup_tm.md<SEP>mem_setup.md<SEP>mem_migration.md",
+        "created_at": 1791275802
+      },
+      {
+        "entity_name": "调优指南",
+        "entity_type": "content",
+        "description": "介绍如何根据具体使用场景调整Flink内存配置以及不同场景下需重点关注配置参数的文档",
+        "source_id": "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+        "file_path": "mem_tuning.md",
+        "created_at": 1791275684
+      }
+    ],
+    "relationships": [
+      {
+        "src_id": "Flink",
+        "tgt_id": "TaskManager",
+        "description": "TaskManager是Flink中负责执行用户代码的组件。<SEP>TaskManager是Flink的部署组件之一。<SEP>Flink 1.10起对TaskManager进程的JVM Metaspace和JVM直接内存进行限制。<SEP>TaskManager是Flink的工作进程，其内存由新的内存配置项管理",
+        "keywords": "内存管理,内存限制,组件,组成,组成部分",
+        "weight": 4.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-000<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_setup_tm.md<SEP>mem_setup.md<SEP>mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "Flink",
+        "tgt_id": "托管内存",
+        "description": "Flink批处理算子使用托管内存提高处理效率，并在不超过限额的前提下尽可能分配更多托管内存。<SEP>托管内存是由Flink负责分配和管理的本地(堆外)内存。<SEP>托管内存是Flink内存的组成部分<SEP>Flink根据配置和消费者权重管理并分配托管内存。<SEP>Flink不再支持堆上的托管内存，托管内存今后将都是惰性分配的。<SEP>Flink 1.10对托管内存引入堆外化、本地内存化、惰性分配等变化。",
+        "keywords": "内存分配,内存管理,分配,分配管理,性能优化,管理,组成部分,配置变更",
+        "weight": 6.0,
+        "source_id": "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-000<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-001<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-003<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+        "file_path": "mem_tuning.md<SEP>mem_setup_tm.md<SEP>mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "JobManager",
+        "tgt_id": "TaskManager",
+        "description": "JobManager与TaskManager相比具有相似但更简单的内存模型。",
+        "keywords": "对比,相似",
+        "weight": 1.0,
+        "source_id": "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+        "file_path": "mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "Flink",
+        "tgt_id": "JVM堆内存",
+        "description": "Flink的总内存配置实际同时包含JVM堆内存和其他堆外内存。",
+        "keywords": "内存管理",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "托管内存",
+        "description": "托管内存是TaskManager的内存组成部分，可在关闭内存控制时尝试增大。<SEP>托管内存是TaskManager的内存部分，具有默认占比。",
+        "keywords": "内存组成,属于,配置",
+        "weight": 2.0,
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+        "file_path": "mem_trouble.md<SEP>mem_setup.md",
+        "created_at": 1791275771
+      },
+      {
+        "src_id": "Flink",
+        "tgt_id": "JVM直接内存",
+        "description": "Flink可通过配置参数对JobManager进程的JVM直接内存进行限制",
+        "keywords": "内存限制",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "Flink总内存",
+        "tgt_id": "堆外内存",
+        "description": "Flink总内存由JVM堆内存和堆外内存组成。<SEP>同时配置Flink总内存和JVM堆内存而未配置堆外内存时，堆外内存等于Flink总内存减去JVM堆内存。",
+        "keywords": "包含,推导计算",
+        "weight": 2.0,
+        "source_id": "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup.md<SEP>mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "任务堆外内存",
+        "tgt_id": "堆外内存",
+        "description": "任务堆外内存是用于Flink应用算子及用户代码的堆外内存(直接内存或本地内存)。",
+        "keywords": "类型",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "Flink",
+        "tgt_id": "Flink TaskManager内存模型",
+        "description": "Flink TaskManager内存模型描述Flink TaskManager进程的内存组成。",
+        "keywords": "拥有",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "-XX:MaxDirectMemorySize",
+        "tgt_id": "Flink",
+        "description": "启用JVM直接内存限制时，Flink根据配置的堆外内存大小设置该JVM参数。",
+        "keywords": "参数设置",
+        "weight": 1.0,
+        "source_id": "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "Flink",
+        "tgt_id": "任务堆内存",
+        "description": "任务堆内存是Flink任务内存的一部分",
+        "keywords": "组成部分",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "托管内存",
+        "tgt_id": "批处理作业",
+        "description": "Flink批处理作业的算子使用托管内存来提高处理效率。",
+        "keywords": "内存使用,性能提升",
+        "weight": 1.0,
+        "source_id": "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001",
+        "file_path": "mem_tuning.md",
+        "created_at": 1791275691
+      },
+      {
+        "src_id": "JVM开销",
+        "tgt_id": "TaskManager",
+        "description": "可尝试增大JVM开销以缓解TaskManager的内存问题。<SEP>JVM开销是TaskManager内存模型的组成部分",
+        "keywords": "内存组成,组成部分,调整",
+        "weight": 2.0,
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_trouble.md<SEP>mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "Flink",
+        "tgt_id": "内存段",
+        "description": "减小内存段大小可加快checkpoint并减少Flink网络栈消耗的内存量。",
+        "keywords": "内存配置",
+        "weight": 1.0,
+        "source_id": "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002",
+        "file_path": "network_mem_tuning.md",
+        "created_at": 1791275663
+      },
+      {
+        "src_id": "Flink",
+        "tgt_id": "框架堆外内存",
+        "description": "框架堆外内存是Flink框架内存的一部分",
+        "keywords": "组成部分",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "Flink",
+        "tgt_id": "网络内存",
+        "description": "网络内存是Flink内存的组成部分<SEP>Flink负责管理网络内存，保证其实际用量不超过配置大小。",
+        "keywords": "管理,组成部分",
+        "weight": 2.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-001<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "Flink",
+        "tgt_id": "任务堆外内存",
+        "description": "任务堆外内存是Flink任务内存的一部分",
+        "keywords": "组成部分",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "Flink",
+        "tgt_id": "调优指南",
+        "description": "调优指南介绍如何根据使用场景调整Flink的内存配置",
+        "keywords": "内存,配置",
+        "weight": 1.0,
+        "source_id": "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+        "file_path": "mem_tuning.md",
+        "created_at": 1791275691
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "网络内存",
+        "description": "网络内存的配置仅针对TaskManager。",
+        "keywords": "仅适用于",
+        "weight": 1.0,
+        "source_id": "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+        "file_path": "mem_setup.md",
+        "created_at": 1791275766
+      },
+      {
+        "src_id": "Flink",
+        "tgt_id": "框架堆内存",
+        "description": "框架堆内存是Flink框架内存的一部分",
+        "keywords": "组成部分",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "JVM堆内存",
+        "tgt_id": "JobManager",
+        "description": "JVM堆内存是JobManager的内存部分。<SEP>JobManager可通过明确指定JVM堆内存大小的方式进行内存配置。<SEP>JVM堆内存是JobManager内存模型的组成部分，通过jobmanager.memory.heap.size配置。",
+        "keywords": "内存管理,内存组成,属于,配置",
+        "weight": 3.0,
+        "source_id": "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-000<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup.md<SEP>mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "JobManager",
+        "tgt_id": "堆外内存",
+        "description": "堆外内存是JobManager的默认内存部分。<SEP>JobManager的堆外内存包括JVM直接内存和本地内存，可通过配置参数设置大小。<SEP>堆外内存是JobManager内存模型的组成部分，通过jobmanager.memory.off-heap.size配置。",
+        "keywords": "内存管理,内存组成,属于,配置",
+        "weight": 3.0,
+        "source_id": "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-000<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup.md<SEP>mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "JVM直接内存",
+        "tgt_id": "TaskManager",
+        "description": "Flink 1.10起TaskManager进程的JVM直接内存受到限制。",
+        "keywords": "内存限制",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "任务堆内存",
+        "description": "任务堆内存是TaskManager的内存部分。",
+        "keywords": "属于",
+        "weight": 1.0,
+        "source_id": "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+        "file_path": "mem_setup.md",
+        "created_at": 1791275768
+      },
+      {
+        "src_id": "JVM直接内存",
+        "tgt_id": "托管内存",
+        "description": "托管内存现在使用本地内存而非直接内存，不在JVM直接内存限制范围内。",
+        "keywords": "内存机制",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "Apache Flink",
+        "tgt_id": "TaskManager",
+        "description": "TaskManager是Apache Flink的核心组件之一。<SEP>TaskManager是Apache Flink的工作进程组件。",
+        "keywords": "属于,组件",
+        "weight": 2.0,
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+        "file_path": "mem_trouble.md<SEP>mem_setup.md",
+        "created_at": 1791275766
+      },
+      {
+        "src_id": "Flink TaskManager内存模型",
+        "tgt_id": "托管内存",
+        "description": "托管内存是Flink TaskManager内存模型的组成部分之一。",
+        "keywords": "组成部分",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "JVM",
+        "tgt_id": "TaskManager",
+        "description": "TaskManager作为Flink进程运行在JVM之上。",
+        "keywords": "运行环境",
+        "weight": 1.0,
+        "source_id": "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+        "file_path": "mem_setup.md",
+        "created_at": 1791275766
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "框架堆外内存",
+        "description": "框架堆外内存是TaskManager内存模型的组成部分之一。<SEP>框架堆外内存是TaskManager内存模型的组成部分",
+        "keywords": "组成,组成部分",
+        "weight": 2.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_setup_tm.md<SEP>mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "任务堆外内存",
+        "description": "任务堆外内存是TaskManager内存模型的组成部分之一。<SEP>任务堆外内存是TaskManager内存模型的组成部分",
+        "keywords": "组成,组成部分",
+        "weight": 2.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-001<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_setup_tm.md<SEP>mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "RocksDBStateBackend",
+        "tgt_id": "TaskManager",
+        "description": "使用RocksDBStateBackend时可通过调整TaskManager的托管内存或环境变量缓解内存问题。",
+        "keywords": "依赖,配置",
+        "weight": 1.0,
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001",
+        "file_path": "mem_trouble.md",
+        "created_at": 1791275676
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "taskmanager.memory.process.size",
+        "description": "该参数用于在TaskManager上配置进程总内存。<SEP>该配置项取代原有的taskmanager.heap.size成为TaskManager总内存配置",
+        "keywords": "取代,配置参数,配置项",
+        "weight": 2.0,
+        "source_id": "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000<SEP>doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_setup.md<SEP>mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "框架堆内存",
+        "description": "框架堆内存是TaskManager内存模型的一部分，属于进阶配置。",
+        "keywords": "属于,配置",
+        "weight": 1.0,
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+        "file_path": "mem_trouble.md",
+        "created_at": 1791275676
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "taskmanager.memory.flink.size",
+        "description": "该参数用于在TaskManager上配置Flink总内存。",
+        "keywords": "配置参数",
+        "weight": 1.0,
+        "source_id": "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+        "file_path": "mem_setup.md",
+        "created_at": 1791275766
+      },
+      {
+        "src_id": "Flink TaskManager内存模型",
+        "tgt_id": "JVM开销",
+        "description": "JVM开销是Flink TaskManager内存模型的组成部分之一。",
+        "keywords": "组成部分",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "IOException: Insufficient Number Of Network Buffers",
+        "tgt_id": "TaskManager",
+        "description": "该异常仅与TaskManager相关，通常说明TaskManager的网络内存过小。",
+        "keywords": "关联,影响组件",
+        "weight": 1.0,
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+        "file_path": "mem_trouble.md",
+        "created_at": 1791275675
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "glibc",
+        "description": "glibc内存分配器缺陷可能导致TaskManager在保存点或全量检查点期间非堆内存持续增长。",
+        "keywords": "内存问题,影响",
+        "weight": 1.0,
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001",
+        "file_path": "mem_trouble.md",
+        "created_at": 1791275676
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "taskmanager.memory.jvm-metaspace.size",
+        "description": "该配置参数用于设置TaskManager的JVM Metaspace大小",
+        "keywords": "JVM Metaspace,配置项",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "containerized.heap-cutoff-ratio",
+        "description": "容器切除内存配置参数containerized.heap-cutoff-ratio将不再对TaskManager进程生效。",
+        "keywords": "不再生效",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "containerized.heap-cutoff-min",
+        "description": "容器切除内存配置参数containerized.heap-cutoff-min将不再对TaskManager进程生效。",
+        "keywords": "不再生效",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "taskmanager.memory.task.off-heap.size",
+        "description": "该配置参数用于设置TaskManager的任务堆外内存",
+        "keywords": "堆外内存,配置项",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "TaskManager",
+        "tgt_id": "taskmanager.memory.framework.off-heap.size",
+        "description": "该配置参数用于设置TaskManager的框架堆外内存",
+        "keywords": "堆外内存,配置项",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "JVM开销",
+        "tgt_id": "任务堆内存",
+        "description": "配置任务堆内存等其他内存部分大小后，JVM开销可推导为进程总内存减去其他所有内存部分后的剩余部分。",
+        "keywords": "推导影响",
+        "weight": 1.0,
+        "source_id": "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+        "file_path": "mem_setup.md",
+        "created_at": 1791275771
+      },
+      {
+        "src_id": "JVM直接内存",
+        "tgt_id": "网络内存",
+        "description": "网络内存同样被计算在JVM直接内存中。",
+        "keywords": "计入",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "Flink TaskManager内存模型",
+        "tgt_id": "网络内存",
+        "description": "网络内存是Flink TaskManager内存模型的组成部分之一。",
+        "keywords": "组成部分",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "MALLOC_ARENA_MAX",
+        "tgt_id": "TaskManager",
+        "description": "可为TaskManager添加环境变量MALLOC_ARENA_MAX=1以缓解glibc导致的内存增长。",
+        "keywords": "环境变量,配置",
+        "weight": 1.0,
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001",
+        "file_path": "mem_trouble.md",
+        "created_at": 1791275676
+      },
+      {
+        "src_id": "Flink总内存",
+        "tgt_id": "JVM堆内存",
+        "description": "Flink总内存包括JVM堆内存、托管内存及其他直接或本地内存。<SEP>Flink总内存由JVM堆内存和堆外内存组成。",
+        "keywords": "包含",
+        "weight": 2.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-000<SEP>doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+        "file_path": "mem_setup_tm.md<SEP>mem_setup.md",
+        "created_at": 1791275766
+      },
+      {
+        "src_id": "JVM直接内存",
+        "tgt_id": "堆外内存",
+        "description": "JVM直接内存是堆外内存的组成部分。",
+        "keywords": "组成",
+        "weight": 1.0,
+        "source_id": "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "JVM堆内存",
+        "tgt_id": "任务堆内存",
+        "description": "任务堆内存包含在总的JVM堆空间中，用于Flink算子及用户代码的执行。",
+        "keywords": "组成部分",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "Flink TaskManager内存模型",
+        "tgt_id": "任务堆内存",
+        "description": "任务堆内存是Flink TaskManager内存模型的组成部分之一。",
+        "keywords": "组成部分",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "Flink TaskManager内存模型",
+        "tgt_id": "JVM Metaspace",
+        "description": "JVM Metaspace是Flink TaskManager内存模型的组成部分之一。",
+        "keywords": "组成部分",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "JVM堆内存",
+        "tgt_id": "总内存",
+        "description": "总内存既包含JVM堆内存，也包含其他堆外内存部分。",
+        "keywords": "包含",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "堆外内存",
+        "tgt_id": "框架堆外内存",
+        "description": "框架堆外内存是用于Flink框架的堆外内存(直接内存或本地内存)。",
+        "keywords": "类型",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "JVM直接内存",
+        "tgt_id": "框架堆外内存",
+        "description": "框架堆外内存被计算在JVM直接内存限制中。",
+        "keywords": "计入",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "JVM直接内存",
+        "tgt_id": "任务堆外内存",
+        "description": "任务堆外内存被计算在JVM直接内存限制中。",
+        "keywords": "计入",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "Flink TaskManager内存模型",
+        "tgt_id": "框架堆外内存",
+        "description": "框架堆外内存是Flink TaskManager内存模型的组成部分之一。",
+        "keywords": "组成部分",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "Flink TaskManager内存模型",
+        "tgt_id": "任务堆外内存",
+        "description": "任务堆外内存是Flink TaskManager内存模型的组成部分之一。",
+        "keywords": "组成部分",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "JVM堆内存",
+        "tgt_id": "jobmanager.memory.heap.size",
+        "description": "该参数用于明确指定JVM堆内存的大小。<SEP>JVM堆内存大小由参数jobmanager.memory.heap.size明确指定。",
+        "keywords": "配置参数",
+        "weight": 2.0,
+        "source_id": "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "OutOfMemoryError: Direct Buffer Memory",
+        "tgt_id": "堆外内存",
+        "description": "可通过调整堆外内存来增大直接内存限制以解决该异常。",
+        "keywords": "解决方法,配置",
+        "weight": 1.0,
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+        "file_path": "mem_trouble.md",
+        "created_at": 1791275676
+      },
+      {
+        "src_id": "Flink TaskManager内存模型",
+        "tgt_id": "框架堆内存",
+        "description": "框架堆内存是Flink TaskManager内存模型的组成部分之一。",
+        "keywords": "组成部分",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "Checkpoint",
+        "tgt_id": "JVM堆内存",
+        "description": "Checkpoint完成的回调函数中执行的用户代码会消耗JVM堆内存。",
+        "keywords": "资源消耗",
+        "weight": 1.0,
+        "source_id": "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "JVM堆内存",
+        "tgt_id": "MemoryStateBackend",
+        "description": "MemoryStateBackend状态后端需要使用JVM堆内存。",
+        "keywords": "依赖使用",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "FsStateBackend",
+        "tgt_id": "JVM堆内存",
+        "description": "FsStateBackend状态后端需要使用JVM堆内存。",
+        "keywords": "依赖使用",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "JVM堆内存",
+        "tgt_id": "批处理Source",
+        "description": "特殊批处理Source在作业提交时执行的用户代码需要使用JVM堆内存。",
+        "keywords": "资源消耗",
+        "weight": 1.0,
+        "source_id": "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "JVM堆内存",
+        "tgt_id": "taskmanager.memory.task.heap.size",
+        "description": "taskmanager.memory.task.heap.size直接控制任务和算子使用的JVM堆内存。",
+        "keywords": "配置",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "任务堆内存",
+        "tgt_id": "本地执行模式",
+        "description": "本地执行模式下任务堆内存默认值为无穷大(Long.MAX_VALUE字节)",
+        "keywords": "默认值",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "JVM直接内存",
+        "tgt_id": "OutOfMemoryError",
+        "description": "JVM直接内存可能发生OutOfMemoryError异常",
+        "keywords": "内存溢出,异常",
+        "weight": 1.0,
+        "source_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004",
+        "file_path": "mem_migration.md",
+        "created_at": 1791275807
+      },
+      {
+        "src_id": "jobmanager.memory.off-heap.size",
+        "tgt_id": "堆外内存",
+        "description": "该参数用于设置堆外内存的大小。<SEP>堆外内存大小由参数jobmanager.memory.off-heap.size配置。",
+        "keywords": "配置参数",
+        "weight": 2.0,
+        "source_id": "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "堆外内存",
+        "tgt_id": "直接内存",
+        "description": "堆外内存包括直接内存和本地内存。",
+        "keywords": "包含",
+        "weight": 1.0,
+        "source_id": "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+        "file_path": "mem_setup.md",
+        "created_at": 1791275766
+      },
+      {
+        "src_id": "堆外内存",
+        "tgt_id": "批处理Source",
+        "description": "特殊批处理Source在作业提交时执行的用户代码可能用到堆外内存。",
+        "keywords": "资源消耗",
+        "weight": 1.0,
+        "source_id": "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "JVM直接内存",
+        "tgt_id": "jobmanager.memory.enable-jvm-direct-memory-limit",
+        "description": "该参数用于设置是否启用JVM直接内存限制。",
+        "keywords": "配置参数",
+        "weight": 1.0,
+        "source_id": "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "-XX:MaxDirectMemorySize",
+        "tgt_id": "JVM直接内存",
+        "description": "JVM直接内存的大小限制通过-XX:MaxDirectMemorySize参数实现。",
+        "keywords": "参数设置,限制",
+        "weight": 1.0,
+        "source_id": "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "堆外内存",
+        "tgt_id": "本地内存",
+        "description": "堆外内存包括直接内存和本地内存。<SEP>本地内存是堆外内存的组成部分。",
+        "keywords": "包含,组成",
+        "weight": 2.0,
+        "source_id": "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000<SEP>doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+        "file_path": "mem_setup.md<SEP>mem_setup_jobmanager.md",
+        "created_at": 1791275789
+      },
+      {
+        "src_id": "OutOfMemoryError: Java Heap Space",
+        "tgt_id": "任务堆内存",
+        "description": "可通过增大TaskManager的任务堆内存来增大JVM堆空间。",
+        "keywords": "解决方法,配置",
+        "weight": 1.0,
+        "source_id": "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+        "file_path": "mem_trouble.md",
+        "created_at": 1791275676
+      },
+      {
+        "src_id": "taskmanager.memory.task.heap.size",
+        "tgt_id": "任务堆内存",
+        "description": "任务堆内存大小由配置参数taskmanager.memory.task.heap.size设置。<SEP>taskmanager.memory.task.heap.size是用于指定任务堆内存大小的配置参数。<SEP>该参数用于配置任务堆内存的大小",
+        "keywords": "配置参数",
+        "weight": 3.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-000<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-002<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "taskmanager.memory.task.off-heap.size",
+        "tgt_id": "任务堆外内存",
+        "description": "任务堆外内存大小由配置参数taskmanager.memory.task.off-heap.size设置。<SEP>该参数用于配置任务堆外内存的大小<SEP>通过该参数指定任务堆外内存的大小。",
+        "keywords": "指定,配置,配置参数",
+        "weight": 3.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-001<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-002<SEP>doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "taskmanager.memory.framework.off-heap.size",
+        "tgt_id": "框架堆外内存",
+        "description": "框架堆外内存大小由配置参数taskmanager.memory.framework.off-heap.size设置。",
+        "keywords": "配置参数",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      },
+      {
+        "src_id": "taskmanager.memory.framework.heap.size",
+        "tgt_id": "框架堆内存",
+        "description": "框架堆内存大小由配置参数taskmanager.memory.framework.heap.size设置。",
+        "keywords": "配置参数",
+        "weight": 1.0,
+        "source_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+        "file_path": "mem_setup_tm.md",
+        "created_at": 1791275746
+      }
+    ],
+    "chunks": [
+      {
+        "reference_id": "1",
+        "content": "些内存部分的大小可以直接通过一个配置参数进行设置，有些则需要根据多个参数进行调整。\n\n<a name=\"framework-memory\" />\n\n## 框架内存\n\n通常情况下，不建议对*框架堆内存*和*框架堆外内存*进行调整。\n除非你非常肯定 Flink 的内部数据结构及操作需要更多的内存。\n这可能与具体的部署环境及作业结构有关，例如非常高的并发度。\n此外，Flink 的部分依赖（例如 Hadoop）在某些特定的情况下也可能会需要更多的直接内存或本地内存。\n\n<span class=\"label label-info\">提示</span>\n不管是堆内存还是堆外内存，Flink 中的框架内存和任务内存之间目前是没有隔离的。\n对框架和任务内存的区分，主要是为了在后续版本中做进一步优化。\n\n<a name=\"local-execution\" />\n\n## 本地执行\n如果你是将 Flink 作为一个单独的 Java 程序运行在你的电脑本地而非创建一个集群（例如在 IDE 中），那么只有下列配置会生效，其他配置参数则不会起到任何效果：\n\n|   **组成部分**   |   **配置参数**                                                      |   **本地执行时的默认值**                 |\n| :------------------------------------------- | :---------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |\n| 任务堆内存                                    | [`taskmanager.memory.task.heap.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-task-heap-size)         | 无穷大                                                                        |\n| 任务堆外内存                                | [`taskmanager.memory.task.off-heap.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-task-off-heap-size) | 无穷大                                                                        |\n| 托管内存                               | [`taskmanager.memory.managed.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-managed-size)             | 128MB                                                                           |\n| 网络内存                               | [`taskmanager.memory.network.min`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-network-min) <br /> [`taskmanager.memory.network.max`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-network-max) | 64MB |\n\n<br/>\n\n本地执行模式下，上面列出的所有内存部分均可以但不是必须进行配置。\n如果未配置，则会采用默认值。\n其中，[任务堆内存](#task-operator-heap-memory)和*任务堆外内存*的默认值无穷大（*Long.MAX_VALUE* 字节），以及[托管内存](#managed-memory)的默认值 128MB 均只针对本地执行模式。\n\n<span class=\"label label-info\">提示</span>\n这种情况下，任务堆内存的大小与实际的堆空间大小无关。\n该配置参数可能与后续版本中的进一步优化相关。\n本地执行模式下，JVM 堆空间的实际大小不受 Flink 掌控，而是取决于本地执行进程是如何启动的。\n如果希望控制 JVM 的堆空间大小，可以在启动进程时明确地指定相关的 JVM 参数，即 *-Xmx* 和 *-Xms*。",
+        "file_path": "mem_setup_tm.md",
+        "chunk_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+      },
+      {
+        "reference_id": "1",
+        "content": "解\n\n<br />\n\n{{< img src=\"/fig/detailed-mem-model.svg\" width=\"300px\" alt=\"Simple memory model\" usemap=\"#simple-mem-model\" >}}\n\n</center>\n<br />\n\n如上图所示，下表中列出了 Flink TaskManager 内存模型的所有组成部分，以及影响其大小的相关配置参数。\n\n|   **组成部分**                                |   **配置参数**                                                                                                                                                                                                                                                           |   **描述**                                                                                                                                                                                                                                       |\n| :------------------------------------------------------------------| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| [框架堆内存（Framework Heap Memory）](#framework-memory)                         | [`taskmanager.memory.framework.heap.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-framework-heap-size)                                                                                                                                                                                                         | 用于 Flink 框架的 JVM 堆内存（进阶配置）。                                                                                                                                                                                                              |\n| [任务堆内存（Task Heap Memory）](#task-operator-heap-memory)                     | [`taskmanager.memory.task.heap.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-task-heap-size)                                                                                                                                                                                                                   | 用于 Flink 应用的算子及用户代码的 JVM 堆内存。                                                                                                                                                                                               |\n| [托管内存（Managed memory）](#managed-memory)                                  | [`taskmanager.memory.managed.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-managed-size) <br/> [`taskmanager.memory.managed.fraction`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-managed-fraction)                                                                                                                     | 由 Flink 管理的用于排序、哈希表、缓存中间结果及 RocksDB State Backend 的本地内存。                                                                                                                                                |\n| [框架堆外内存（Framework Off-heap Memory）](#framework-memory)                     | [`taskmanager.memory.framework.off-heap.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-framework-off-heap-size)                                                                                                                                                                                                 | 用于 Flink 框架的[堆外内存（直接内存或本地内存）](#configure-off-heap-memory-direct-or-native)（进阶配置）。                                                                                                                                            |\n| [任务堆外内存（Task Off-heap Memory）](#configure-off-heap-memory-direct-or-native)| [`taskmanager.memory.task.off-heap.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-task-off-heap-size)                                                                                                                                                                                                           | 用于 Flink 应用的算子及用户代码的[堆外内存（直接内存或本地内存）](#configure-off-heap-memory-direct-or-native)。                                                                                                                                            |\n| 网络内存（Network Memory）                                                     | [`taskmanager.memory.network.min`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-network-min) <br/> [`taskmanager.memory.network.max`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-network-max) <br/> [`taskmanager.memory.network.fraction`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-network-fraction)                               | 用于任务之间数据传输的直接内存（例如网络传输缓冲）。该内存部分为基于 [Flink 总内存]({{< ref \"docs/deployment/memory/mem_setup\" >}}#configure-total-memory)的[受限的等比内存部分]({{< ref \"docs/deployment/memory/mem_setup\" >}}#capped-fractionated-components)。这块内存被用于分配[网络缓冲]({{< ref \"docs/deployment/memory/network_mem_tuning\" >}}) |\n| [JVM Metaspace]({{< ref \"docs/deployment/memory/mem_setup\" >}}#jvm-parameters)                     | [`taskmanager.memory.jvm-metaspace.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-jvm-metaspace-size)                                                                                                                                                                                                           | Flink JVM 进程的 Metaspace。                                                                                                                                                                                                                                      |\n| JVM 开销                                                       | [`taskmanager.memory.jvm-overhead.min`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-jvm-overhead-min) <br/> [`taskmanager.memory.jvm-overhead.max`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-jvm-overhead-max) <br/> [`taskmanager.memory.jvm-overhead.fraction`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-jvm-overhead-fraction) | 用于其他 JVM 开销的本地内存，例如栈空间、垃圾回收空间等。该内存部分为基于[进程总内存]({{< ref \"docs/deployment/memory/mem_setup\" >}}#configure-total-memory)的[受限的等比内存部分]({{< ref \"docs/deployment/memory/mem_setup\" >}}#capped-fractionated-components)。    |\n\n<br/>\n\n我们可以看到，有些内存部分的大小可以直接通过一个配置参数进行设置，有些则需要根据多个参数进行调整。\n\n<a name=\"framework-memory\" />\n\n## 框架内存\n\n通常情况下，不建议对*框架堆内存*和*框架堆外内存*进行调整。\n除非你非常肯定 Flink 的内部数据结构及操作需要更多的内存。\n这可能与具体的部署环境及作业结构有关，例如非常高的",
+        "file_path": "mem_setup_tm.md",
+        "chunk_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+      },
+      {
+        "reference_id": "2",
+        "content": "直接内存*进行限制。\n从 *1.11* 版本开始，Flink 同样对 JobManager 进程使用的 *JVM Metaspace* 进行限制。\n此外，还可以通过设置 [`jobmanager.memory.enable-jvm-direct-memory-limit`]({{< ref \"docs/deployment/config\" >}}#jobmanager-memory-enable-jvm-direct-memory-limit) 对 JobManager 进程的 *JVM 直接内存*进行限制。\n请参考 [JVM 参数]({{< ref \"docs/deployment/memory/mem_setup\" >}}#jvm-parameters)。\n\nFlink 通过设置上述 JVM 内存限制降低内存泄漏问题的排查难度，以避免出现[容器内存溢出]({{< ref \"docs/deployment/memory/mem_trouble\" >}}#container-memory-exceeded)等问题。\n请参考常见问题中关于 [JVM Metaspace]({{< ref \"docs/deployment/memory/mem_trouble\" >}}#outofmemoryerror-metaspace) 和 [JVM 直接内存]({{< ref \"docs/deployment/memory/mem_trouble\" >}}#outofmemoryerror-direct-buffer-memory) *OutOfMemoryError* 异常的描述。\n\n<a name=\"container-cut-off-memory\" />\n\n## 容器切除（Cut-Off）内存\n\n在容器化部署模式（Containerized Deployment）下，此前你可以指定切除内存。\n这部分内存将预留给所有未被 Flink 计算在内的内存开销。\n其主要来源是不受 Flink 直接管理的依赖使用的内存，例如 RocksDB、JVM 内部开销等。\n相应的配置参数（`containerized.heap-cutoff-ratio` 和 `containerized.heap-cutoff-min`）不再生效。\n新的内存配置方法引入了新的内存组成部分来具体描述这些内存用量。\n\n<a name=\"for-taskmanagers\" />\n\n### TaskManager\n\n流处理作业如果使用了 [RocksDBStateBackend]({{< ref \"docs/ops/state/state_backends\" >}}#the-rocksdbstatebackend)，RocksDB 使用的本地内存现在将被归为[托管内存]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#managed-memory)。\n默认情况下，RocksDB 将限制其内存用量不超过[托管内存]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#managed-memory)大小。\n请同时参考[如何升级托管内存](#managed-memory)以及[如何配置托管内存]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#managed-memory)。\n\n其他堆外（直接或本地）内存开销，现在可以通过下列配置参数进行设置：\n* 任务堆外内存（[`taskmanager.memory.task.off-heap.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-task-off-heap-size)）\n* 框架堆外内存（[`taskmanager.memory.framework.off-heap.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-framework-off-heap-size)）\n* JVM Metaspace（[`taskmanager.memory.jvm-metaspace.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-jvm-metaspace-size)）\n* [JVM 开销]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#detailed-memory-model)\n\n<a name=\"for-jobmanagers\" />\n\n### JobManager\n\n可以通过下列配置参数设置堆外（直接或本地）内存开销：\n* 堆外内存 ([`jobmanager.memory.off-heap.size`]({{< ref \"docs/deployment/config\" >}}#jobmanager-memory-off-heap-size))\n* JVM Metaspace ([`jobmanager.memory.jvm-metaspace.size`]({{< ref \"docs/deployment/config\" >}}#jobmanager-memory-jvm-metaspace-size))\n* [JVM 开销]({{< ref \"docs/deployment/memory/mem_setup_jobmanager\" >}}#detailed-configuration)\n\n<a name=\"default-configuration-in-flink-confyaml\" />\n\n## Flink 配置文件中的默认配置\n\n本节描述 Flink 自带的默认 [Flink 配置文件]({{< ref \"docs/deployment/config#flink-配置文件\" >}})中的变化。\n\n原本的 TaskManager 总内存（`taskmanager.heap.size`）被新的配置项 [`taskmanager.memory.process.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-process-size) 所取代。\n默认值从 1024MB 增加到了 1728MB。\n\n原本的 JobManager 总内存（`jobmanager.heap.size`）被新的配置项 [`jobmanager.memory.process.size`]({{< ref \"docs/deployment/config\" >}}#jobmanager-memory-process-size) 所取代。\n默认值从 1024MB 增加到了 1600MB。\n\n请参考[如何配置总内存]({{< ref \"docs/deployment/memory/mem_setup\" >}}#configure-total-memory)。\n\n{{< hint warning >}}\n**注意：** 使用新的默认 [Flink 配置文件]({{< ref \"docs/deployment/config#flink-配置文件\" >}}) 可能会造成各内存部分的大小发生变化，从而产生性能",
+        "file_path": "mem_migration.md",
+        "chunk_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+      },
+      {
+        "reference_id": "4",
+        "content": "emory/mem_setup\" >}}#configure-total-memory)中所述，另一种配置 JobManager 内存的方式是明确指定 *JVM 堆内存*的大小（[`jobmanager.memory.heap.size`]({{< ref \"docs/deployment/config\" >}}#jobmanager-memory-heap-size)）。\n通过这种方式，用户可以更好地掌控用于以下用途的 *JVM 堆内存*大小。\n* Flink 框架\n* 在作业提交时（例如一些特殊的批处理 Source）及 Checkpoint 完成的回调函数中执行的用户代码\n\nFlink 需要多少 *JVM 堆内存*，很大程度上取决于运行的作业数量、作业的结构及上述用户代码的需求。\n\n<span class=\"label label-info\">提示</span>\n如果已经明确设置了 *JVM 堆内存*，建议不要再设置*进程总内存*或 *Flink 总内存*，否则可能会造成内存配置冲突。\n\n在启动 JobManager 进程时，Flink 启动脚本及客户端通过设置 JVM 参数 *-Xms* 和 *-Xmx* 来管理 JVM 堆空间的大小。\n请参考 [JVM 参数]({{< ref \"docs/deployment/memory/mem_setup\" >}}#jvm-parameters)。\n\n<a name=\"configure-off-heap-memory\" />\n\n### 配置堆外内存\n\n*堆外内存*包括 *JVM 直接内存* 和 *本地内存*。\n可以通过配置参数 [`jobmanager.memory.enable-jvm-direct-memory-limit`]({{< ref \"docs/deployment/config\" >}}#jobmanager-memory-enable-jvm-direct-memory-limit) 设置是否启用 *JVM 直接内存限制*。\n如果该配置项设置为 `true`，Flink 会根据配置的*堆外内存*大小设置 JVM 参数 *-XX:MaxDirectMemorySize*。\n请参考 [JVM 参数]({{< ref \"docs/deployment/memory/mem_setup\" >}}#jvm-parameters)。\n\n可以通过配置参数 [`jobmanager.memory.off-heap.size`]({{< ref \"docs/deployment/config\" >}}#jobmanager-memory-off-heap-size) 设置堆外内存的大小。\n如果遇到 JobManager 进程抛出 “OutOfMemoryError: Direct buffer memory” 的异常，可以尝试调大这项配置。\n请参考[常见问题]({{< ref \"docs/deployment/memory/mem_trouble\" >}}#outofmemoryerror-direct-buffer-memory)。\n\n以下情况可能用到堆外内存：\n* Flink 框架依赖（例如 Pekko 的网络通信）\n* 在作业提交时（例如一些特殊的批处理 Source）及 Checkpoint 完成的回调函数中执行的用户代码\n\n<span class=\"label label-info\">提示</span>\n如果同时配置了 [Flink 总内存]({{< ref \"docs/deployment/memory/mem_setup\" >}}#configure-total-memory)和 [JVM 堆内存](#configure-jvm-heap)，且没有配置*堆外内存*，那么*堆外内存*的大小将会是 [Flink 总内存]({{< ref \"docs/deployment/memory/mem_setup\" >}}#configure-total-memory)减去[JVM 堆内存](#configure-jvm-heap)。\n这种情况下，*堆外内存*的默认大小将不会生效。\n\n<a name=\"local-execution\" />\n\n## 本地执行\n\n如果你是在本地运行 Flink（例如在 IDE 中）而非创建一个集群，那么 JobManager 的内存配置将不会生效。",
+        "file_path": "mem_setup_jobmanager.md",
+        "chunk_id": "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+      },
+      {
+        "reference_id": "3",
+        "content": "配置内存]({{< ref \"docs/deployment/memory/mem_tuning\" >}}#configure-memory-for-standalone-deployment)。\n\n通过配置*进程总内存*可以指定由 Flink *JVM 进程*使用的总内存大小。\n对于容器化部署模式（Containerized Deployment），这相当于申请的容器（Container）大小，详情请参考[如何配置容器内存]({{< ref \"docs/deployment/memory/mem_tuning\" >}}#configure-memory-for-containers)（[Kubernetes]({{< ref \"docs/deployment/resource-providers/standalone/kubernetes\" >}}) 或 [Yarn]({{< ref \"docs/deployment/resource-providers/yarn\" >}})）。\n\n此外，还可以通过设置 *Flink 总内存*的特定内部组成部分的方式来进行内存配置。\n不同进程需要设置的内存组成部分是不一样的。\n详情请分别参考 [TaskManager]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#configure-heap-and-managed-memory) 和 [JobManager]({{< ref \"docs/deployment/memory/mem_setup_jobmanager\" >}}#configure-jvm-heap) 的相关文档。\n\n<span class=\"label label-info\">提示</span>\n以上三种方式中，用户需要至少选择其中一种进行配置（本地运行除外），否则 Flink 将无法启动。\n这意味着，用户需要从以下无默认值的配置参数（或参数组合）中选择一个给出明确的配置：\n\n|   **TaskManager:**                                                                                                                                          |   **JobManager:**                                        |\n| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------- |\n| [`taskmanager.memory.flink.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-flink-size)                                                                                                       | [`jobmanager.memory.flink.size`]({{< ref \"docs/deployment/config\" >}}#jobmanager-memory-flink-size)     |\n| [`taskmanager.memory.process.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-process-size)                                                                                                   | [`jobmanager.memory.process.size`]({{< ref \"docs/deployment/config\" >}}#jobmanager-memory-process-size) |\n| [`taskmanager.memory.task.heap.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-task-heap-size) 和 <br/> [`taskmanager.memory.managed.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-managed-size) | [`jobmanager.memory.heap.size`]({{< ref \"docs/deployment/config\" >}}#jobmanager-memory-heap-size)       |\n\n<br/>\n\n<span class=\"label label-info\">提示</span>\n不建议同时设置*进程总内存*和 *Flink 总内存*。\n这可能会造成内存配置冲突，从而导致部署失败。\n额外配置其他内存部分时，同样需要注意可能产生的配置冲突。\n\n<a name=\"jvm-parameters\" />\n\n## JVM 参数\n\nFlink 进程启动时，会根据配置的和自动推导出的各内存部分大小，显式地设置以下 JVM 参数：\n\n|   **JVM 参数**   |   **TaskManager 取值**   |   **JobManager 取值**   |\n| :---------------------------------------- | :------------------------------------------------- | :------------------------------------------------ |\n| *-Xmx* 和 *-Xms*                         | 框架堆内存 + 任务堆内存                       | JVM 堆内存 (\\*)                                  |\n| *-XX:MaxDirectMemorySize*<br/>（TaskManager 始终设置，JobManager 见注释）                 | 框架堆外内存 + 任务堆外内存(\\*\\*) + 网络内存     | 堆外内存 (\\*\\*) (\\*\\*\\*)                               |\n| *-XX:MaxMetaspaceSize*                    | JVM Metaspace                                      | JVM Metaspace                                     |\n(\\*) 请记住，根据所使用的 GC 算法，你可能无法使用到全部堆内存。一些 GC 算法会为它们自身分配一定量的堆内存。这会导致[堆的指标]({{< ref \"docs/ops/metrics\" >}}#memory)返回一个不同的最大值。\n<br/>\n(\\*\\*) 请注意，堆外内存也包括了用户代码使用的本地内存（非直接内存）。\n<br/>\n(\\*\\*\\*) 只有在 [`jobmanager.memory.enable-jvm-direct-memory-limit`]({{< ref \"docs/deployment/config\" >}}#jobmanager-memory-enable-jvm-direct-memory-limit) 设置为 `true` 时，JobManager 才会设置 *JVM 直接内存限制*。\n<br/><br/>\n\n相关内存部分的配置方法，请同时参考 [TaskManager]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#detailed-memory-model) 和 [JobManager]({{< ref \"docs/deployment/memory/mem_setup_jobmanager\" >}}#detailed-configuration) 的详细内存模型。\n\n<a name=\"capped-fractionated-components\" />\n\n## 受限的等比内存部分\n\n本节介绍下列内存部分的配置方法。它们都可以通过指定其在总内存中所占比例进行配置，同时受限于相应的最大/最小值范围。\n* *JVM 开销*：可以配置占用*进程总内存*的固定比例\n*",
+        "file_path": "mem_setup.md",
+        "chunk_id": "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-001"
+      },
+      {
+        "reference_id": "2",
+        "content": "Flink 的总内存的配置参数是 `taskmanager.heap.size` 或 `taskmanager.heap.mb`。\n尽管这两个参数以“堆（Heap）”命名，实际上它们指定的内存既包含了 JVM 堆内存，也包含了其他堆外内存部分。\n这两个配置参数目前已被弃用。\n\n如果配置了上述弃用的参数，同时又没有配置与之对应的新配置参数，那它们将按如下规则对应到新的配置参数。\n* 独立部署模式（Standalone Deployment）下：Flink 总内存（[`taskmanager.memory.flink.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-flink-size)）\n* 容器化部署模式（Containerized Deployment）下（Yarn）：进程总内存（[`taskmanager.memory.process.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-process-size)）\n\n建议您尽早使用新的配置参数取代已弃用的配置参数，它们在今后的版本中可能会被彻底移除。\n\n请参考[如何配置总内存]({{< ref \"docs/deployment/memory/mem_setup\" >}}#configure-total-memory)。\n\n<a name=\"jvm-heap-memory\" />\n\n### JVM 堆内存\n\n此前，JVM 堆空间由托管内存（仅在配置为堆上时）及 Flink 用到的所有其他堆内存组成。\n这里的其他堆内存是由总内存减去所有其他非堆内存得到的。\n请参考[如何升级托管内存](#managed-memory)。\n\n现在，如果仅配置了*Flink总内存*或*进程总内存*，JVM 的堆空间依然是根据总内存减去所有其他非堆内存得到的。\n请参考[如何配置总内存]({{< ref \"docs/deployment/memory/mem_setup\" >}}#configure-total-memory)。\n\n此外，你现在可以更直接地控制用于任务和算子的 JVM 的堆内存（[`taskmanager.memory.task.heap.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-task-heap-size)），详见[任务堆内存]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#task-operator-heap-memory)。\n如果流处理作业选择使用 Heap State Backend（[MemoryStateBackend]({{< ref \"docs/ops/state/state_backends\" >}}#memorystatebackend)\n或 [FsStateBackend]({{< ref \"docs/ops/state/state_backends\" >}}#fsstatebackend)），那么它同样需要使用 JVM 堆内存。\n\nFlink 现在总是会预留一部分 JVM 堆内存供框架使用（[`taskmanager.memory.framework.heap.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-framework-heap-size)）。\n请参考[框架内存]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#framework-memory)。\n\n<a name=\"managed-memory\" />\n\n### 托管内存\n\n请参考[如何配置托管内存]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#managed-memory)。\n\n<a name=\"explicit-size\" />\n\n#### 明确的大小\n\n原本用于指定明确的托管内存大小的配置参数（`taskmanager.memory.size`）已被弃用，与它具有相同语义的新配置参数为 [`taskmanager.memory.managed.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-managed-size)。\n建议使用新的配置参数，原本的配置参数在今后的版本中可能会被彻底移除。\n\n<a name=\"fraction\" />\n\n#### 占比\n\n此前，如果不指定明确的大小，也可以将托管内存配置为占用总内存减去网络内存和容器切除内存（仅在 [Yarn]({{< ref \"docs/deployment/resource-providers/yarn\" >}})）之后剩余部分的固定比例（`taskmanager.memory.fraction`）。\n该配置参数已经被彻底移除，配置它不会产生任何效果。\n请使用新的配置参数 [`taskmanager.memory.managed.fraction`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-managed-fraction)。\n在未通过 [`taskmanager.memory.managed.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-managed-size) 指定明确大小的情况下，新的配置参数将指定[托管内存]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#managed-memory)在 [Flink 总内存]({{< ref \"docs/deployment/memory/mem_setup\" >}}#configure-total-memory)中的所占比例。\n\n<a name=\"rocksdb-state\" />\n\n#### RocksDB State Backend\n\n流处理作业如果选择使用 [RocksDBStateBackend]({{< ref \"docs/ops/state/state_backends\" >}}#rocksdbstatebackend)，它使用的本地内存现在也被归为[托管内存]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#managed-memory)。\n默认情况下，RocksDB 将限制其内存用量不超过[托管内存]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#managed-memory)大小，以避免在 [Yarn]({{<",
+        "file_path": "mem_migration.md",
+        "chunk_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+      },
+      {
+        "reference_id": "1",
+        "content": "---\ntitle: \"配置 TaskManager 内存\"\nweight: 3\ntype: docs\naliases:\n  - /zh/deployment/memory/mem_setup_tm.html\n  - /zh/ops/memory/mem_setup_tm.html\n---\n<!--\nLicensed to the Apache Software Foundation (ASF) under one\nor more contributor license agreements.  See the NOTICE file\ndistributed with this work for additional information\nregarding copyright ownership.  The ASF licenses this file\nto you under the Apache License, Version 2.0 (the\n\"License\"); you may not use this file except in compliance\nwith the License.  You may obtain a copy of the License at\n\n  http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing,\nsoftware distributed under the License is distributed on an\n\"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY\nKIND, either express or implied.  See the License for the\nspecific language governing permissions and limitations\nunder the License.\n-->\n\n# 配置 TaskManager 内存\n\nFlink 的 TaskManager 负责执行用户代码。\n根据实际需求为 TaskManager 配置内存将有助于减少 Flink 的资源占用，增强作业运行的稳定性。\n\n本文接下来介绍的内存配置方法适用于 *1.10* 及以上版本。\nFlink 在 1.10 版本中对内存配置部分进行了较大幅度的改动，从早期版本升级的用户请参考[升级指南]({{< ref \"docs/deployment/memory/mem_migration\" >}})。\n\n<span class=\"label label-info\">提示</span>\n本篇内存配置文档<strong>仅针对 TaskManager</strong>！\n与 [JobManager]({{< ref \"docs/deployment/memory/mem_setup_jobmanager\" >}}) 相比，TaskManager 具有相似但更加复杂的内存模型。\n\n<a name=\"configure-total-memory\" />\n\n## 配置总内存\n\nFlink JVM 进程的*进程总内存（Total Process Memory）*包含了由 Flink 应用使用的内存（*Flink 总内存*）以及由运行 Flink 的 JVM 使用的内存。\n其中，*Flink 总内存（Total Flink Memory）*包括 JVM 堆内存（Heap Memory）、*托管内存（Managed Memory）*以及其他直接内存（Direct Memory）或本地内存（Native Memory）。\n\n{{< img src=\"/fig/simple_mem_model.svg\" width=\"300px\" alt=\"Simple memory model\" usemap=\"#simple-mem-model\" >}}\n\n<br />\n\n如果你是在本地运行 Flink（例如在 IDE 中）而非创建一个集群，那么本文介绍的配置并非所有都是适用的，详情请参考[本地执行](#local-execution)。\n\n其他情况下，配置 Flink 内存最简单的方法就是[配置总内存]({{< ref \"docs/deployment/memory/mem_setup\" >}}#configure-total-memory)。\n此外，Flink 也支持[更细粒度的内存配置方式](#configure-heap-and-managed-memory)。\n\nFlink 会根据默认值或其他配置参数自动调整剩余内存部分的大小。\n接下来的章节将介绍关于各内存部分的更多细节。\n\n<a name=\"configure-heap-and-managed-memory\" />\n\n## 配置堆内存和托管内存\n\n如[配置总内存](#configure-total-memory)中所述，另一种配置 Flink 内存的方式是同时设置[任务堆内存](#task-operator-heap-memory)和[托管内存](#managed-memory)。\n通过这种方式，用户可以更好地掌控用于 Flink 任务的 JVM 堆内存及 Flink 的[托管内存](#managed-memory)大小。\n\nFlink 会根据默认值或其他配置参数自动调整剩余内存部分的大小。\n关于各内存部分的更多细节，请参考[相关文档](#detailed-memory-model)。\n\n<span class=\"label label-info\">提示</span>\n如果已经明确设置了任务堆内存和托管内存，建议不要再设置*进程总内存*或 *Flink 总内存*，否则可能会造成内存配置冲突。\n\n<a name=\"task-operator-heap-memory\" />\n\n### 任务（算子）堆内存\n\n如果希望确保指定大小的 JVM 堆内存给用户代码使用，可以明确指定*任务堆内存*（[`taskmanager.memory.task.heap.size`]({{< ref \"docs/deployment/config\" >}}#taskmanager-memory-task-heap-size)）。\n指定的内存将被包含在总的 JVM 堆空间中，专门用于 Flink 算子及用户代码的执行。\n\n<a name=\"managed-memory\" />\n\n### 托管内存\n\n*托管内存*是由 Flink 负责分配和管理的本地（堆外）内存。\n以下场景需要使用*托管内存*：\n* 流处理作业中用于 [RocksDB State Backend]({{< ref \"docs/ops/state/state_backends\" >}}#the-rocksdbstatebackend)。\n* 流处理和批处理作业中用于排序、哈希表及缓存中间结果。\n* 流处理和批处理作业中用于[在 Python 进程中执行用户自定义函数]({{< ref \"docs/dev/table/functions/python-udfs\" >}})。\n\n可以通过以下两种范式指定*托管内存",
+        "file_path": "mem_setup_tm.md",
+        "chunk_id": "doc-80f1d496c923f43242912a26d7d69f02-chunk-000"
+      },
+      {
+        "reference_id": "3",
+        "content": "detailed-configuration) 的详细内存模型。\n\n<a name=\"capped-fractionated-components\" />\n\n## 受限的等比内存部分\n\n本节介绍下列内存部分的配置方法。它们都可以通过指定其在总内存中所占比例进行配置，同时受限于相应的最大/最小值范围。\n* *JVM 开销*：可以配置占用*进程总内存*的固定比例\n* *网络内存*：可以配置占用 *Flink 总内存*的固定比例（仅针对 TaskManager）\n\n相关内存部分的配置方法，请同时参考 [TaskManager]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#detailed-memory-model) 和 [JobManager]({{< ref \"docs/deployment/memory/mem_setup_jobmanager\" >}}#detailed-configuration) 的详细内存模型。\n\n这些内存部分的大小必须在相应的最大值、最小值范围内，否则 Flink 将无法启动。\n最大值、最小值具有默认值，也可以通过相应的配置参数进行设置。\n例如，如果仅配置下列参数：\n- *进程总内存* = 1000MB\n- *JVM 开销最小值* = 64MB\n- *JVM 开销最大值* = 128MB\n- *JVM 开销占比* = 0.1\n\n那么 *JVM 开销*的实际大小将会是 1000MB x 0.1 = 100MB，在 64-128MB 的范围内。\n\n如果将最大值、最小值设置成相同大小，那相当于明确指定了该内存部分的大小。\n\n如果没有明确指定内存部分的大小，Flink 会根据总内存和占比计算出该内存部分的大小。\n计算得到的内存大小将受限于相应的最大值、最小值范围。\n例如，如果仅配置下列参数：\n- *进程总内存* = 1000MB\n- *JVM 开销最小值* = 128MB\n- *JVM 开销最大值* = 256MB\n- *JVM 开销占比* = 0.1\n\n那么 *JVM 开销*的实际大小将会是 128MB，因为根据总内存和占比计算得到的内存大小 100MB 小于最小值。\n\n如果配置了总内存和其他内存部分的大小，那么 Flink 也有可能会忽略给定的占比。\n这种情况下，受限的等比内存部分的实际大小是总内存减去其他所有内存部分后剩余的部分。\n这样推导得出的内存大小必须符合最大值、最小值范围，否则 Flink 将无法启动。\n例如，如果仅配置下列参数：\n- *进程总内存* = 1000MB\n- *任务堆内存* = 100MB（或 JobManager 的 *JVM 堆内存*）\n- *JVM 开销最小值* = 64MB\n- *JVM 开销最大值* = 256MB\n- *JVM 开销占比* = 0.1\n\n*进程总内存*中所有其他内存部分均有默认大小，包括 TaskManager 的*托管内存*默认占比或 JobManager 的默认*堆外内存*。\n因此，*JVM 开销*的实际大小不是根据占比算出的大小（1000MB x 0.1 = 100MB），而是*进程总内存*中剩余的部分。\n这个剩余部分的大小必须在 64-256MB 的范围内，否则将会启动失败。",
+        "file_path": "mem_setup.md",
+        "chunk_id": "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+      },
+      {
+        "reference_id": "5",
+        "content": "内存。\n默认情况下，RocksDB 会限制其内存用量不超过用户配置的[*托管内存*]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#managed-memory)。\n因此，使用这种方式存储状态时，配置足够多的*托管内存*是十分重要的。\n如果你关闭了 RocksDB 的内存控制，那么在容器化部署模式下如果 RocksDB 分配的内存超出了申请容器的大小（[进程总内存]({{< ref \"docs/deployment/memory/mem_setup\" >}}#configure-total-memory)），可能会造成 TaskExecutor 被部署环境杀掉。\n请同时参考[如何调整 RocksDB 内存]({{< ref \"docs/ops/state/large_state_tuning\" >}}#tuning-rocksdb-memory)以及 [state.backend.rocksdb.memory.managed]({{< ref \"docs/deployment/config\" >}}#state-backend-rocksdb-memory-managed)。\n\n<a name=\"configure-memory-for-batch-jobs\" />\n\n## 批处理作业的内存配置\n\nFlink 批处理算子使用[托管内存]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#managed-memory)来提高处理效率。\n算子运行时，部分操作可以直接在原始数据上进行，而无需将数据反序列化成 Java 对象。\n这意味着[托管内存]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#managed-memory)对应用的性能具有实质上的影响。\n因此 Flink 会在不超过其配置限额的前提下，尽可能分配更多的[托管内存]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#managed-memory)。\nFlink 明确知道可以使用的内存大小，因此可以有效避免 `OutOfMemoryError` 的发生。\n当[托管内存]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#managed-memory)不足时，Flink 会优雅地将数据落盘。",
+        "file_path": "mem_tuning.md",
+        "chunk_id": "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001"
+      },
+      {
+        "reference_id": "2",
+        "content": "参数的相关描述。\n\n下列配置参数已被彻底移除，配置它们将不会产生任何效果。\n\n<table class=\"table table-bordered\">\n    <thead>\n        <tr>\n            <th class=\"text-left\">移除的配置参数</th>\n            <th class=\"text-left\">备注</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td><h5>taskmanager.memory.fraction</h5></td>\n            <td>\n                请参考新配置参数 <a href=\"{{< ref \"docs/deployment/config\" >}}#taskmanager-memory-managed-fraction\">taskmanager.memory.managed.fraction</a> 的相关描述。\n                新的配置参数与被移除的配置参数在语义上有所差别，因此其配置值通常也需要做出适当调整。\n                请参考<a href=\"#managed-memory\">如何升级托管内存</a>。\n            </td>\n        </tr>\n        <tr>\n             <td><h5>taskmanager.memory.off-heap</h5></td>\n             <td>Flink 不再支持堆上的（On-Heap）<i>托管内存</i>。请参考<a href=\"#managed-memory\">如何升级托管内存</a>。</td>\n        </tr>\n        <tr>\n             <td><h5>taskmanager.memory.preallocate</h5></td>\n             <td>Flink 不再支持内存预分配，今后<i>托管内存</i>将都是惰性分配的。请参考<a href=\"#managed-memory\">如何升级托管内存</a>。</td>\n        </tr>\n    </tbody>\n</table>\n\n下列配置参数将被弃用，出于向后兼容性考虑，配置它们将被解读成对应的新配置参数。\n\n<table class=\"table table-bordered\">\n    <thead>\n        <tr>\n            <th class=\"text-left\">弃用的配置参数</th>\n            <th class=\"text-left\">对应的新配置参数</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td><h5>taskmanager.heap.size</h5></td>\n            <td>\n                <ul>\n                  <li><a href=\"{{< ref \"docs/deployment/resource-providers/standalone/overview\" >}}\">独立部署模式（Standalone Deployment）</a>下：<a href=\"{{< ref \"docs/deployment/config\" >}}#taskmanager-memory-flink-size\">taskmanager.memory.flink.size</a></li>\n                  <li>容器化部署模式（Containerized Deployment）下：<a href=\"{{< ref \"docs/deployment/config\" >}}#taskmanager-memory-process-size\">taskmanager.memory.process.size</a></li>\n                </ul>\n                请参考<a href=\"#total-memory-previously-heap-memory\">如何升级总内存</a>。\n            </td>\n        </tr>\n        <tr>\n             <td><h5>taskmanager.memory.size</h5></td>\n             <td><a href=\"{{< ref \"docs/deployment/config\" >}}#taskmanager-memory-managed-size\">taskmanager.memory.managed.size</a>。请参考<a href=\"#managed-memory\">如何升级托管内存</a>。</td>\n        </tr>\n        <tr>\n             <td><h5>taskmanager.network.memory.min</h5></td>\n             <td><a href=\"{{< ref \"docs/deployment/config\" >}}#taskmanager-memory-network-min\">taskmanager.memory.network.min</a></td>\n        </tr>\n        <tr>\n             <td><h5>taskmanager.network.memory.max</h5></td>\n             <td><a href=\"{{< ref \"docs/deployment/config\" >}}#taskmanager-memory-network-max\">taskmanager.memory.network.max</a></td>\n        </tr>\n        <tr>\n             <td><h5>taskmanager.network.memory.fraction</h5></td>\n             <td><a href=\"{{< ref \"docs/deployment/config\" >}}#taskmanager-memory-network-fraction\">taskmanager.memory.network.fraction</a></td>\n        </tr>\n    </tbody>\n</table>\n\n尽管网络内存的配置参数没有发生太多变化，我们仍建议您检查其配置结果。\n网络内存的大小可能会受到其他内存部分大小变化的影响，例如总内存变化时，根据占比计算出的网络内存也可能发生变化。\n请参考[内存模型详解]({{< ref \"docs/deployment/memory/mem_setup_tm\" >}}#detailed-memory-model)。\n\n容器切除（Cut-Off）内存相关的配置参数（`containerized.heap-cutoff-ratio` 和 `containerized.heap-cutoff-min`）将不再对 TaskManager 进程生效。\n请参考[如何升级容器切除内存](#container-cut-off-memory)。\n\n<a name=\"total-memory-previously-heap-memory\" />\n\n### 总内存（原堆内存）\n\n在原本的内存配置方法中，用于指定用于 Flink 的总内存的配置参数是 `taskmanager.heap.size` 或 `taskmanager.heap.mb`。\n尽管这两个参数以“堆（Heap）”命名，实际上它们指定的内存既包含了 JVM 堆内存，也包含了其他堆外内存部分。\n这两个配置参数目前已被弃用。\n\n如果配置了上述弃用的参数，同时又没有配置与之对应的新配置参数，那它们将按如下",
+        "file_path": "mem_migration.md",
+        "chunk_id": "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+      }
+    ],
+    "references": [
+      {
+        "reference_id": "1",
+        "file_path": "mem_setup_tm.md"
+      },
+      {
+        "reference_id": "2",
+        "file_path": "mem_migration.md"
+      },
+      {
+        "reference_id": "3",
+        "file_path": "mem_setup.md"
+      },
+      {
+        "reference_id": "4",
+        "file_path": "mem_setup_jobmanager.md"
+      },
+      {
+        "reference_id": "5",
+        "file_path": "mem_tuning.md"
+      }
+    ]
+  },
+  "metadata": {
+    "query_mode": "mix",
+    "keywords": {
+      "high_level": [
+        "Flink 内存管理",
+        "堆外内存配置",
+        "物理隔离",
+        "直接内存溢出"
+      ],
+      "low_level": [
+        "Flink TaskManager",
+        "框架堆外内存",
+        "任务堆外内存",
+        "网络内存",
+        "直接内存"
+      ]
+    },
+    "processing_info": {
+      "total_entities_found": 18,
+      "total_relations_found": 78,
+      "entities_after_truncation": 18,
+      "relations_after_truncation": 78,
+      "merged_chunks_count": 21,
+      "final_chunks_count": 10
+    }
+  }
+}

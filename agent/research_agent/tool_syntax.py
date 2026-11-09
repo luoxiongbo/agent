@@ -4,6 +4,10 @@
 # @File : tool_syntax.py
 # @Software : PyCharm
 
+"""
+agentic ai 章节 tool use 里的例子
+"""
+
 import os
 
 from dotenv import load_dotenv

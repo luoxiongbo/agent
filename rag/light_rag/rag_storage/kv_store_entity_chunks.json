@@ -1,0 +1,1678 @@
+{
+  "Flink": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000",
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001",
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002",
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 17,
+    "update_time": 1791275807,
+    "_id": "Flink"
+  },
+  "网络缓冲": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 2,
+    "update_time": 1791275729,
+    "_id": "网络缓冲"
+  },
+  "Subtask": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000",
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001",
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 3,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Subtask"
+  },
+  "Checkpoint Barrier": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Checkpoint Barrier"
+  },
+  "对齐的Checkpoints": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "对齐的Checkpoints"
+  },
+  "非对齐的Checkpoints": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "非对齐的Checkpoints"
+  },
+  "缓冲消胀机制": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000",
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001",
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 3,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "缓冲消胀机制"
+  },
+  "Taskmanager.network.memory.buffer-debloat.enabled": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Taskmanager.network.memory.buffer-debloat.enabled"
+  },
+  "Taskmanager.network.memory.buffer-debloat.target": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Taskmanager.network.memory.buffer-debloat.target"
+  },
+  "Taskmanager.network.memory.buffer-debloat.period": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Taskmanager.network.memory.buffer-debloat.period"
+  },
+  "Taskmanager.network.memory.buffer-debloat.samples": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Taskmanager.network.memory.buffer-debloat.samples"
+  },
+  "Taskmanager.network.memory.buffer-debloat.threshold-percentages": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Taskmanager.network.memory.buffer-debloat.threshold-percentages"
+  },
+  "EstimatedTimeToConsumeBuffersMs": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "EstimatedTimeToConsumeBuffersMs"
+  },
+  "DebloatedBufferSize": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "DebloatedBufferSize"
+  },
+  "网络缓冲队列": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "网络缓冲队列"
+  },
+  "Apache Software Foundation": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1791275729,
+    "_id": "Apache Software Foundation"
+  },
+  "Job Graph": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Job Graph"
+  },
+  "Input Channel": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Input Channel"
+  },
+  "快照": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "快照"
+  },
+  "透支缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "透支缓冲区"
+  },
+  "Unaligned Checkpoint": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Unaligned Checkpoint"
+  },
+  "Pipelined Shuffle": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Pipelined Shuffle"
+  },
+  "WindowOperator": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "WindowOperator"
+  },
+  "必须缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "必须缓冲区"
+  },
+  "可选缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "可选缓冲区"
+  },
+  "缓冲区池": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "缓冲区池"
+  },
+  "网络缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "网络缓冲区"
+  },
+  "独占缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001",
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 2,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "独占缓冲区"
+  },
+  "流动缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001",
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 2,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "流动缓冲区"
+  },
+  "Subpartition": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Subpartition"
+  },
+  "execution.buffer-timeout": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "execution.buffer-timeout"
+  },
+  "taskmanager.network.memory.buffers-per-channel": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "taskmanager.network.memory.buffers-per-channel"
+  },
+  "taskmanager.network.memory.floating-buffers-per-gate": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "taskmanager.network.memory.floating-buffers-per-gate"
+  },
+  "内存段": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "内存段"
+  },
+  "缓冲区数量计算公式": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "缓冲区数量计算公式"
+  },
+  "Checkpoint": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 2,
+    "update_time": 1791275789,
+    "_id": "Checkpoint"
+  },
+  "反压": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "反压"
+  },
+  "数据倾斜": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "数据倾斜"
+  },
+  "快照时间": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "快照时间"
+  },
+  "缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "缓冲区"
+  },
+  "IllegalConfigurationException": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "IllegalConfigurationException"
+  },
+  "OutOfMemoryError: Java Heap Space": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "OutOfMemoryError: Java Heap Space"
+  },
+  "OutOfMemoryError: Direct Buffer Memory": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 2,
+    "update_time": 1791275789,
+    "_id": "OutOfMemoryError: Direct Buffer Memory"
+  },
+  "OutOfMemoryError: Metaspace": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "OutOfMemoryError: Metaspace"
+  },
+  "IOException: Insufficient Number Of Network Buffers": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "IOException: Insufficient Number Of Network Buffers"
+  },
+  "容器内存超用": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "容器内存超用"
+  },
+  "TaskManager": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 10,
+    "update_time": 1791275807,
+    "_id": "TaskManager"
+  },
+  "JobManager": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 9,
+    "update_time": 1791275807,
+    "_id": "JobManager"
+  },
+  "TaskExecutorProcessUtils": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "TaskExecutorProcessUtils"
+  },
+  "JobManagerProcessUtils": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "JobManagerProcessUtils"
+  },
+  "Taskmanager.memory.network.min": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "Taskmanager.memory.network.min"
+  },
+  "Taskmanager.memory.network.max": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "Taskmanager.memory.network.max"
+  },
+  "Taskmanager.memory.network.fraction": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "Taskmanager.memory.network.fraction"
+  },
+  "Jobmanager.memory.enable-jvm-direct-memory-limit": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "Jobmanager.memory.enable-jvm-direct-memory-limit"
+  },
+  "RocksDBStateBackend": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001",
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 5,
+    "update_time": 1791275807,
+    "_id": "RocksDBStateBackend"
+  },
+  "JVM直接内存泄漏": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 2,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "JVM直接内存泄漏"
+  },
+  "Apache Flink": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1791275759,
+    "_id": "Apache Flink"
+  },
+  "总内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 2,
+    "update_time": 1791275799,
+    "_id": "总内存"
+  },
+  "任务堆内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 5,
+    "update_time": 1791275766,
+    "_id": "任务堆内存"
+  },
+  "框架堆内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 3,
+    "update_time": 1791275729,
+    "_id": "框架堆内存"
+  },
+  "JVM Metaspace": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 6,
+    "update_time": 1791275807,
+    "_id": "JVM Metaspace"
+  },
+  "直接内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1791275759,
+    "_id": "直接内存"
+  },
+  "堆外内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 6,
+    "update_time": 1791275789,
+    "_id": "堆外内存"
+  },
+  "网络内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 7,
+    "update_time": 1791275807,
+    "_id": "网络内存"
+  },
+  "Yarn": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 4,
+    "update_time": 1791275807,
+    "_id": "Yarn"
+  },
+  "Kubernetes": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 3,
+    "update_time": 1791275802,
+    "_id": "Kubernetes"
+  },
+  "直接内存限制": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "直接内存限制"
+  },
+  "托管内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001",
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 12,
+    "update_time": 1791275807,
+    "_id": "托管内存"
+  },
+  "glibc": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "glibc"
+  },
+  "MALLOC_ARENA_MAX": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "MALLOC_ARENA_MAX"
+  },
+  "JVM开销": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001",
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 6,
+    "update_time": 1791275807,
+    "_id": "JVM开销"
+  },
+  "内存控制": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "内存控制"
+  },
+  "保存点": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "保存点"
+  },
+  "全量检查点": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "全量检查点"
+  },
+  "调优指南": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275684,
+    "update_time": 1791275684,
+    "_id": "调优指南"
+  },
+  "独立部署模式": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 5,
+    "update_time": 1791275807,
+    "_id": "独立部署模式"
+  },
+  "容器化部署模式": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 5,
+    "update_time": 1791275807,
+    "_id": "容器化部署模式"
+  },
+  "Flink总内存": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 6,
+    "update_time": 1791275789,
+    "_id": "Flink总内存"
+  },
+  "进程总内存": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 7,
+    "update_time": 1791275789,
+    "_id": "进程总内存"
+  },
+  "State Backend": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "State Backend"
+  },
+  "Heap State Backend": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 2,
+    "update_time": 1791275746,
+    "_id": "Heap State Backend"
+  },
+  "MemoryStateBackend": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "MemoryStateBackend"
+  },
+  "FsStateBackend": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "FsStateBackend"
+  },
+  "RocksDB": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 4,
+    "update_time": 1791275807,
+    "_id": "RocksDB"
+  },
+  "配置指南": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "配置指南"
+  },
+  "taskmanager.memory.flink.size": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 4,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.flink.size"
+  },
+  "jobmanager.memory.flink.size": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1791275766,
+    "_id": "jobmanager.memory.flink.size"
+  },
+  "taskmanager.memory.process.size": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 5,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.process.size"
+  },
+  "jobmanager.memory.process.size": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 4,
+    "update_time": 1791275807,
+    "_id": "jobmanager.memory.process.size"
+  },
+  "JVM进程": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "JVM进程"
+  },
+  "容器": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "容器"
+  },
+  "TaskExecutor": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "TaskExecutor"
+  },
+  "OutOfMemoryError": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "OutOfMemoryError"
+  },
+  "批处理作业": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "批处理作业"
+  },
+  "state.backend.rocksdb.memory.managed": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 2,
+    "update_time": 1791275803,
+    "_id": "state.backend.rocksdb.memory.managed"
+  },
+  "批处理算子": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "批处理算子"
+  },
+  "JVM堆内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 7,
+    "update_time": 1791275807,
+    "_id": "JVM堆内存"
+  },
+  "RocksDB State Backend": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 3,
+    "update_time": 1791275746,
+    "_id": "RocksDB State Backend"
+  },
+  "taskmanager.memory.task.heap.size": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 4,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.task.heap.size"
+  },
+  "Flink 1.10版本": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275729,
+    "update_time": 1791275729,
+    "_id": "Flink 1.10版本"
+  },
+  "Flink TaskManager内存模型": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275729,
+    "update_time": 1791275729,
+    "_id": "Flink TaskManager内存模型"
+  },
+  "框架堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 4,
+    "update_time": 1791275807,
+    "_id": "框架堆外内存"
+  },
+  "任务堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 4,
+    "update_time": 1791275807,
+    "_id": "任务堆外内存"
+  },
+  "taskmanager.memory.framework.heap.size": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275729,
+    "update_time": 1791275729,
+    "_id": "taskmanager.memory.framework.heap.size"
+  },
+  "taskmanager.memory.managed.size": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 5,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.managed.size"
+  },
+  "taskmanager.memory.framework.off-heap.size": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.framework.off-heap.size"
+  },
+  "taskmanager.memory.task.off-heap.size": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 4,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.task.off-heap.size"
+  },
+  "taskmanager.memory.jvm-metaspace.size": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.jvm-metaspace.size"
+  },
+  "taskmanager.memory.managed.fraction": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 4,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.managed.fraction"
+  },
+  "taskmanager.memory.network.min": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 3,
+    "update_time": 1791275799,
+    "_id": "taskmanager.memory.network.min"
+  },
+  "taskmanager.memory.network.max": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 3,
+    "update_time": 1791275799,
+    "_id": "taskmanager.memory.network.max"
+  },
+  "taskmanager.memory.network.fraction": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 2,
+    "update_time": 1791275799,
+    "_id": "taskmanager.memory.network.fraction"
+  },
+  "taskmanager.memory.jvm-overhead.min": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275729,
+    "update_time": 1791275729,
+    "_id": "taskmanager.memory.jvm-overhead.min"
+  },
+  "taskmanager.memory.jvm-overhead.max": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275729,
+    "update_time": 1791275729,
+    "_id": "taskmanager.memory.jvm-overhead.max"
+  },
+  "taskmanager.memory.jvm-overhead.fraction": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275729,
+    "update_time": 1791275729,
+    "_id": "taskmanager.memory.jvm-overhead.fraction"
+  },
+  "受限的等比内存部分": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 2,
+    "update_time": 1791275766,
+    "_id": "受限的等比内存部分"
+  },
+  "本地执行模式": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1791275789,
+    "_id": "本地执行模式"
+  },
+  "Hadoop": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275729,
+    "update_time": 1791275729,
+    "_id": "Hadoop"
+  },
+  "JVM": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1791275766,
+    "_id": "JVM"
+  },
+  "-Xmx": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275729,
+    "update_time": 1791275729,
+    "_id": "-Xmx"
+  },
+  "-Xms": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275729,
+    "update_time": 1791275729,
+    "_id": "-Xms"
+  },
+  "Python进程": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Python进程"
+  },
+  "Python UDF": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Python UDF"
+  },
+  "消费者权重": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "消费者权重"
+  },
+  "taskmanager.memory.managed.consumer-weights": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "taskmanager.memory.managed.consumer-weights"
+  },
+  "JVM直接内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 4,
+    "update_time": 1791275807,
+    "_id": "JVM直接内存"
+  },
+  "OPERATOR": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "OPERATOR"
+  },
+  "STATE_BACKEND": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "STATE_BACKEND"
+  },
+  "PYTHON": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "PYTHON"
+  },
+  "本地内存": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 2,
+    "update_time": 1791275789,
+    "_id": "本地内存"
+  },
+  "网络内存调优指南": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "网络内存调优指南"
+  },
+  "升级指南": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1791275789,
+    "_id": "升级指南"
+  },
+  "JVM开销占比": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "JVM开销占比"
+  },
+  "JVM开销最小值": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "JVM开销最小值"
+  },
+  "JVM开销最大值": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "JVM开销最大值"
+  },
+  "最大值/最小值": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "最大值/最小值"
+  },
+  "ResourceManager": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "ResourceManager"
+  },
+  "Dispatcher": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "Dispatcher"
+  },
+  "JobMaster": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JobMaster"
+  },
+  "jobmanager.memory.heap.size": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 3,
+    "update_time": 1791275802,
+    "_id": "jobmanager.memory.heap.size"
+  },
+  "jobmanager.memory.off-heap.size": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 3,
+    "update_time": 1791275807,
+    "_id": "jobmanager.memory.off-heap.size"
+  },
+  "jobmanager.memory.jvm-metaspace.size": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "jobmanager.memory.jvm-metaspace.size"
+  },
+  "jobmanager.memory.jvm-overhead.fraction": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "jobmanager.memory.jvm-overhead.fraction"
+  },
+  "配置总内存": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "配置总内存"
+  },
+  "Flink 1.11": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "Flink 1.11"
+  },
+  "jobmanager.memory.jvm-overhead.min": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "jobmanager.memory.jvm-overhead.min"
+  },
+  "jobmanager.memory.jvm-overhead.max": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "jobmanager.memory.jvm-overhead.max"
+  },
+  "jobmanager.memory.enable-jvm-direct-memory-limit": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 3,
+    "update_time": 1791275807,
+    "_id": "jobmanager.memory.enable-jvm-direct-memory-limit"
+  },
+  "Pekko": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "Pekko"
+  },
+  "-Xms和-Xmx": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "-Xms和-Xmx"
+  },
+  "-XX:MaxDirectMemorySize": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "-XX:MaxDirectMemorySize"
+  },
+  "本地执行": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "本地执行"
+  },
+  "批处理Source": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "批处理Source"
+  },
+  "taskmanager.memory.fraction": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.fraction"
+  },
+  "taskmanager.memory.off-heap": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 2,
+    "create_time": 1791275798,
+    "update_time": 1791275798,
+    "_id": "taskmanager.memory.off-heap"
+  },
+  "taskmanager.memory.preallocate": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 2,
+    "create_time": 1791275798,
+    "update_time": 1791275798,
+    "_id": "taskmanager.memory.preallocate"
+  },
+  "taskmanager.heap.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 3,
+    "update_time": 1791275807,
+    "_id": "taskmanager.heap.size"
+  },
+  "taskmanager.memory.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.size"
+  },
+  "taskmanager.network.memory.min": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275799,
+    "update_time": 1791275799,
+    "_id": "taskmanager.network.memory.min"
+  },
+  "taskmanager.network.memory.max": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275799,
+    "update_time": 1791275799,
+    "_id": "taskmanager.network.memory.max"
+  },
+  "taskmanager.network.memory.fraction": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275799,
+    "update_time": 1791275799,
+    "_id": "taskmanager.network.memory.fraction"
+  },
+  "containerized.heap-cutoff-ratio": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "containerized.heap-cutoff-ratio"
+  },
+  "containerized.heap-cutoff-min": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "containerized.heap-cutoff-min"
+  },
+  "taskmanager.heap.mb": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "taskmanager.heap.mb"
+  },
+  "RocksDB StateBackend": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275802,
+    "update_time": 1791275802,
+    "_id": "RocksDB StateBackend"
+  },
+  "jobmanager.heap.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "jobmanager.heap.size"
+  },
+  "jobmanager.heap.mb": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275802,
+    "update_time": 1791275802,
+    "_id": "jobmanager.heap.mb"
+  },
+  "容器切除内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 3,
+    "update_time": 1791275807,
+    "_id": "容器切除内存"
+  },
+  "总内存配置": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005"
+    ],
+    "count": 1,
+    "create_time": 1791275803,
+    "update_time": 1791275803,
+    "_id": "总内存配置"
+  },
+  "Flink配置文件": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005"
+    ],
+    "count": 1,
+    "create_time": 1791275803,
+    "update_time": 1791275803,
+    "_id": "Flink配置文件"
+  },
+  "1600MB": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005"
+    ],
+    "count": 1,
+    "create_time": 1791275803,
+    "update_time": 1791275803,
+    "_id": "1600MB"
+  },
+  "容器化部署": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "容器化部署"
+  }
+}

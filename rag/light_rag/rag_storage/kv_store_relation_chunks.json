@@ -1,0 +1,2520 @@
+{
+  "Flink<SEP>网络缓冲": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Flink<SEP>网络缓冲"
+  },
+  "Taskmanager.network.memory.buffer-debloat.enabled<SEP>缓冲消胀机制": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Taskmanager.network.memory.buffer-debloat.enabled<SEP>缓冲消胀机制"
+  },
+  "Flink<SEP>Subtask": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Flink<SEP>Subtask"
+  },
+  "Taskmanager.network.memory.buffer-debloat.target<SEP>缓冲消胀机制": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Taskmanager.network.memory.buffer-debloat.target<SEP>缓冲消胀机制"
+  },
+  "Taskmanager.network.memory.buffer-debloat.period<SEP>缓冲消胀机制": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Taskmanager.network.memory.buffer-debloat.period<SEP>缓冲消胀机制"
+  },
+  "Checkpoint Barrier<SEP>对齐的Checkpoints": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Checkpoint Barrier<SEP>对齐的Checkpoints"
+  },
+  "网络缓冲<SEP>非对齐的Checkpoints": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "网络缓冲<SEP>非对齐的Checkpoints"
+  },
+  "Taskmanager.network.memory.buffer-debloat.samples<SEP>缓冲消胀机制": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Taskmanager.network.memory.buffer-debloat.samples<SEP>缓冲消胀机制"
+  },
+  "Checkpoint Barrier<SEP>Subtask": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Checkpoint Barrier<SEP>Subtask"
+  },
+  "Taskmanager.network.memory.buffer-debloat.threshold-percentages<SEP>缓冲消胀机制": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Taskmanager.network.memory.buffer-debloat.threshold-percentages<SEP>缓冲消胀机制"
+  },
+  "Subtask<SEP>网络缓冲队列": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Subtask<SEP>网络缓冲队列"
+  },
+  "Checkpoint Barrier<SEP>Job Graph": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Checkpoint Barrier<SEP>Job Graph"
+  },
+  "EstimatedTimeToConsumeBuffersMs<SEP>缓冲消胀机制": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "EstimatedTimeToConsumeBuffersMs<SEP>缓冲消胀机制"
+  },
+  "快照时间<SEP>网络缓冲": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "快照时间<SEP>网络缓冲"
+  },
+  "Checkpoint Barrier<SEP>快照": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Checkpoint Barrier<SEP>快照"
+  },
+  "DebloatedBufferSize<SEP>缓冲消胀机制": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "DebloatedBufferSize<SEP>缓冲消胀机制"
+  },
+  "EstimatedTimeToConsumeBuffersMs<SEP>Input Channel": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "EstimatedTimeToConsumeBuffersMs<SEP>Input Channel"
+  },
+  "Unaligned Checkpoint<SEP>透支缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Unaligned Checkpoint<SEP>透支缓冲区"
+  },
+  "Flink<SEP>缓冲消胀机制": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000",
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001",
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 3,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Flink<SEP>缓冲消胀机制"
+  },
+  "Pipelined Shuffle<SEP>透支缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Pipelined Shuffle<SEP>透支缓冲区"
+  },
+  "可选缓冲区<SEP>必须缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "可选缓冲区<SEP>必须缓冲区"
+  },
+  "Subtask<SEP>缓冲消胀机制": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000",
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 2,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Subtask<SEP>缓冲消胀机制"
+  },
+  "Flink<SEP>网络缓冲队列": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Flink<SEP>网络缓冲队列"
+  },
+  "WindowOperator<SEP>透支缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "WindowOperator<SEP>透支缓冲区"
+  },
+  "流动缓冲区<SEP>缓冲消胀机制": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "流动缓冲区<SEP>缓冲消胀机制"
+  },
+  "Apache Software Foundation<SEP>Flink": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Apache Software Foundation<SEP>Flink"
+  },
+  "网络缓冲区<SEP>透支缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "网络缓冲区<SEP>透支缓冲区"
+  },
+  "流动缓冲区<SEP>独占缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "流动缓冲区<SEP>独占缓冲区"
+  },
+  "Subtask<SEP>透支缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Subtask<SEP>透支缓冲区"
+  },
+  "缓冲区池<SEP>网络缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "缓冲区池<SEP>网络缓冲区"
+  },
+  "execution.buffer-timeout<SEP>缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "execution.buffer-timeout<SEP>缓冲区"
+  },
+  "taskmanager.network.memory.buffers-per-channel<SEP>独占缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "taskmanager.network.memory.buffers-per-channel<SEP>独占缓冲区"
+  },
+  "Flink<SEP>透支缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Flink<SEP>透支缓冲区"
+  },
+  "Subtask<SEP>Unaligned Checkpoint": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Subtask<SEP>Unaligned Checkpoint"
+  },
+  "Subpartition<SEP>缓冲区池": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Subpartition<SEP>缓冲区池"
+  },
+  "taskmanager.network.memory.floating-buffers-per-gate<SEP>流动缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "taskmanager.network.memory.floating-buffers-per-gate<SEP>流动缓冲区"
+  },
+  "内存段<SEP>缓冲区数量计算公式": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "内存段<SEP>缓冲区数量计算公式"
+  },
+  "Checkpoint<SEP>缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Checkpoint<SEP>缓冲区"
+  },
+  "反压<SEP>独占缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "反压<SEP>独占缓冲区"
+  },
+  "数据倾斜<SEP>流动缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "数据倾斜<SEP>流动缓冲区"
+  },
+  "Subtask<SEP>缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Subtask<SEP>缓冲区"
+  },
+  "Subpartition<SEP>独占缓冲区": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Subpartition<SEP>独占缓冲区"
+  },
+  "Flink<SEP>反压": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Flink<SEP>反压"
+  },
+  "Flink<SEP>内存段": {
+    "chunk_ids": [
+      "doc-5af9976b4b8b135d4c5aaf88c4400db5-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275663,
+    "update_time": 1791275663,
+    "_id": "Flink<SEP>内存段"
+  },
+  "IllegalConfigurationException<SEP>TaskExecutorProcessUtils": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "IllegalConfigurationException<SEP>TaskExecutorProcessUtils"
+  },
+  "IOException: Insufficient Number Of Network Buffers<SEP>TaskManager": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "IOException: Insufficient Number Of Network Buffers<SEP>TaskManager"
+  },
+  "JVM直接内存泄漏<SEP>OutOfMemoryError: Direct Buffer Memory": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "JVM直接内存泄漏<SEP>OutOfMemoryError: Direct Buffer Memory"
+  },
+  "JobManager<SEP>Jobmanager.memory.enable-jvm-direct-memory-limit": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "JobManager<SEP>Jobmanager.memory.enable-jvm-direct-memory-limit"
+  },
+  "RocksDBStateBackend<SEP>容器内存超用": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275675,
+    "update_time": 1791275675,
+    "_id": "RocksDBStateBackend<SEP>容器内存超用"
+  },
+  "IllegalConfigurationException<SEP>JobManagerProcessUtils": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "IllegalConfigurationException<SEP>JobManagerProcessUtils"
+  },
+  "IOException: Insufficient Number Of Network Buffers<SEP>Taskmanager.memory.network.min": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "IOException: Insufficient Number Of Network Buffers<SEP>Taskmanager.memory.network.min"
+  },
+  "Apache Flink<SEP>TaskManager": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1791275766,
+    "_id": "Apache Flink<SEP>TaskManager"
+  },
+  "JobManager<SEP>容器内存超用": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "JobManager<SEP>容器内存超用"
+  },
+  "OutOfMemoryError: Java Heap Space<SEP>总内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "OutOfMemoryError: Java Heap Space<SEP>总内存"
+  },
+  "TaskManager<SEP>框架堆内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "TaskManager<SEP>框架堆内存"
+  },
+  "OutOfMemoryError: Direct Buffer Memory<SEP>直接内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "OutOfMemoryError: Direct Buffer Memory<SEP>直接内存"
+  },
+  "OutOfMemoryError: Java Heap Space<SEP>任务堆内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "OutOfMemoryError: Java Heap Space<SEP>任务堆内存"
+  },
+  "JVM Metaspace<SEP>OutOfMemoryError: Metaspace": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "JVM Metaspace<SEP>OutOfMemoryError: Metaspace"
+  },
+  "IOException: Insufficient Number Of Network Buffers<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "IOException: Insufficient Number Of Network Buffers<SEP>网络内存"
+  },
+  "OutOfMemoryError: Direct Buffer Memory<SEP>堆外内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "OutOfMemoryError: Direct Buffer Memory<SEP>堆外内存"
+  },
+  "JobManager<SEP>OutOfMemoryError: Java Heap Space": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "JobManager<SEP>OutOfMemoryError: Java Heap Space"
+  },
+  "Taskmanager.memory.network.max<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "Taskmanager.memory.network.max<SEP>网络内存"
+  },
+  "Yarn<SEP>容器内存超用": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "Yarn<SEP>容器内存超用"
+  },
+  "Apache Flink<SEP>JobManager": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1791275766,
+    "_id": "Apache Flink<SEP>JobManager"
+  },
+  "Taskmanager.memory.network.fraction<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "Taskmanager.memory.network.fraction<SEP>网络内存"
+  },
+  "JVM直接内存泄漏<SEP>直接内存限制": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "JVM直接内存泄漏<SEP>直接内存限制"
+  },
+  "Kubernetes<SEP>容器内存超用": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "Kubernetes<SEP>容器内存超用"
+  },
+  "RocksDBStateBackend<SEP>TaskManager": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "RocksDBStateBackend<SEP>TaskManager"
+  },
+  "Apache Flink<SEP>Yarn": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "Apache Flink<SEP>Yarn"
+  },
+  "JobManager<SEP>直接内存限制": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "JobManager<SEP>直接内存限制"
+  },
+  "TaskManager<SEP>glibc": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "TaskManager<SEP>glibc"
+  },
+  "RocksDBStateBackend<SEP>内存控制": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "RocksDBStateBackend<SEP>内存控制"
+  },
+  "Apache Flink<SEP>Kubernetes": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "Apache Flink<SEP>Kubernetes"
+  },
+  "glibc<SEP>保存点": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "glibc<SEP>保存点"
+  },
+  "MALLOC_ARENA_MAX<SEP>TaskManager": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "MALLOC_ARENA_MAX<SEP>TaskManager"
+  },
+  "RocksDBStateBackend<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001",
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 3,
+    "update_time": 1791275807,
+    "_id": "RocksDBStateBackend<SEP>托管内存"
+  },
+  "glibc<SEP>全量检查点": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275676,
+    "update_time": 1791275676,
+    "_id": "glibc<SEP>全量检查点"
+  },
+  "TaskManager<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 2,
+    "update_time": 1791275771,
+    "_id": "TaskManager<SEP>托管内存"
+  },
+  "JVM开销<SEP>TaskManager": {
+    "chunk_ids": [
+      "doc-80d6cad9dbb39fe725d6defd5b184377-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "JVM开销<SEP>TaskManager"
+  },
+  "Flink<SEP>调优指南": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "Flink<SEP>调优指南"
+  },
+  "Flink总内存<SEP>独立部署模式": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1791275766,
+    "_id": "Flink总内存<SEP>独立部署模式"
+  },
+  "容器化部署模式<SEP>进程总内存": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1791275766,
+    "_id": "容器化部署模式<SEP>进程总内存"
+  },
+  "Heap State Backend<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 2,
+    "update_time": 1791275746,
+    "_id": "Heap State Backend<SEP>托管内存"
+  },
+  "RocksDB<SEP>RocksDBStateBackend": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 3,
+    "update_time": 1791275807,
+    "_id": "RocksDB<SEP>RocksDBStateBackend"
+  },
+  "Flink总内存<SEP>进程总内存": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 3,
+    "update_time": 1791275766,
+    "_id": "Flink总内存<SEP>进程总内存"
+  },
+  "Kubernetes<SEP>容器化部署模式": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "Kubernetes<SEP>容器化部署模式"
+  },
+  "Heap State Backend<SEP>MemoryStateBackend": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "Heap State Backend<SEP>MemoryStateBackend"
+  },
+  "调优指南<SEP>配置指南": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "调优指南<SEP>配置指南"
+  },
+  "Flink总内存<SEP>taskmanager.memory.flink.size": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "Flink总内存<SEP>taskmanager.memory.flink.size"
+  },
+  "Yarn<SEP>容器化部署模式": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 3,
+    "update_time": 1791275807,
+    "_id": "Yarn<SEP>容器化部署模式"
+  },
+  "FsStateBackend<SEP>Heap State Backend": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "FsStateBackend<SEP>Heap State Backend"
+  },
+  "taskmanager.memory.process.size<SEP>进程总内存": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "taskmanager.memory.process.size<SEP>进程总内存"
+  },
+  "Flink总内存<SEP>jobmanager.memory.flink.size": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "Flink总内存<SEP>jobmanager.memory.flink.size"
+  },
+  "jobmanager.memory.process.size<SEP>进程总内存": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "jobmanager.memory.process.size<SEP>进程总内存"
+  },
+  "Heap State Backend<SEP>State Backend": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "Heap State Backend<SEP>State Backend"
+  },
+  "JVM Metaspace<SEP>独立部署模式": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "JVM Metaspace<SEP>独立部署模式"
+  },
+  "Flink总内存<SEP>JVM开销": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "Flink总内存<SEP>JVM开销"
+  },
+  "RocksDB<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 3,
+    "update_time": 1791275807,
+    "_id": "RocksDB<SEP>托管内存"
+  },
+  "JVM进程<SEP>进程总内存": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "JVM进程<SEP>进程总内存"
+  },
+  "RocksDBStateBackend<SEP>State Backend": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "RocksDBStateBackend<SEP>State Backend"
+  },
+  "Flink<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 6,
+    "update_time": 1791275807,
+    "_id": "Flink<SEP>托管内存"
+  },
+  "RocksDB<SEP>TaskExecutor": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "RocksDB<SEP>TaskExecutor"
+  },
+  "JVM进程<SEP>容器": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "JVM进程<SEP>容器"
+  },
+  "托管内存<SEP>批处理作业": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "托管内存<SEP>批处理作业"
+  },
+  "Flink<SEP>OutOfMemoryError": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "Flink<SEP>OutOfMemoryError"
+  },
+  "RocksDB<SEP>进程总内存": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "RocksDB<SEP>进程总内存"
+  },
+  "托管内存<SEP>批处理算子": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "托管内存<SEP>批处理算子"
+  },
+  "RocksDB<SEP>state.backend.rocksdb.memory.managed": {
+    "chunk_ids": [
+      "doc-0482f313dc31035b34ebc58bc263ca6b-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275691,
+    "update_time": 1791275691,
+    "_id": "RocksDB<SEP>state.backend.rocksdb.memory.managed"
+  },
+  "Flink<SEP>TaskManager": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 4,
+    "update_time": 1791275807,
+    "_id": "Flink<SEP>TaskManager"
+  },
+  "JVM堆内存<SEP>任务堆内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "JVM堆内存<SEP>任务堆内存"
+  },
+  "RocksDB State Backend<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 3,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "RocksDB State Backend<SEP>托管内存"
+  },
+  "Flink<SEP>JobManager": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 6,
+    "update_time": 1791275807,
+    "_id": "Flink<SEP>JobManager"
+  },
+  "taskmanager.memory.task.heap.size<SEP>任务堆内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 3,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "taskmanager.memory.task.heap.size<SEP>任务堆内存"
+  },
+  "Flink总内存<SEP>JVM堆内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1791275766,
+    "_id": "Flink总内存<SEP>JVM堆内存"
+  },
+  "Python进程<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Python进程<SEP>托管内存"
+  },
+  "Python UDF<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Python UDF<SEP>托管内存"
+  },
+  "TaskManager<SEP>框架堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "TaskManager<SEP>框架堆外内存"
+  },
+  "TaskManager<SEP>任务堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "TaskManager<SEP>任务堆外内存"
+  },
+  "托管内存<SEP>消费者权重": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "托管内存<SEP>消费者权重"
+  },
+  "Flink<SEP>Flink 1.10版本": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink<SEP>Flink 1.10版本"
+  },
+  "Flink<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 2,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink<SEP>网络内存"
+  },
+  "taskmanager.memory.managed.consumer-weights<SEP>消费者权重": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "taskmanager.memory.managed.consumer-weights<SEP>消费者权重"
+  },
+  "taskmanager.memory.task.off-heap.size<SEP>任务堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 3,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "taskmanager.memory.task.off-heap.size<SEP>任务堆外内存"
+  },
+  "JVM直接内存<SEP>框架堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "JVM直接内存<SEP>框架堆外内存"
+  },
+  "JVM直接内存<SEP>任务堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "JVM直接内存<SEP>任务堆外内存"
+  },
+  "OPERATOR<SEP>消费者权重": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "OPERATOR<SEP>消费者权重"
+  },
+  "Flink总内存<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink总内存<SEP>托管内存"
+  },
+  "JVM直接内存<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "JVM直接内存<SEP>网络内存"
+  },
+  "taskmanager.memory.managed.size<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 4,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.managed.size<SEP>托管内存"
+  },
+  "Flink TaskManager内存模型<SEP>框架堆内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink TaskManager内存模型<SEP>框架堆内存"
+  },
+  "STATE_BACKEND<SEP>消费者权重": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "STATE_BACKEND<SEP>消费者权重"
+  },
+  "Flink TaskManager内存模型<SEP>任务堆内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink TaskManager内存模型<SEP>任务堆内存"
+  },
+  "taskmanager.memory.managed.fraction<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 3,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.managed.fraction<SEP>托管内存"
+  },
+  "PYTHON<SEP>消费者权重": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "PYTHON<SEP>消费者权重"
+  },
+  "Flink TaskManager内存模型<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink TaskManager内存模型<SEP>托管内存"
+  },
+  "taskmanager.memory.framework.heap.size<SEP>框架堆内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "taskmanager.memory.framework.heap.size<SEP>框架堆内存"
+  },
+  "taskmanager.memory.framework.off-heap.size<SEP>框架堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "taskmanager.memory.framework.off-heap.size<SEP>框架堆外内存"
+  },
+  "JVM Metaspace<SEP>taskmanager.memory.jvm-metaspace.size": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "JVM Metaspace<SEP>taskmanager.memory.jvm-metaspace.size"
+  },
+  "网络内存<SEP>网络缓冲": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "网络内存<SEP>网络缓冲"
+  },
+  "Flink TaskManager内存模型<SEP>框架堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink TaskManager内存模型<SEP>框架堆外内存"
+  },
+  "taskmanager.memory.network.min<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 2,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "taskmanager.memory.network.min<SEP>网络内存"
+  },
+  "Flink TaskManager内存模型<SEP>任务堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink TaskManager内存模型<SEP>任务堆外内存"
+  },
+  "JVM开销<SEP>taskmanager.memory.jvm-overhead.min": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "JVM开销<SEP>taskmanager.memory.jvm-overhead.min"
+  },
+  "taskmanager.memory.network.max<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 2,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "taskmanager.memory.network.max<SEP>网络内存"
+  },
+  "JVM开销<SEP>taskmanager.memory.jvm-overhead.max": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "JVM开销<SEP>taskmanager.memory.jvm-overhead.max"
+  },
+  "taskmanager.memory.network.fraction<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "taskmanager.memory.network.fraction<SEP>网络内存"
+  },
+  "JVM开销<SEP>taskmanager.memory.jvm-overhead.fraction": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "JVM开销<SEP>taskmanager.memory.jvm-overhead.fraction"
+  },
+  "Flink TaskManager内存模型<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink TaskManager内存模型<SEP>网络内存"
+  },
+  "受限的等比内存部分<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 2,
+    "update_time": 1791275766,
+    "_id": "受限的等比内存部分<SEP>网络内存"
+  },
+  "Flink TaskManager内存模型<SEP>JVM Metaspace": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink TaskManager内存模型<SEP>JVM Metaspace"
+  },
+  "堆外内存<SEP>框架堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "堆外内存<SEP>框架堆外内存"
+  },
+  "Flink总内存<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 2,
+    "update_time": 1791275766,
+    "_id": "Flink总内存<SEP>网络内存"
+  },
+  "JVM开销<SEP>受限的等比内存部分": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 2,
+    "update_time": 1791275766,
+    "_id": "JVM开销<SEP>受限的等比内存部分"
+  },
+  "任务堆外内存<SEP>堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "任务堆外内存<SEP>堆外内存"
+  },
+  "JVM开销<SEP>进程总内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002",
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 2,
+    "update_time": 1791275766,
+    "_id": "JVM开销<SEP>进程总内存"
+  },
+  "Flink TaskManager内存模型<SEP>JVM开销": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink TaskManager内存模型<SEP>JVM开销"
+  },
+  "Flink<SEP>Flink TaskManager内存模型": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink<SEP>Flink TaskManager内存模型"
+  },
+  "JVM<SEP>本地执行模式": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "JVM<SEP>本地执行模式"
+  },
+  "Flink<SEP>框架堆内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink<SEP>框架堆内存"
+  },
+  "-Xmx<SEP>JVM": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "-Xmx<SEP>JVM"
+  },
+  "Flink<SEP>框架堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink<SEP>框架堆外内存"
+  },
+  "-Xms<SEP>JVM": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "-Xms<SEP>JVM"
+  },
+  "托管内存<SEP>本地执行模式": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "托管内存<SEP>本地执行模式"
+  },
+  "任务堆内存<SEP>本地执行模式": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "任务堆内存<SEP>本地执行模式"
+  },
+  "Flink<SEP>任务堆内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink<SEP>任务堆内存"
+  },
+  "Flink<SEP>任务堆外内存": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink<SEP>任务堆外内存"
+  },
+  "Flink<SEP>Hadoop": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink<SEP>Hadoop"
+  },
+  "Flink<SEP>本地执行模式": {
+    "chunk_ids": [
+      "doc-80f1d496c923f43242912a26d7d69f02-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275746,
+    "update_time": 1791275746,
+    "_id": "Flink<SEP>本地执行模式"
+  },
+  "堆外内存<SEP>直接内存": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "堆外内存<SEP>直接内存"
+  },
+  "堆外内存<SEP>本地内存": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 2,
+    "update_time": 1791275789,
+    "_id": "堆外内存<SEP>本地内存"
+  },
+  "TaskManager<SEP>taskmanager.memory.flink.size": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "TaskManager<SEP>taskmanager.memory.flink.size"
+  },
+  "Flink总内存<SEP>堆外内存": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 2,
+    "update_time": 1791275789,
+    "_id": "Flink总内存<SEP>堆外内存"
+  },
+  "TaskManager<SEP>taskmanager.memory.process.size": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "TaskManager<SEP>taskmanager.memory.process.size"
+  },
+  "JobManager<SEP>jobmanager.memory.flink.size": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "JobManager<SEP>jobmanager.memory.flink.size"
+  },
+  "Apache Flink<SEP>网络内存调优指南": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "Apache Flink<SEP>网络内存调优指南"
+  },
+  "JobManager<SEP>jobmanager.memory.process.size": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "JobManager<SEP>jobmanager.memory.process.size"
+  },
+  "JVM<SEP>进程总内存": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "JVM<SEP>进程总内存"
+  },
+  "Flink<SEP>受限的等比内存部分": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "Flink<SEP>受限的等比内存部分"
+  },
+  "Apache Flink<SEP>JVM": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "Apache Flink<SEP>JVM"
+  },
+  "TaskManager<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "TaskManager<SEP>网络内存"
+  },
+  "Apache Flink<SEP>升级指南": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "Apache Flink<SEP>升级指南"
+  },
+  "JVM<SEP>TaskManager": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "JVM<SEP>TaskManager"
+  },
+  "JVM堆内存<SEP>JobManager": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 3,
+    "update_time": 1791275789,
+    "_id": "JVM堆内存<SEP>JobManager"
+  },
+  "TaskManager<SEP>任务堆内存": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "TaskManager<SEP>任务堆内存"
+  },
+  "JVM<SEP>JobManager": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "JVM<SEP>JobManager"
+  },
+  "JVM开销最小值<SEP>最大值/最小值": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275766,
+    "update_time": 1791275766,
+    "_id": "JVM开销最小值<SEP>最大值/最小值"
+  },
+  "JobManager<SEP>堆外内存": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 3,
+    "update_time": 1791275789,
+    "_id": "JobManager<SEP>堆外内存"
+  },
+  "JVM开销<SEP>JVM开销占比": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275771,
+    "update_time": 1791275771,
+    "_id": "JVM开销<SEP>JVM开销占比"
+  },
+  "JVM开销最大值<SEP>最大值/最小值": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275771,
+    "update_time": 1791275771,
+    "_id": "JVM开销最大值<SEP>最大值/最小值"
+  },
+  "JVM开销<SEP>JVM开销最小值": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275771,
+    "update_time": 1791275771,
+    "_id": "JVM开销<SEP>JVM开销最小值"
+  },
+  "JVM开销<SEP>JVM开销最大值": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275771,
+    "update_time": 1791275771,
+    "_id": "JVM开销<SEP>JVM开销最大值"
+  },
+  "Flink<SEP>最大值/最小值": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275771,
+    "update_time": 1791275771,
+    "_id": "Flink<SEP>最大值/最小值"
+  },
+  "JVM开销<SEP>任务堆内存": {
+    "chunk_ids": [
+      "doc-9cd2c3d710e5034e40b38cb6a271eba8-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275771,
+    "update_time": 1791275771,
+    "_id": "JVM开销<SEP>任务堆内存"
+  },
+  "JobManager<SEP>ResourceManager": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JobManager<SEP>ResourceManager"
+  },
+  "Dispatcher<SEP>JobManager": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "Dispatcher<SEP>JobManager"
+  },
+  "JobManager<SEP>JobMaster": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JobManager<SEP>JobMaster"
+  },
+  "jobmanager.memory.off-heap.size<SEP>堆外内存": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 2,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "jobmanager.memory.off-heap.size<SEP>堆外内存"
+  },
+  "JobManager<SEP>TaskManager": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JobManager<SEP>TaskManager"
+  },
+  "JVM堆内存<SEP>jobmanager.memory.heap.size": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 2,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JVM堆内存<SEP>jobmanager.memory.heap.size"
+  },
+  "JVM Metaspace<SEP>JobManager": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "JVM Metaspace<SEP>JobManager"
+  },
+  "Flink 1.11<SEP>配置总内存": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "Flink 1.11<SEP>配置总内存"
+  },
+  "Flink<SEP>升级指南": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "Flink<SEP>升级指南"
+  },
+  "JVM开销<SEP>JobManager": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "update_time": 1791275807,
+    "_id": "JVM开销<SEP>JobManager"
+  },
+  "JVM Metaspace<SEP>jobmanager.memory.jvm-metaspace.size": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JVM Metaspace<SEP>jobmanager.memory.jvm-metaspace.size"
+  },
+  "JobManager<SEP>配置总内存": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JobManager<SEP>配置总内存"
+  },
+  "JVM开销<SEP>jobmanager.memory.jvm-overhead.fraction": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JVM开销<SEP>jobmanager.memory.jvm-overhead.fraction"
+  },
+  "JVM直接内存<SEP>堆外内存": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JVM直接内存<SEP>堆外内存"
+  },
+  "JobManager<SEP>本地执行模式": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JobManager<SEP>本地执行模式"
+  },
+  "JVM开销<SEP>jobmanager.memory.jvm-overhead.min": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JVM开销<SEP>jobmanager.memory.jvm-overhead.min"
+  },
+  "JVM直接内存<SEP>jobmanager.memory.enable-jvm-direct-memory-limit": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JVM直接内存<SEP>jobmanager.memory.enable-jvm-direct-memory-limit"
+  },
+  "Flink<SEP>Pekko": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "Flink<SEP>Pekko"
+  },
+  "Checkpoint<SEP>JVM堆内存": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "Checkpoint<SEP>JVM堆内存"
+  },
+  "JVM开销<SEP>jobmanager.memory.jvm-overhead.max": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JVM开销<SEP>jobmanager.memory.jvm-overhead.max"
+  },
+  "-Xms和-Xmx<SEP>Flink": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "-Xms和-Xmx<SEP>Flink"
+  },
+  "JobManager<SEP>OutOfMemoryError: Direct Buffer Memory": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JobManager<SEP>OutOfMemoryError: Direct Buffer Memory"
+  },
+  "JVM堆内存<SEP>批处理Source": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JVM堆内存<SEP>批处理Source"
+  },
+  "JVM开销<SEP>配置总内存": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JVM开销<SEP>配置总内存"
+  },
+  "-XX:MaxDirectMemorySize<SEP>Flink": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "-XX:MaxDirectMemorySize<SEP>Flink"
+  },
+  "JobManager<SEP>本地执行": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "JobManager<SEP>本地执行"
+  },
+  "堆外内存<SEP>批处理Source": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "堆外内存<SEP>批处理Source"
+  },
+  "-XX:MaxDirectMemorySize<SEP>JVM直接内存": {
+    "chunk_ids": [
+      "doc-f3c1c22469a68bc75a30439deafa7436-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275789,
+    "update_time": 1791275789,
+    "_id": "-XX:MaxDirectMemorySize<SEP>JVM直接内存"
+  },
+  "taskmanager.memory.fraction<SEP>taskmanager.memory.managed.fraction": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 2,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.fraction<SEP>taskmanager.memory.managed.fraction"
+  },
+  "taskmanager.heap.size<SEP>taskmanager.memory.flink.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 2,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.heap.size<SEP>taskmanager.memory.flink.size"
+  },
+  "taskmanager.memory.managed.size<SEP>taskmanager.memory.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 2,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.managed.size<SEP>taskmanager.memory.size"
+  },
+  "taskmanager.memory.network.min<SEP>taskmanager.network.memory.min": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.network.min<SEP>taskmanager.network.memory.min"
+  },
+  "taskmanager.memory.network.max<SEP>taskmanager.network.memory.max": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.network.max<SEP>taskmanager.network.memory.max"
+  },
+  "taskmanager.memory.network.fraction<SEP>taskmanager.network.memory.fraction": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.network.fraction<SEP>taskmanager.network.memory.fraction"
+  },
+  "TaskManager<SEP>containerized.heap-cutoff-ratio": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "TaskManager<SEP>containerized.heap-cutoff-ratio"
+  },
+  "taskmanager.heap.size<SEP>taskmanager.memory.process.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 3,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.heap.size<SEP>taskmanager.memory.process.size"
+  },
+  "taskmanager.memory.network.fraction<SEP>总内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.network.fraction<SEP>总内存"
+  },
+  "taskmanager.memory.flink.size<SEP>独立部署模式": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 2,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.flink.size<SEP>独立部署模式"
+  },
+  "TaskManager<SEP>containerized.heap-cutoff-min": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "TaskManager<SEP>containerized.heap-cutoff-min"
+  },
+  "taskmanager.heap.mb<SEP>总内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.heap.mb<SEP>总内存"
+  },
+  "taskmanager.memory.process.size<SEP>容器化部署模式": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 2,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.process.size<SEP>容器化部署模式"
+  },
+  "总内存<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "总内存<SEP>网络内存"
+  },
+  "JVM堆内存<SEP>总内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "JVM堆内存<SEP>总内存"
+  },
+  "taskmanager.heap.size<SEP>总内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-001"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.heap.size<SEP>总内存"
+  },
+  "Flink<SEP>JVM堆内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "Flink<SEP>JVM堆内存"
+  },
+  "taskmanager.heap.mb<SEP>taskmanager.heap.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.heap.mb<SEP>taskmanager.heap.size"
+  },
+  "JVM堆内存<SEP>MemoryStateBackend": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "JVM堆内存<SEP>MemoryStateBackend"
+  },
+  "taskmanager.memory.fraction<SEP>网络内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.fraction<SEP>网络内存"
+  },
+  "Flink<SEP>Yarn": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "Flink<SEP>Yarn"
+  },
+  "FsStateBackend<SEP>JVM堆内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "FsStateBackend<SEP>JVM堆内存"
+  },
+  "taskmanager.memory.fraction<SEP>容器切除内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.fraction<SEP>容器切除内存"
+  },
+  "RocksDB StateBackend<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "RocksDB StateBackend<SEP>托管内存"
+  },
+  "Yarn<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "Yarn<SEP>托管内存"
+  },
+  "JVM堆内存<SEP>taskmanager.memory.task.heap.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "JVM堆内存<SEP>taskmanager.memory.task.heap.size"
+  },
+  "jobmanager.heap.size<SEP>jobmanager.memory.heap.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "jobmanager.heap.size<SEP>jobmanager.memory.heap.size"
+  },
+  "jobmanager.heap.size<SEP>jobmanager.memory.process.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "jobmanager.heap.size<SEP>jobmanager.memory.process.size"
+  },
+  "JVM直接内存<SEP>TaskManager": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "JVM直接内存<SEP>TaskManager"
+  },
+  "RocksDB StateBackend<SEP>state.backend.rocksdb.memory.managed": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "RocksDB StateBackend<SEP>state.backend.rocksdb.memory.managed"
+  },
+  "RocksDB<SEP>Yarn": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-002"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "RocksDB<SEP>Yarn"
+  },
+  "taskmanager.memory.off-heap<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.off-heap<SEP>托管内存"
+  },
+  "JobManager<SEP>jobmanager.memory.enable-jvm-direct-memory-limit": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003",
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 2,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "JobManager<SEP>jobmanager.memory.enable-jvm-direct-memory-limit"
+  },
+  "jobmanager.memory.heap.size<SEP>独立部署模式": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "jobmanager.memory.heap.size<SEP>独立部署模式"
+  },
+  "jobmanager.memory.process.size<SEP>容器化部署模式": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "jobmanager.memory.process.size<SEP>容器化部署模式"
+  },
+  "JVM直接内存<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "JVM直接内存<SEP>托管内存"
+  },
+  "Flink<SEP>JVM Metaspace": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "Flink<SEP>JVM Metaspace"
+  },
+  "taskmanager.memory.preallocate<SEP>托管内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "taskmanager.memory.preallocate<SEP>托管内存"
+  },
+  "Flink<SEP>JVM直接内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "Flink<SEP>JVM直接内存"
+  },
+  "容器切除内存<SEP>容器化部署模式": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-003"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "容器切除内存<SEP>容器化部署模式"
+  },
+  "TaskManager<SEP>taskmanager.memory.task.off-heap.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "TaskManager<SEP>taskmanager.memory.task.off-heap.size"
+  },
+  "JobManager<SEP>taskmanager.memory.jvm-metaspace.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "JobManager<SEP>taskmanager.memory.jvm-metaspace.size"
+  },
+  "RocksDB<SEP>容器切除内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "RocksDB<SEP>容器切除内存"
+  },
+  "TaskManager<SEP>taskmanager.memory.framework.off-heap.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "TaskManager<SEP>taskmanager.memory.framework.off-heap.size"
+  },
+  "JobManager<SEP>jobmanager.memory.off-heap.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "JobManager<SEP>jobmanager.memory.off-heap.size"
+  },
+  "JVM Metaspace<SEP>OutOfMemoryError": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "JVM Metaspace<SEP>OutOfMemoryError"
+  },
+  "containerized.heap-cutoff-ratio<SEP>容器切除内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "containerized.heap-cutoff-ratio<SEP>容器切除内存"
+  },
+  "TaskManager<SEP>taskmanager.memory.jvm-metaspace.size": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "TaskManager<SEP>taskmanager.memory.jvm-metaspace.size"
+  },
+  "JVM直接内存<SEP>OutOfMemoryError": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "JVM直接内存<SEP>OutOfMemoryError"
+  },
+  "containerized.heap-cutoff-min<SEP>容器切除内存": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "containerized.heap-cutoff-min<SEP>容器切除内存"
+  },
+  "Flink配置文件<SEP>总内存配置": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "Flink配置文件<SEP>总内存配置"
+  },
+  "1600MB<SEP>总内存配置": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "1600MB<SEP>总内存配置"
+  },
+  "容器切除内存<SEP>容器化部署": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-004"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "容器切除内存<SEP>容器化部署"
+  },
+  "Flink<SEP>Flink配置文件": {
+    "chunk_ids": [
+      "doc-a1ba901e12ec168e72f2066a8b01614d-chunk-005"
+    ],
+    "count": 1,
+    "create_time": 1791275807,
+    "update_time": 1791275807,
+    "_id": "Flink<SEP>Flink配置文件"
+  }
+}
