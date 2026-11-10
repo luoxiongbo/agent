@@ -1,4 +1,4 @@
-from langgraph import
+from langgraph.graph
 
 
 def part1():
