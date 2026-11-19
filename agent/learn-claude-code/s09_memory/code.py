@@ -73,6 +73,7 @@ RECALL_CHAR_LIMIT = 20000
 CONSOLIDATE_THRESHOLD = 10
 CONSOLIDATE_INPUT_CHAR_LIMIT = 20000
 
+
 def parse_frontmatter(text: str) -> tuple[dict, str]:
     if not text.startswith("---\n"):
         return {}, text
@@ -87,9 +88,11 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
         return {}, text
     return metadata, parts[2].lstrip()
 
+
 def memory_slug(name: str) -> str:
     slug = re.sub(r"[^\w]+", "-", name.lower()).strip("-_")
     return slug or "memory"
+
 
 def memory_path(filename: str, allow_index: bool = False) -> Path:
     if Path(filename).name != filename:
@@ -105,11 +108,14 @@ def memory_path(filename: str, allow_index: bool = False) -> Path:
         raise ValueError(f"Memory path escapes the store: {filename}")
     return path
 
+
 def _memory_slug(name: str) -> str:
     return memory_slug(name)
 
+
 def _normalized_memory_text(value: str) -> str:
     return " ".join(value.lower().split())
+
 
 def should_store_memory(candidate: dict, existing: list[dict]) -> bool:
     """Accept durable records that are not temporary or already stored."""
@@ -137,12 +143,13 @@ def should_store_memory(candidate: dict, existing: list[dict]) -> bool:
         if memory_slug(str(memory.get("name", ""))) == slug:
             return False
         if _normalized_memory_text(
-            str(memory.get("description", ""))
+                str(memory.get("description", ""))
         ) == normalized_description:
             return False
         if _normalized_memory_text(str(memory.get("body", ""))) == normalized_body:
             return False
     return True
+
 
 def memory_document(name: str, mem_type: str, description: str, body: str) -> str:
     metadata = yaml.safe_dump(
@@ -151,6 +158,7 @@ def memory_document(name: str, mem_type: str, description: str, body: str) -> st
         allow_unicode=True,
     ).strip()
     return f"---\n{metadata}\n---\n\n{body.strip()}\n"
+
 
 def write_memory_file(name: str, mem_type: str, description: str, body: str) -> Path:
     if not name.strip():
@@ -167,6 +175,7 @@ def write_memory_file(name: str, mem_type: str, description: str, body: str) -> 
     )
     rebuild_memory_index()
     return path
+
 
 def rebuild_memory_index() -> None:
     MEMORY_DIR.mkdir(parents=True, exist_ok=True)
@@ -189,6 +198,7 @@ def rebuild_memory_index() -> None:
         "\n".join(lines) + ("\n" if lines else ""), encoding="utf-8"
     )
 
+
 def read_memory_index() -> str:
     try:
         path = memory_path(MEMORY_INDEX.name, allow_index=True)
@@ -196,12 +206,14 @@ def read_memory_index() -> str:
         return ""
     return path.read_text(encoding="utf-8").strip() if path.exists() else ""
 
+
 def read_memory_file(filename: str) -> str | None:
     try:
         path = memory_path(filename)
     except ValueError:
         return None
     return path.read_text(encoding="utf-8") if path.is_file() else None
+
 
 def list_memory_files() -> list[dict]:
     records = []
@@ -224,6 +236,7 @@ def list_memory_files() -> list[dict]:
         })
     return records
 
+
 # -- Recall --
 
 def block_text(block) -> str:
@@ -235,6 +248,7 @@ def block_text(block) -> str:
         else ""
     )
 
+
 def message_text(message: dict) -> str:
     content = message.get("content", "")
     if isinstance(content, str):
@@ -242,6 +256,7 @@ def message_text(message: dict) -> str:
     if isinstance(content, list):
         return "\n".join(filter(None, (block_text(block) for block in content)))
     return ""
+
 
 def extract_json_array(text: str) -> list:
     decoder = json.JSONDecoder()
@@ -256,6 +271,7 @@ def extract_json_array(text: str) -> list:
             return value
     return []
 
+
 def recent_user_text(messages: list, max_turns: int = 3) -> str:
     turns = []
     for message in reversed(messages):
@@ -268,8 +284,9 @@ def recent_user_text(messages: list, max_turns: int = 3) -> str:
             break
     return "\n".join(reversed(turns))[:4000]
 
+
 def keyword_memory_selection(
-    records: list[dict], query: str, max_items: int
+        records: list[dict], query: str, max_items: int
 ) -> list[str]:
     words = set(
         re.findall(r"[a-z0-9_]{3,}|[\u4e00-\u9fff]{2,}", query.lower())
@@ -282,6 +299,7 @@ def keyword_memory_selection(
             ranked.append((score, record["filename"]))
     ranked.sort(key=lambda item: (-item[0], item[1]))
     return [filename for _, filename in ranked[:max_items]]
+
 
 def select_relevant_memories(messages: list, max_items: int = 5) -> list[str]:
     records = list_memory_files()
@@ -322,6 +340,7 @@ def select_relevant_memories(messages: list, max_items: int = 5) -> list[str]:
     except Exception:
         return keyword_memory_selection(records, query, max_items)
 
+
 def load_memories(messages: list) -> str:
     loaded = []
     remaining = RECALL_CHAR_LIMIT
@@ -333,6 +352,7 @@ def load_memories(messages: list) -> str:
         loaded.append({"source": filename, "content": recalled})
         remaining -= len(recalled)
     return json.dumps(loaded, ensure_ascii=False, indent=2) if loaded else ""
+
 
 def build_system(relevant_memories: str = "") -> str:
     index = read_memory_index()
@@ -354,6 +374,7 @@ def build_system(relevant_memories: str = "") -> str:
         sections.append(f"Relevant memory records:\n{relevant_memories}")
     return "\n\n".join(sections)
 
+
 # -- Extract and consolidate --
 
 def dialogue_text(messages: list, max_messages: int = 12) -> str:
@@ -364,8 +385,9 @@ def dialogue_text(messages: list, max_messages: int = 12) -> str:
             lines.append(f"{message.get('role', 'unknown')}: {text}")
     return "\n".join(lines)[:8000]
 
+
 def validate_memory_record(
-    record, require_scope: bool = False
+        record, require_scope: bool = False
 ) -> dict | None:
     if not isinstance(record, dict):
         return None
@@ -388,6 +410,7 @@ def validate_memory_record(
     if scope:
         validated["scope"] = scope
     return validated
+
 
 def extract_memories(messages: list) -> int:
     dialogue = dialogue_text(messages)
@@ -427,10 +450,10 @@ def extract_memories(messages: list) -> int:
                 message_text({"content": response.content})
             )
             if (
-                validated := validate_memory_record(
-                    item, require_scope=True
-                )
-            ) is not None
+                   validated := validate_memory_record(
+                       item, require_scope=True
+                   )
+               ) is not None
         ]
 
         stored = 0
@@ -452,6 +475,7 @@ def extract_memories(messages: list) -> int:
     except Exception as error:
         print(f"\n\033[33m[Memory extraction skipped: {error}]\033[0m")
         return 0
+
 
 def consolidate_memories() -> int:
     records = list_memory_files()
@@ -542,6 +566,7 @@ def consolidate_memories() -> int:
         print(f"\n\033[33m[Memory consolidation skipped: {error}]\033[0m")
         return 0
 
+
 # -- Tools --
 
 def run_bash(command: str) -> str:
@@ -559,6 +584,7 @@ def run_bash(command: str) -> str:
     except subprocess.TimeoutExpired:
         return "Error: Timeout (120s)"
 
+
 def run_read(path: str, limit: int | None = None) -> str:
     try:
         lines = (WORKDIR / path).resolve().read_text(encoding="utf-8").splitlines()
@@ -570,6 +596,7 @@ def run_read(path: str, limit: int | None = None) -> str:
     except Exception as error:
         return f"Error: {error}"
 
+
 def run_write(path: str, content: str) -> str:
     try:
         file_path = (WORKDIR / path).resolve()
@@ -578,6 +605,7 @@ def run_write(path: str, content: str) -> str:
         return f"Wrote {len(content)} bytes to {path}"
     except Exception as error:
         return f"Error: {error}"
+
 
 def run_edit(path: str, old_text: str, new_text: str) -> str:
     try:
@@ -589,6 +617,7 @@ def run_edit(path: str, old_text: str, new_text: str) -> str:
         return f"Edited {path}"
     except Exception as error:
         return f"Error: {error}"
+
 
 def run_glob(pattern: str) -> str:
     try:
@@ -604,15 +633,20 @@ def run_glob(pattern: str) -> str:
     except Exception as error:
         return f"Error: {error}"
 
+
 TOOLS = [
     {"name": "bash", "description": "Run a shell command.",
      "input_schema": {"type": "object", "properties": {"command": {"type": "string"}}, "required": ["command"]}},
     {"name": "read_file", "description": "Read file contents.",
-     "input_schema": {"type": "object", "properties": {"path": {"type": "string"}, "limit": {"type": "integer"}}, "required": ["path"]}},
+     "input_schema": {"type": "object", "properties": {"path": {"type": "string"}, "limit": {"type": "integer"}},
+                      "required": ["path"]}},
     {"name": "write_file", "description": "Write content to a file.",
-     "input_schema": {"type": "object", "properties": {"path": {"type": "string"}, "content": {"type": "string"}}, "required": ["path", "content"]}},
+     "input_schema": {"type": "object", "properties": {"path": {"type": "string"}, "content": {"type": "string"}},
+                      "required": ["path", "content"]}},
     {"name": "edit_file", "description": "Replace exact text in a file once.",
-     "input_schema": {"type": "object", "properties": {"path": {"type": "string"}, "old_text": {"type": "string"}, "new_text": {"type": "string"}}, "required": ["path", "old_text", "new_text"]}},
+     "input_schema": {"type": "object", "properties": {"path": {"type": "string"}, "old_text": {"type": "string"},
+                                                       "new_text": {"type": "string"}},
+                      "required": ["path", "old_text", "new_text"]}},
     {"name": "glob", "description": "Find files matching a glob pattern; ** matches recursively.",
      "input_schema": {"type": "object", "properties": {"pattern": {"type": "string"}}, "required": ["pattern"]}},
 ]
@@ -629,8 +663,10 @@ TOOL_HANDLERS = {
 
 HOOKS = {"UserPromptSubmit": [], "PreToolUse": [], "PostToolUse": [], "Stop": []}
 
+
 def register_hook(event: str, callback):
     HOOKS[event].append(callback)
+
 
 def trigger_hooks(event: str, *args):
     for callback in HOOKS[event]:
@@ -638,6 +674,7 @@ def trigger_hooks(event: str, *args):
         if result is not None:
             return result
     return None
+
 
 DENY_LIST = ["rm -rf /", "sudo", "shutdown", "reboot", "mkfs", "dd if="]
 DESTRUCTIVE_COMMAND_WORD = re.compile(
@@ -657,7 +694,7 @@ def permission_hook(block):
             if pattern in command:
                 return f"Permission denied by deny list: {pattern}"
         if contains_destructive_command(command) or any(
-            keyword in command for keyword in DESTRUCTIVE
+                keyword in command for keyword in DESTRUCTIVE
         ):
             print("\n\033[33m[permission] Potentially destructive command\033[0m")
             print(f"   Tool: {block.name}({block.input})")
@@ -673,19 +710,23 @@ def permission_hook(block):
                 return "Permission denied by user"
     return None
 
+
 def log_hook(block):
     preview = str(list(block.input.values())[:2])[:60]
     print(f"\033[90m[HOOK] {block.name}({preview})\033[0m")
     return None
+
 
 def large_output_hook(block, output):
     if len(str(output)) > 100000:
         print(f"\033[33m[HOOK] Large output from {block.name}: {len(str(output))} chars\033[0m")
     return None
 
+
 def context_inject_hook(query: str):
     print(f"\033[90m[HOOK] UserPromptSubmit: working in {WORKDIR}\033[0m")
     return None
+
 
 def summary_hook(messages: list):
     tool_count = sum(
@@ -701,11 +742,13 @@ def summary_hook(messages: list):
     print(f"\033[90m[HOOK] Stop: session used {tool_count} tool calls\033[0m")
     return None
 
+
 register_hook("UserPromptSubmit", context_inject_hook)
 register_hook("PreToolUse", permission_hook)
 register_hook("PreToolUse", log_hook)
 register_hook("PostToolUse", large_output_hook)
 register_hook("Stop", summary_hook)
+
 
 def execute_tool(block) -> str:
     blocked = trigger_hooks("PreToolUse", block)
@@ -720,6 +763,7 @@ def execute_tool(block) -> str:
 
     trigger_hooks("PostToolUse", block, output)
     return str(output)
+
 
 # -- Agent loop --
 
@@ -761,6 +805,7 @@ def agent_loop(messages: list):
                 "content": output,
             })
         messages.append({"role": "user", "content": results})
+
 
 if __name__ == "__main__":
     print("s09: Memory - selective knowledge across sessions")

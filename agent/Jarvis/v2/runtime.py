@@ -135,6 +135,7 @@ def is_prompt_too_long_error(e: Exception) -> bool:
 def run_create_worktree(name: str, task_id: str) -> str:
     return create_worktree(name, task_id)
 
+
 # -- Basic Tool Handlers --
 
 def run_create_task(subject: str, description: str = "") -> str:
@@ -173,6 +174,7 @@ def run_get_task(task_id: str) -> str:
     except FileNotFoundError:
         return f"Error: task {task_id} not found"
 
+
 def run_claim_task(task_id: str) -> str:
     try:
         return claim_task(task_id, owner="agent")
@@ -181,6 +183,7 @@ def run_claim_task(task_id: str) -> str:
     except FileNotFoundError:
         return f"Error: task {task_id} not found"
 
+
 def run_complete_task(task_id: str) -> str:
     try:
         return complete_task(task_id, owner="agent")
@@ -188,6 +191,7 @@ def run_complete_task(task_id: str) -> str:
         return f"Error: {exc}"
     except FileNotFoundError:
         return f"Error: task {task_id} not found"
+
 
 def run_spawn_teammate(name: str, role: str, prompt: str,
                        task_id: str | None = None,
@@ -211,6 +215,7 @@ def run_send_message(to: str, content: str) -> str:
     BUS.send("lead", to, content)
     return f"Sent to {to}"
 
+
 def run_connect_mcp(name: str) -> str:
     return connect_mcp(name)
 
@@ -220,11 +225,22 @@ def run_connect_mcp(name: str) -> str:
 # The model sees tool schemas; Python executes handlers. S15 keeps both tables
 # explicit so every added capability is visible in one place.
 BUILTIN_TOOLS = [
-    {"name": "bash", "description": "Run a shell command.",
-     "input_schema": {"type": "object",
-                      "properties": {"command": {"type": "string"},
-                                     "run_in_background": {"type": "boolean"}},
-                      "required": ["command"]}},
+    {
+        "name": "bash",
+        "description": "Run a shell command.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "command": {
+                    "type": "string"
+                },
+                "run_in_background": {
+                    "type": "boolean"
+                }
+            },
+            "required": ["command"]
+        }
+    },
     {"name": "read_file", "description": "Read file contents.",
      "input_schema": {"type": "object",
                       "properties": {"path": {"type": "string"},
@@ -250,12 +266,13 @@ BUILTIN_TOOLS = [
      "description": "Create and manage a task list for the current session.",
      "input_schema": {"type": "object",
                       "properties": {"todos": {"type": "array",
-                          "items": {"type": "object",
-                                    "properties": {
-                                        "content": {"type": "string"},
-                                        "status": {"type": "string",
-                                                   "enum": ["pending", "in_progress", "completed"]}},
-                                    "required": ["content", "status"]}}},
+                                               "items": {"type": "object",
+                                                         "properties": {
+                                                             "content": {"type": "string"},
+                                                             "status": {"type": "string",
+                                                                        "enum": ["pending", "in_progress",
+                                                                                 "completed"]}},
+                                                         "required": ["content", "status"]}}},
                       "required": ["todos"]}},
     {"name": "task",
      "description": "Launch a focused subagent. Returns only its final summary.",
@@ -325,16 +342,16 @@ BUILTIN_TOOLS = [
     {"name": "spawn_teammate", "description": "Spawn a persistent teammate.",
      "input_schema": {"type": "object",
                       "properties": {"name": {
-                                         "type": "string",
-                                         "pattern": "^[A-Za-z0-9_-]{1,64}$",
-                                     },
-                                     "role": {"type": "string"},
-                                     "prompt": {"type": "string"},
-                                     "task_id": {
-                                         "type": "string",
-                                         "pattern": "^task_[0-9a-f]{8}$",
-                                     },
-                                     "require_plan": {"type": "boolean"}},
+                          "type": "string",
+                          "pattern": "^[A-Za-z0-9_-]{1,64}$",
+                      },
+                          "role": {"type": "string"},
+                          "prompt": {"type": "string"},
+                          "task_id": {
+                              "type": "string",
+                              "pattern": "^task_[0-9a-f]{8}$",
+                          },
+                          "require_plan": {"type": "boolean"}},
                       "required": ["name", "role", "prompt"]}},
     {"name": "list_teammates", "description": "List active teammates.",
      "input_schema": {"type": "object", "properties": {}, "required": []}},
@@ -365,12 +382,12 @@ BUILTIN_TOOLS = [
      "description": "Create a task-bound git worktree for a pending task.",
      "input_schema": {"type": "object",
                       "properties": {"name": {
-                                         "type": "string",
-                                         "pattern": ("^(?!.*\\.\\.)[A-Za-z0-9]"
-                                                     "[A-Za-z0-9._-]{0,63}$"),
-                                         "maxLength": 64,
-                                     },
-                                     "task_id": {"type": "string"}},
+                          "type": "string",
+                          "pattern": ("^(?!.*\\.\\.)[A-Za-z0-9]"
+                                      "[A-Za-z0-9._-]{0,63}$"),
+                          "maxLength": 64,
+                      },
+                          "task_id": {"type": "string"}},
                       "required": ["name", "task_id"],
                       "additionalProperties": False}},
     {"name": "connect_mcp",
@@ -403,7 +420,6 @@ BUILTIN_HANDLERS = {
     "create_worktree": run_create_worktree,
     "connect_mcp": run_connect_mcp,
 }
-
 
 # -- Agent Loop --
 

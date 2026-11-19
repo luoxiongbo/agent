@@ -241,6 +241,7 @@ def _normalize_todos(todos):
             return None, f"Error: todos[{i}] has invalid status '{todo['status']}'"
     return todos, None
 
+
 def run_todo_write(todos: list) -> str:
     global CURRENT_TODOS
     todos, error = _normalize_todos(todos)
@@ -471,7 +472,7 @@ def connect_mcp(name: str) -> str:
 
 
 def assemble_tool_pool() -> tuple[list[dict], dict]:
-    """Merge builtin tools + all MCP tools into one pool."""
+    """将内置工具和所有MCP工具合并成一个工具池"""
     from .runtime import BUILTIN_HANDLERS, BUILTIN_TOOLS
 
     global mcp_tool_policies
@@ -479,8 +480,9 @@ def assemble_tool_pool() -> tuple[list[dict], dict]:
     tools = list(BUILTIN_TOOLS)
     handlers = dict(BUILTIN_HANDLERS)
     policies: dict[str, str] = {}
-    origins = {tool["name"]: f"built-in tool {tool['name']!r}"
-               for tool in tools}
+    origins = {
+        tool["name"]: f"built-in tool {tool['name']!r}" for tool in tools
+    }
     for server_name, mcp_client in mcp_clients.items():
         safe_server = normalize_mcp_name(server_name)
         for tool_def in mcp_client.tools:
