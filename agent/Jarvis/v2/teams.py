@@ -37,7 +37,6 @@ from .tools import (
     trigger_hooks,
 )
 
-
 # -- MessageBus and Team Protocols --
 
 MAILBOX_DIR = WORKDIR / ".mailboxes"
@@ -112,6 +111,7 @@ active_teammates: dict[str, str] = {}
 plan_gates: dict[str, str] = {}
 plan_request_ids: dict[str, str] = {}
 team_lock = threading.RLock()
+
 
 # -- Protocol State --
 
@@ -206,18 +206,18 @@ def apply_plan_response(name: str, msg: dict) -> tuple[bool, str]:
         state = pending_requests.get(request_id)
         expected_id = plan_request_ids.get(name)
         valid = (
-            msg.get("from") == "lead"
-            and msg.get("to") == name
-            and request_id == expected_id
-            and state is not None
-            and state.type == "plan_approval"
-            and state.sender == name
-            and state.target == "lead"
-            and state.work_version == work_version
-            and state.task_id == task_id
-            and state.status in {"approved", "rejected"}
-            and metadata.get("approve", False)
-            == (state.status == "approved")
+                msg.get("from") == "lead"
+                and msg.get("to") == name
+                and request_id == expected_id
+                and state is not None
+                and state.type == "plan_approval"
+                and state.sender == name
+                and state.target == "lead"
+                and state.work_version == work_version
+                and state.task_id == task_id
+                and state.status in {"approved", "rejected"}
+                and metadata.get("approve", False)
+                == (state.status == "approved")
         )
         if not valid:
             return False, "[Ignored plan response: request mismatch]"
@@ -234,14 +234,14 @@ def apply_shutdown_request(name: str, msg: dict) -> tuple[bool, str]:
     with team_lock:
         state = pending_requests.get(request_id)
         valid = (
-            msg.get("from") == "lead"
-            and msg.get("to") == name
-            and state is not None
-            and state.type == "shutdown"
-            and state.sender == "lead"
-            and state.target == name
-            and state.status == "pending"
-            and active_teammates.get(name) != "stopping"
+                msg.get("from") == "lead"
+                and msg.get("to") == name
+                and state is not None
+                and state.type == "shutdown"
+                and state.sender == "lead"
+                and state.target == name
+                and state.status == "pending"
+                and active_teammates.get(name) != "stopping"
         )
         if not valid:
             return False, "[Ignored shutdown request: request mismatch]"
@@ -453,13 +453,13 @@ def spawn_teammate_thread(name: str, role: str, prompt: str,
         if msg_type == "plan_approval_response":
             _, notice = apply_plan_response(name, msg)
             messages.append({"role": "user",
-                "content": notice})
+                             "content": notice})
         elif msg_type == "plan_request":
             messages.append({"role": "user",
-                "content": f"[Plan required] {msg['content']}"})
+                             "content": f"[Plan required] {msg['content']}"})
         elif msg_type == "message":
             messages.append({"role": "user",
-                "content": f"[Message from {msg['from']}] {msg['content']}"})
+                             "content": f"[Message from {msg['from']}] {msg['content']}"})
         return False
 
     def run_loop():
@@ -715,7 +715,6 @@ SUB_SYSTEM = (
     "Do not spawn more agents."
 )
 
-
 SUB_TOOLS = [
     {"name": "bash", "description": "Run a shell command.",
      "input_schema": {"type": "object",
@@ -743,7 +742,6 @@ SUB_TOOLS = [
                       "properties": {"pattern": {"type": "string"}},
                       "required": ["pattern"]}},
 ]
-
 
 SUB_HANDLERS = {
     "bash": run_bash, "read_file": run_read,

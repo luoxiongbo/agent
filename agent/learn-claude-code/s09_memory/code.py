@@ -242,6 +242,7 @@ def list_memory_files() -> list[dict]:
 def block_text(block) -> str:
     if isinstance(block, dict):
         return str(block.get("text", "")) if block.get("type") == "text" else ""
+    # 把 block 当作对象处理
     return (
         str(getattr(block, "text", ""))
         if getattr(block, "type", None) == "text"
@@ -379,10 +380,12 @@ def build_system(relevant_memories: str = "") -> str:
 
 def dialogue_text(messages: list, max_messages: int = 12) -> str:
     lines = []
+    # 只遍历最近 max_messages 条消息
     for message in messages[-max_messages:]:
         text = message_text(message).strip()
         if text:
             lines.append(f"{message.get('role', 'unknown')}: {text}")
+    # 用换行符拼接所有消息，并截取前 8000 个字符
     return "\n".join(lines)[:8000]
 
 
@@ -449,6 +452,7 @@ def extract_memories(messages: list) -> int:
             for item in extract_json_array(
                 message_text({"content": response.content})
             )
+            if (validated := validate_memory_record(item, require_scope=True)) is not None
             if (
                    validated := validate_memory_record(
                        item, require_scope=True

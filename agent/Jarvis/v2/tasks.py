@@ -13,12 +13,10 @@ import threading
 
 from .config import WORKDIR
 
-
 try:
     import fcntl
 except ImportError:  # Windows uses the in-process lock.
     fcntl = None
-
 
 # -- Task System --
 
@@ -164,7 +162,7 @@ def update_task(task_id: str, addBlockedBy: list[str]) -> Task:
             if not _task_path(dependency).is_file():
                 raise ValueError(f"Dependency not found: {dependency}")
             if dependency not in task.blockedBy and _task_depends_on(
-                dependency, task_id
+                    dependency, task_id
             ):
                 raise ValueError(
                     f"Dependency cycle detected: {task_id} -> {dependency}"
@@ -286,7 +284,6 @@ def claim_task(task_id: str, owner: str = "agent") -> str:
 def complete_task(task_id: str, owner: str = "agent") -> str:
     """Complete an assignment only when the caller owns it."""
     from .teams import plan_gates
-
 
     with task_store_lock():
         task = load_task(task_id)
@@ -432,6 +429,7 @@ def assignment_cwd(owner: str) -> Path:
         return cwd
 
 
+# 仅在任务已完成时，释放负责人的工作目录租约；同时更新分配版本并将计划门禁重置为 not_required。
 def release_completed_assignment(owner: str) -> bool:
     """Release a completed cwd lease only at a model turn boundary."""
     from .teams import plan_gates
@@ -550,7 +548,6 @@ def create_worktree(name: str, task_id: str) -> str:
 def remove_worktree(name: str, discard_changes: bool = False) -> str:
     """Remove a registered checkout while always retaining its branch."""
     from .scheduler import background_lock, background_tasks
-
 
     error = validate_worktree_name(name)
     if error:

@@ -176,6 +176,7 @@ def run_glob(pattern: str, cwd: Path | None = None) -> str:
         return f"Error: {e}"
 
 
+#
 def _agent_cwd() -> tuple[Path | None, str | None]:
     try:
         return assignment_cwd("agent"), None
@@ -352,6 +353,8 @@ register_hook("Stop", stop_hook)
 
 # -- MCP System --
 
+# MCP 被建模为“后期绑定”工具：先建立连接，再发现服务器。
+# 这些工具会被合并到常规工具池中，并以 `mcp__server__tool` 格式命名。
 # MCP is modeled as late-bound tools: connect first, then discovered server
 # tools are merged into the normal tool pool with mcp__server__tool names.
 class MCPClient:
@@ -362,8 +365,7 @@ class MCPClient:
         self.tools: list[dict] = []
         self._handlers: dict[str, callable] = {}
 
-    def register(self, tool_defs: list[dict],
-                 handlers: dict[str, callable]):
+    def register(self, tool_defs: list[dict], handlers: dict[str, callable]):
         names = [tool.get("name") for tool in tool_defs]
         if any(not isinstance(name, str) or not name for name in names):
             raise ValueError("Every MCP tool needs a non-empty name")
@@ -385,6 +387,7 @@ class MCPClient:
             return f"MCP error: {type(exc).__name__}: {exc}"
 
 
+# 类型注解，表示字典的 key 是 str，value 是 MCPClient
 mcp_clients: dict[str, MCPClient] = {}
 _DISALLOWED_CHARS = re.compile(r"[^a-zA-Z0-9_-]")
 
@@ -397,6 +400,7 @@ MCP_HOST_POLICY = {
 }
 
 
+# 格式化
 def normalize_mcp_name(name: str) -> str:
     """Replace characters outside the model tool-name alphabet."""
     normalized = _DISALLOWED_CHARS.sub("_", name)
@@ -409,21 +413,32 @@ def _mock_server_docs() -> MCPClient:
     client = MCPClient("docs")
     client.register(
         tool_defs=[
-            {"name": "search", "description": "Search the documentation.",
-             "inputSchema": {"type": "object",
-                             "properties": {"query": {"type": "string"}},
-                             "required": ["query"]},
-             "annotations": {"readOnlyHint": True}},
+            {
+                "name": "search",
+                "description": "Search the documentation.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string"
+                        }
+                    },
+                    "required": ["query"]
+                },
+                "annotations": {
+                    "readOnlyHint": True
+                }
+            },
             {"name": "get_version",
              "description": "Get the documentation API version.",
-             "inputSchema": {"type": "object", "properties": {},
-                             "required": []},
+             "inputSchema": {"type": "object", "properties": {}, "required": []},
              "annotations": {"readOnlyHint": True}},
         ],
         handlers={
             "search": lambda query: f"[docs] Found 3 results for '{query}'",
             "get_version": lambda: "[docs] API v2.1.0",
-        })
+        }
+    )
     return client
 
 
@@ -431,16 +446,25 @@ def _mock_server_deploy() -> MCPClient:
     client = MCPClient("deploy")
     client.register(
         tool_defs=[
-            {"name": "trigger",
-             "description": "Trigger a deployment.",
-             "inputSchema": {"type": "object",
-                             "properties": {"service": {"type": "string"}},
-                             "required": ["service"]},
-             "annotations": {"destructiveHint": True}},
-            {"name": "status", "description": "Check deployment status.",
-             "inputSchema": {"type": "object",
-                             "properties": {"service": {"type": "string"}},
-                             "required": ["service"]},
+            {
+                "name": "trigger",
+                "description": "Trigger a deployment.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "service": {
+                            "type": "string"
+                        }
+                    },
+                    "required": ["service"]
+                },
+                "annotations": {
+                    "destructiveHint": True
+                }
+            },
+            {"name": "status",
+             "description": "Check deployment status.",
+             "inputSchema": {"type": "object", "properties": {"service": {"type": "string"}}, "required": ["service"]},
              "annotations": {"readOnlyHint": True}},
         ],
         handlers={
