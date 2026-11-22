@@ -257,8 +257,12 @@ def run_todo_write(todos: list) -> str:
 
 # Hooks are intentionally outside tool handlers. The loop can add permission,
 # logging, and stop behavior without changing each individual tool.
-HOOKS = {"UserPromptSubmit": [], "PreToolUse": [],
-         "PostToolUse": [], "Stop": []}
+HOOKS = {
+    "UserPromptSubmit": [],
+    "PreToolUse": [],
+    "PostToolUse": [],
+    "Stop": []
+}
 
 
 def register_hook(event: str, callback):
@@ -280,6 +284,7 @@ mcp_tool_policies: dict[str, str] = {}
 def permission_hook(block):
     # The permission layer sees the raw tool_use before dispatch. It can deny,
     # ask the user, or allow execution to continue.
+    # 拒绝，询问，允许执行
     from .code import CONSOLE, terminal_print
 
     if block.name == "bash":
@@ -289,6 +294,7 @@ def permission_hook(block):
         for pattern in DENY_LIST:
             if pattern in command:
                 return f"Permission denied: '{pattern}' is on the deny list"
+        # 非主线程直接拒绝，因为后台线程无法交互式地请求用户批准 shell 命令
         if threading.current_thread() is not threading.main_thread():
             return ("Permission denied: interactive shell approval is unavailable "
                     "during an asynchronous turn")

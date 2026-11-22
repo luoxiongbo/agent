@@ -193,9 +193,19 @@ def run_complete_task(task_id: str) -> str:
         return f"Error: task {task_id} not found"
 
 
-def run_spawn_teammate(name: str, role: str, prompt: str,
-                       task_id: str | None = None,
+def run_spawn_teammate(name: str, role: str, prompt: str, task_id: str | None = None,
                        require_plan: bool = False) -> str:
+    """
+    Spawn a new teammate with the given name, role, and prompt.
+    args:
+        name: The name of the teammate to spawn.
+        role: The role of the teammate to spawn.
+        prompt: The prompt to give the teammate.
+        task_id: The task to assign the teammate to.
+        require_plan: Whether the teammate should require a plan.
+    returns:
+        A message indicating success or failure.
+    """
     return spawn_teammate_thread(name, role, prompt, task_id, require_plan)
 
 
@@ -580,20 +590,24 @@ BUILTIN_HANDLERS = {
     "write_file": run_agent_write,
     "edit_file": run_agent_edit,
     "glob": run_agent_glob,
-    "todo_write": run_todo_write, "task": spawn_subagent,
+    "todo_write": run_todo_write,
+    "task": spawn_subagent,  # 启动子 agent
     "load_skill": load_skill,
-    "create_task": run_create_task, "update_task": run_update_task,
+    "create_task": run_create_task,
+    "update_task": run_update_task,
     "list_tasks": run_list_tasks,
     "get_task": run_get_task,
-    "claim_task": run_claim_task, "complete_task": run_complete_task,
+    "claim_task": run_claim_task,
+    "complete_task": run_complete_task,
     "schedule_cron": run_schedule_cron,
     "list_crons": run_list_crons,
     "cancel_cron": run_cancel_cron,
-    "spawn_teammate": run_spawn_teammate,
+    "spawn_teammate": run_spawn_teammate,  # 启动 teammate
     "list_teammates": run_list_teammates,
     "send_message": run_send_message,
     "request_shutdown": run_request_shutdown,
-    "request_plan": run_request_plan, "review_plan": run_review_plan,
+    "request_plan": run_request_plan,
+    "review_plan": run_review_plan,
     "create_worktree": run_create_worktree,
     "connect_mcp": run_connect_mcp,
 }
@@ -635,8 +649,7 @@ def inject_background_notifications(messages: list):
             {"type": "text", "text": note} for note in notes]})
 
 
-def call_llm(messages: list, context: dict, tools: list,
-             state: RecoveryState, max_tokens: int):
+def call_llm(messages: list, context: dict, tools: list, state: RecoveryState, max_tokens: int):
     system = assemble_system_prompt(context)
     return with_retry(
         lambda: client.messages.create(
@@ -770,8 +783,11 @@ def agent_loop(messages: list, context: dict, active_request: str):
             else:
                 rounds_since_todo += 1
 
-            results.append({"type": "tool_result",
-                            "tool_use_id": block.id, "content": output})
+            results.append({
+                "type": "tool_result",
+                "tool_use_id": block.id,
+                "content": output
+            })
 
         messages.append({"role": "user", "content": build_user_content(results)})
         if compact_requested:

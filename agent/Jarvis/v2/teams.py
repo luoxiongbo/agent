@@ -66,8 +66,8 @@ class MessageBus:
         inbox = self._path(agent)
         if not inbox.exists():
             return []
-        msgs = [json.loads(line) for line in inbox.read_text(encoding="utf-8").splitlines()
-                if line.strip()]
+        msgs = [json.loads(line) for line in inbox.read_text(encoding="utf-8").splitlines() if line.strip()]
+        # 删除收件箱文件
         inbox.unlink()
         return msgs
 
@@ -107,8 +107,11 @@ class MessageBus:
 
 
 BUS = MessageBus()
+# 活跃的队友
 active_teammates: dict[str, str] = {}
+# 计划网关
 plan_gates: dict[str, str] = {}
+# 计划请求ID
 plan_request_ids: dict[str, str] = {}
 team_lock = threading.RLock()
 
@@ -393,8 +396,7 @@ def _run_teammate_tool(name: str, block, handlers: dict) -> str:
 
 # -- Teammate Thread --
 
-def spawn_teammate_thread(name: str, role: str, prompt: str,
-                          task_id: str | None = None,
+def spawn_teammate_thread(name: str, role: str, prompt: str, task_id: str | None = None,
                           require_plan: bool = False) -> str:
     if not is_valid_agent_name(name):
         return ("Invalid teammate name: use 1-64 letters, digits, "
@@ -402,8 +404,7 @@ def spawn_teammate_thread(name: str, role: str, prompt: str,
     if name.lower() in RESERVED_TEAMMATE_NAMES:
         return f"Invalid teammate name: '{name}' is reserved by the runtime"
     with team_lock:
-        if any(existing.casefold() == name.casefold()
-               for existing in active_teammates):
+        if any(existing.casefold() == name.casefold() for existing in active_teammates):
             return f"Teammate '{name}' already exists"
         active_teammates[name] = "working"
         plan_gates[name] = "required" if require_plan else "not_required"
@@ -411,6 +412,7 @@ def spawn_teammate_thread(name: str, role: str, prompt: str,
 
     if task_id:
         try:
+            # 认领的关系是什么
             claimed = claim_task(task_id, owner=name)
         except (FileNotFoundError, ValueError) as exc:
             claimed = f"Error: {exc}"
@@ -529,67 +531,127 @@ def spawn_teammate_thread(name: str, role: str, prompt: str,
                                "Lead approval before bash, write_file, or edit_file.")
         messages = [{"role": "user", "content": initial_prompt}]
         sub_tools = [
-            {"name": "bash", "description": "Run a shell command.",
-             "input_schema": {"type": "object",
-                              "properties": {"command": {"type": "string"}},
-                              "required": ["command"]}},
-            {"name": "read_file", "description": "Read file.",
-             "input_schema": {"type": "object",
-                              "properties": {
-                                  "path": {"type": "string"},
-                                  "limit": {"type": "integer"},
-                                  "offset": {"type": "integer"}},
-                              "required": ["path"]}},
-            {"name": "write_file", "description": "Write file.",
-             "input_schema": {"type": "object",
-                              "properties": {"path": {"type": "string"},
-                                             "content": {"type": "string"}},
-                              "required": ["path", "content"]}},
-            {"name": "edit_file", "description": "Replace text in a file.",
-             "input_schema": {"type": "object",
-                              "properties": {
-                                  "path": {"type": "string"},
-                                  "old_text": {"type": "string"},
-                                  "new_text": {"type": "string"}},
-                              "required": ["path", "old_text", "new_text"]}},
-            {"name": "glob", "description": "Find files by glob pattern; ** matches recursively.",
-             "input_schema": {"type": "object",
-                              "properties": {
-                                  "pattern": {"type": "string"}},
-                              "required": ["pattern"]}},
-            {"name": "send_message",
-             "description": "Send an intermediate message to 'lead' or an active teammate.",
-             "input_schema": {"type": "object",
-                              "properties": {"to": {"type": "string"},
-                                             "content": {"type": "string"}},
-                              "required": ["to", "content"]}},
-            {"name": "submit_plan",
-             "description": "Submit a plan for Lead approval.",
-             "input_schema": {"type": "object",
-                              "properties": {"plan": {"type": "string"}},
-                              "required": ["plan"]}},
-            {"name": "list_tasks",
-             "description": "List all tasks on the board.",
-             "input_schema": {"type": "object", "properties": {},
-                              "required": []}},
-            {"name": "claim_task",
-             "description": "Claim a pending task.",
-             "input_schema": {"type": "object",
-                              "properties": {"task_id": {"type": "string"}},
-                              "required": ["task_id"]}},
-            {"name": "complete_task",
-             "description": "Mark an in-progress task as completed.",
-             "input_schema": {"type": "object",
-                              "properties": {"task_id": {"type": "string"}},
-                              "required": ["task_id"]}},
+            {
+                "name": "bash",
+                "description": "Run a shell command.",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "command": {"type": "string"},
+                    },
+                    "required": ["command"],
+                },
+            },
+            {
+                "name": "read_file",
+                "description": "Read file.",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "path": {"type": "string"},
+                        "limit": {"type": "integer"},
+                        "offset": {"type": "integer"},
+                    },
+                    "required": ["path"],
+                },
+            },
+            {
+                "name": "write_file",
+                "description": "Write file.",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "path": {"type": "string"},
+                        "content": {"type": "string"},
+                    },
+                    "required": ["path", "content"],
+                },
+            },
+            {
+                "name": "edit_file",
+                "description": "Replace text in a file.",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "path": {"type": "string"},
+                        "old_text": {"type": "string"},
+                        "new_text": {"type": "string"},
+                    },
+                    "required": ["path", "old_text", "new_text"],
+                },
+            },
+            {
+                "name": "glob",
+                "description": "Find files by glob pattern; ** matches recursively.",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "pattern": {"type": "string"},
+                    },
+                    "required": ["pattern"],
+                },
+            },
+            {
+                "name": "send_message",
+                "description": "Send an intermediate message to 'lead' or an active teammate.",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "to": {"type": "string"},
+                        "content": {"type": "string"},
+                    },
+                    "required": ["to", "content"],
+                },
+            },
+            {
+                "name": "submit_plan",
+                "description": "Submit a plan for Lead approval.",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "plan": {"type": "string"},
+                    },
+                    "required": ["plan"],
+                },
+            },
+            {
+                "name": "list_tasks",
+                "description": "List all tasks on the board.",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {},
+                    "required": [],
+                },
+            },
+            {
+                "name": "claim_task",
+                "description": "Claim a pending task.",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "task_id": {"type": "string"},
+                    },
+                    "required": ["task_id"],
+                },
+            },
+            {
+                "name": "complete_task",
+                "description": "Mark an in-progress task as completed.",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "task_id": {"type": "string"},
+                    },
+                    "required": ["task_id"],
+                },
+            },
         ]
 
         sub_handlers = {
             "bash": _run_bash, "read_file": _run_read,
             "write_file": _run_write, "edit_file": _run_edit,
             "glob": _run_glob,
-            "send_message": lambda to, content: _teammate_send_message(
-                name, to, content),
+            "send_message": lambda to, content: _teammate_send_message(name, to, content),
             "submit_plan": lambda plan: _teammate_submit_plan(name, plan),
             "list_tasks": _run_list_tasks,
             "claim_task": _run_claim_task,
@@ -677,7 +739,10 @@ def spawn_teammate_thread(name: str, role: str, prompt: str,
             run_loop()
         except Exception as exc:
             try:
-                BUS.send(name, "lead", f"{type(exc).__name__}: {exc}", "error")
+                BUS.send(
+                    name, "lead",
+                    f"{type(exc).__name__}: {exc}",
+                    "error")
             except Exception:
                 pass
         finally:
@@ -716,36 +781,73 @@ SUB_SYSTEM = (
 )
 
 SUB_TOOLS = [
-    {"name": "bash", "description": "Run a shell command.",
-     "input_schema": {"type": "object",
-                      "properties": {"command": {"type": "string"}},
-                      "required": ["command"]}},
-    {"name": "read_file", "description": "Read file contents.",
-     "input_schema": {"type": "object",
-                      "properties": {"path": {"type": "string"},
-                                     "limit": {"type": "integer"},
-                                     "offset": {"type": "integer"}},
-                      "required": ["path"]}},
-    {"name": "write_file", "description": "Write content to a file.",
-     "input_schema": {"type": "object",
-                      "properties": {"path": {"type": "string"},
-                                     "content": {"type": "string"}},
-                      "required": ["path", "content"]}},
-    {"name": "edit_file", "description": "Replace exact text in a file once.",
-     "input_schema": {"type": "object",
-                      "properties": {"path": {"type": "string"},
-                                     "old_text": {"type": "string"},
-                                     "new_text": {"type": "string"}},
-                      "required": ["path", "old_text", "new_text"]}},
-    {"name": "glob", "description": "Find files matching a glob pattern; ** matches recursively.",
-     "input_schema": {"type": "object",
-                      "properties": {"pattern": {"type": "string"}},
-                      "required": ["pattern"]}},
+    {
+        "name": "bash",
+        "description": "Run a shell command.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "command": {"type": "string"},
+            },
+            "required": ["command"],
+        },
+    },
+    {
+        "name": "read_file",
+        "description": "Read file contents.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "path": {"type": "string"},
+                "limit": {"type": "integer"},
+                "offset": {"type": "integer"},
+            },
+            "required": ["path"],
+        },
+    },
+    {
+        "name": "write_file",
+        "description": "Write content to a file.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "path": {"type": "string"},
+                "content": {"type": "string"},
+            },
+            "required": ["path", "content"],
+        },
+    },
+    {
+        "name": "edit_file",
+        "description": "Replace exact text in a file once.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "path": {"type": "string"},
+                "old_text": {"type": "string"},
+                "new_text": {"type": "string"},
+            },
+            "required": ["path", "old_text", "new_text"],
+        },
+    },
+    {
+        "name": "glob",
+        "description": "Find files matching a glob pattern; ** matches recursively.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "pattern": {"type": "string"},
+            },
+            "required": ["pattern"],
+        },
+    },
 ]
 
 SUB_HANDLERS = {
-    "bash": run_bash, "read_file": run_read,
-    "write_file": run_write, "edit_file": run_edit,
+    "bash": run_bash,
+    "read_file": run_read,
+    "write_file": run_write,
+    "edit_file": run_edit,
     "glob": run_glob,
 }
 

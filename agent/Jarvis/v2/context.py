@@ -177,16 +177,11 @@ PROMPT_SECTIONS = {
 def assemble_system_prompt(context: dict) -> str:
     # The system prompt is rebuilt each turn from live context. This is where
     # memory, skill catalog, MCP state, and active teammates become visible.
-    sections = [PROMPT_SECTIONS["identity"],
-                PROMPT_SECTIONS["tools"],
-                PROMPT_SECTIONS["tasks"],
-                PROMPT_SECTIONS["teams"],
-                PROMPT_SECTIONS["workspace"],
-                PROMPT_SECTIONS["memory"],
-                PROMPT_SECTIONS["compaction"]]
-    sections.append(f"Current time: {datetime.now().isoformat(timespec='seconds')}")
-    sections.append("Skills catalog:\n" + list_skills() +
-                    "\nUse load_skill(name) when a skill is relevant.")
+    sections = [PROMPT_SECTIONS["identity"], PROMPT_SECTIONS["tools"], PROMPT_SECTIONS["tasks"],
+                PROMPT_SECTIONS["teams"], PROMPT_SECTIONS["workspace"], PROMPT_SECTIONS["memory"],
+                PROMPT_SECTIONS["compaction"],
+                f"Current time: {datetime.now().isoformat(timespec='seconds')}",
+                "Skills catalog:\n" + list_skills() + "\nUse load_skill(name) when a skill is relevant."]
     if context.get("memory_catalog"):
         sections.append(f"Memory catalog:\n{context['memory_catalog']}")
     if context.get("memories"):

@@ -73,8 +73,7 @@ def advance_assignment_version(owner: str):
         if team is not None:
             team.acquire()
         try:
-            if (isinstance(gates, dict) and owner in gates
-                    and gates[owner] != "not_required"):
+            if (isinstance(gates, dict) and owner in gates and gates[owner] != "not_required"):
                 gates[owner] = "required"
             if isinstance(request_ids, dict):
                 request_ids.pop(owner, None)
@@ -191,6 +190,7 @@ def save_task(task: Task):
             temporary.unlink(missing_ok=True)
 
 
+# 读取指定的持久化任务文件并解析返回
 def load_task(task_id: str) -> Task:
     with task_lock:
         data = json.loads(_task_path(task_id).read_text(encoding="utf-8"))
@@ -202,14 +202,14 @@ def load_task(task_id: str) -> Task:
         return task
 
 
+# 读取持久化的任务文件并解析返回
 def list_tasks() -> list[Task]:
     with task_lock:
         if not TASKS_DIR.exists():
             return []
         if not TASKS_ROOT.is_relative_to(WORKDIR.resolve()):
             raise ValueError("Tasks directory escapes workspace")
-        return [load_task(path.stem)
-                for path in sorted(TASKS_DIR.glob("task_*.json"))]
+        return [load_task(path.stem) for path in sorted(TASKS_DIR.glob("task_*.json"))]
 
 
 def get_task_json(task_id: str) -> str:
@@ -233,8 +233,9 @@ def can_start(task_id: str) -> bool:
 
 
 def _owner_in_progress(owner: str) -> Task | None:
-    return next((task for task in list_tasks()
-                 if task.status == "in_progress" and task.owner == owner), None)
+    return next(
+        (task for task in list_tasks() if task.status == "in_progress" and task.owner == owner),
+        None)
 
 
 def _incomplete_dependencies(task: Task) -> list[str]:
@@ -398,6 +399,7 @@ def _registered_worktree(name: str) -> tuple[Path | None, str | None]:
     return path, None
 
 
+# 有疑惑，task.worktree 什么时候赋值的
 def task_worktree_cwd(task: Task) -> tuple[Path, str | None]:
     """Resolve a task cwd, failing closed for broken worktree bindings."""
     if not task.worktree:

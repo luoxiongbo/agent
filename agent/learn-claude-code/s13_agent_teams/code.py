@@ -20,7 +20,7 @@ Need: pip install anthropic python-dotenv + .env with ANTHROPIC_API_KEY
     .worktrees/   optional task-bound working directories
 """
 
-import fcntl
+import errno
 import json
 import os
 import random
@@ -34,6 +34,12 @@ import time
 from contextlib import contextmanager
 from dataclasses import dataclass, asdict, field
 from pathlib import Path
+from queue import Empty, Queue
+
+if os.name == "nt":
+    import msvcrt
+else:
+    import fcntl
 
 try:
     import readline
@@ -71,22 +77,35 @@ assignment_versions: dict[str, int] = {}
 def task_store_lock():
     """Serialize task mutations across threads and host processes."""
     with task_lock:
-        depth = getattr(_task_store_state, "depth", 0)
-        if depth == 0:
-            TASKS_DIR.mkdir(parents=True, exist_ok=True)
-            handle = TASK_LOCK_PATH.open("a+", encoding="utf-8")
-            fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
-            _task_store_state.handle = handle
-        _task_store_state.depth = depth + 1
-        try:
+        if getattr(_task_store_state, "locked", False):
             yield
-        finally:
-            _task_store_state.depth -= 1
-            if _task_store_state.depth == 0:
-                handle = _task_store_state.handle
-                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
-                handle.close()
-                del _task_store_state.handle
+            return
+
+        TASKS_DIR.mkdir(parents=True, exist_ok=True)
+        with TASK_LOCK_PATH.open("a+b") as handle:
+            fd = handle.fileno()
+            if os.name == "nt":
+                # Windows locks one byte at a fixed offset, even in an empty file.
+                handle.seek(0)
+                while True:
+                    try:
+                        msvcrt.locking(fd, msvcrt.LK_NBLCK, 1)
+                        break
+                    except OSError as exc:
+                        if exc.errno != errno.EACCES:
+                            raise
+                        time.sleep(0.05)
+            else:
+                fcntl.flock(fd, fcntl.LOCK_EX)
+            _task_store_state.locked = True
+            try:
+                yield
+            finally:
+                _task_store_state.locked = False
+                if os.name == "nt":
+                    msvcrt.locking(fd, msvcrt.LK_UNLCK, 1)
+                else:
+                    fcntl.flock(fd, fcntl.LOCK_UN)
 
 
 def advance_assignment_version(owner: str):
@@ -1705,7 +1724,7 @@ def check_permission(block, prompt_user: bool = True) -> str | None:
             if not prompt_user:
                 return "Permission required: ask Lead to run this command."
             print(f"\n[permission] {block.name}({block.input})")
-            if input("Allow? [y/N] ").strip().lower() not in {"y", "yes"}:
+            if read_permission_input().strip().lower() not in {"y", "yes"}:
                 return "Permission denied by user"
 
     if block.name in {"read_file", "write_file", "edit_file"}:
@@ -1714,7 +1733,7 @@ def check_permission(block, prompt_user: bool = True) -> str | None:
             if not prompt_user:
                 return "Permission required: path is outside the workspace."
             print(f"\n[permission] {block.name}({block.input})")
-            if input("Allow? [y/N] ").strip().lower() not in {"y", "yes"}:
+            if read_permission_input().strip().lower() not in {"y", "yes"}:
                 return "Permission denied by user"
     return None
 
@@ -1833,6 +1852,54 @@ def print_last_assistant_message(history: list):
             print(block.get("text", ""))
 
 
+_pending_cli_input: Queue[str | Exception] | None = None
+
+
+def poll_cli_input() -> str | None:
+    """Read one line, or return None while the prompt is still waiting."""
+    if os.name != "nt":
+        readable, _, _ = select.select([sys.stdin], [], [], 0.25)
+        return sys.stdin.readline() if readable else None
+
+    # Windows select only accepts sockets. Keep one stdin read in flight so
+    # the main thread can check the mailbox while the console waits for Enter.
+    global _pending_cli_input
+    if _pending_cli_input is None:
+        result = Queue[str | Exception](maxsize=1)
+
+        def read_line():
+            try:
+                result.put(sys.stdin.readline())
+            except Exception as exc:
+                result.put(exc)
+
+        threading.Thread(target=read_line, daemon=True).start()
+        _pending_cli_input = result
+    try:
+        line = _pending_cli_input.get(timeout=0.25)
+    except Empty:
+        return None
+    _pending_cli_input = None
+    if isinstance(line, Exception):
+        raise line
+    return line
+
+
+def read_permission_input() -> str:
+    prompt = "Allow? [y/N] "
+    if _pending_cli_input is None:
+        return input(prompt)
+
+    # A mailbox event can wake the lead while the Windows reader owns stdin.
+    print(prompt, end="", flush=True)
+    line = poll_cli_input()
+    while line is None:
+        line = poll_cli_input()
+    if line == "":
+        raise EOFError
+    return line.rstrip("\n")
+
+
 def wait_for_cli_event() -> tuple[str, str | None]:
     prompt_visible = False
     while True:
@@ -1843,9 +1910,8 @@ def wait_for_cli_event() -> tuple[str, str | None]:
         if not prompt_visible:
             print("s13 >> ", end="", flush=True)
             prompt_visible = True
-        readable, _, _ = select.select([sys.stdin], [], [], 0.25)
-        if readable:
-            line = sys.stdin.readline()
+        line = poll_cli_input()
+        if line is not None:
             if line == "":
                 return "quit", None
             return "user", line.rstrip("\n")

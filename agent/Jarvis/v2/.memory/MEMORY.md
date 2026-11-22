@@ -1,0 +1,3 @@
+- [jarvis_project_location](jarvis_project_location.md) - Jarvis agent project repo root and the path of its core task-management module.
+- [jarvis_task_lifecycle_design](jarvis_task_lifecycle_design.md) - Stable architecture facts about the task lifecycle in agent/Jarvis/v2/tasks.py (create → claim → complete).
+- [user_language_preference](user_language_preference.md) - User communicates in Simplified Chinese and expects replies in Chinese.
