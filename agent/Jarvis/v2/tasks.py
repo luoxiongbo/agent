@@ -450,6 +450,7 @@ def release_completed_assignment(owner: str) -> bool:
         return True
 
 
+# 在线程退出时，将队友遗留的工作归还至任务板。
 def release_teammate_assignment(owner: str):
     """Return abandoned teammate work to the task board on thread exit."""
     from .teams import plan_gates
