@@ -1,3 +1,7 @@
 - [jarvis_project_location](jarvis_project_location.md) - Jarvis agent project repo root and the path of its core task-management module.
-- [jarvis_task_lifecycle_design](jarvis_task_lifecycle_design.md) - Stable architecture facts about the task lifecycle in agent/Jarvis/v2/tasks.py (create → claim → complete).
+- [jarvis_task_execution_model](jarvis_task_execution_model.md) - How tasks execute: create_task only registers; execution requires claim_task; timed requests require a schedule_cron one-shot timer.
+- [jarvis_task_lifecycle_design](jarvis_task_lifecycle_design.md) - Implementation details of the task lifecycle in agent/Jarvis/v2/tasks.py (create → claim → complete).
+- [jarvis_teammate_async_env_shell_limits](jarvis_teammate_async_env_shell_limits.md) - Async teammates cannot get interactive shell approval; do not design teammate tasks that depend on approved shell commands.
+- [jarvis_teammate_delegation](jarvis_teammate_delegation.md) - Delegating a task to a teammate: confirm with user, create, bind (auto-claims), execute, complete, then explicitly shut down.
+- [todos_tool_semantics](todos_tool_semantics.md) - How the todos list works: session-level entries with text + status, separate from the Jarvis task system; update only at real progress nodes.
 - [user_language_preference](user_language_preference.md) - User communicates in Simplified Chinese and expects replies in Chinese.
